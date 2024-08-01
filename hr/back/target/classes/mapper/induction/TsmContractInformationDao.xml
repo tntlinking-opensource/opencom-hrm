@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.induction.dao.TsmContractInformationDao">
+  <sql id="tsmContractInformationColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.induction_id AS "inductionId",
+      a.entry_time AS "entryTime",
+      a.probation_month AS "probationMonth.id",
+      IFNULL(probationMonth.name,'') AS "probationMonth.name",
+      a.probation_end_time AS "probationEndTime",
+      a.tech_position AS "techPosition.id",
+      IFNULL(techPosition.name,'') AS "techPosition.name",
+      a.employee_level AS "employeeLevel",
+      a.computer_condition AS "computerCondition.id",
+      IFNULL(computerCondition.name,'') AS "computerCondition.name",
+      a.recruitment_mode AS "recruitmentMode.id",
+      IFNULL(recruitmentMode.name,'') AS "recruitmentMode.name",
+      a.contract_type AS "contractType.id",
+      IFNULL(contractType.name,'') AS "contractType.name",
+      a.contract_property AS "contractProperty.id",
+      IFNULL(contractProperty.name,'') AS "contractProperty.name",
+      a.contract_sign_unit AS "contractSignUnit",
+      a.contract_start_time AS "contractStartTime",
+      a.contract_months AS "contractMonths",
+      a.contract_end_time AS "contractEndTime",
+      a.full_wages AS "fullWages",
+      a.probation_wages AS "probationWages",
+      a.probation_basic_wages AS "probationBasicWages",
+      a.basic_wages AS "basicWages",
+      a.secrecy_reward AS "secrecyReward",
+      a.system_reward AS "systemReward",
+      a.basic_performance AS "basicPerformance",
+      a.floating_performance AS "floatingPerformance",
+      a.probation_basic_performance AS "probationBasicPerformance",
+      a.probation_floating_performance AS "probationFloatingPerformance",
+      a.report_time AS "reportTime",
+      a.entry_type AS "entryType.id",
+      IFNULL(entryType.name,'') AS "entryType.name",
+      a.employee_belongs AS "employeeBelongs",
+      a.report_address AS "reportAddress",
+      a.remarks AS "remarks",
+      a.create_by AS "createBy",
+      a.create_date AS "createDate",
+      a.update_by AS "updateBy",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+      a.company_legal_person AS "companyLegalPerson",
+      a.job_type AS "jobType",
+    </trim>
+  </sql>
+  <sql id="tsmContractInformationJoins">
+    LEFT JOIN sys_dict_item probationMonth ON probationMonth.id = a.probation_month
+    LEFT JOIN sys_dict_item techPosition ON techPosition.id = a.tech_position
+    LEFT JOIN sys_dict_item computerCondition ON computerCondition.id = a.computer_condition
+    LEFT JOIN sys_dict_item recruitmentMode ON recruitmentMode.id = a.recruitment_mode
+    LEFT JOIN sys_dict_item contractType ON contractType.id = a.contract_type
+    LEFT JOIN sys_dict_item contractProperty ON contractProperty.id = a.contract_property
+    LEFT JOIN sys_dict_item entryType ON entryType.id = a.entry_type
+  </sql>
+  <resultMap id="resultTsmContractInformationMap" type="com.geeke.induction.entity.TsmContractInformation">
+    <result property="id" column="id" />
+    <result property="inductionId" column="inductionId" />
+    <result property="entryTime" column="entryTime" />
+    <result property="probationEndTime" column="probationEndTime" />
+    <result property="employeeLevel" column="employeeLevel" />
+    <result property="contractSignUnit" column="contractSignUnit" />
+    <result property="contractStartTime" column="contractStartTime" />
+    <result property="contractMonths" column="contractMonths" />
+    <result property="contractEndTime" column="contractEndTime" />
+    <result property="fullWages" column="fullWages" />
+    <result property="probationWages" column="probationWages" />
+    <result property="probationBasicWages" column="probationBasicWages" />
+    <result property="basicWages" column="basicWages" />
+    <result property="secrecyReward" column="secrecyReward" />
+    <result property="systemReward" column="systemReward" />
+    <result property="basicPerformance" column="basicPerformance" />
+    <result property="floatingPerformance" column="floatingPerformance" />
+    <result property="probationBasicPerformance" column="probationBasicPerformance" />
+    <result property="probationFloatingPerformance" column="probationFloatingPerformance" />
+    <result property="reportTime" column="reportTime" />
+    <result property="employeeBelongs" column="employeeBelongs" />
+    <result property="reportAddress" column="reportAddress" />
+    <result property="remarks" column="remarks" />
+    <result property="createBy" column="createBy" />
+    <result property="createDate" column="createDate" />
+    <result property="updateBy" column="updateBy" />
+    <result property="updateDate" column="updateDate" />
+    <result property="delFlag" column="delFlag" />
+    <result property="companyLegalPerson" column="companyLegalPerson" />
+    <result property="jobType" column="jobType" />
+    <association property="probationMonth" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="probationMonth.id" />
+      <result property="name" column="probationMonth.name" />
+    </association>
+    <association property="techPosition" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="techPosition.id" />
+      <result property="name" column="techPosition.name" />
+    </association>
+    <association property="computerCondition" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="computerCondition.id" />
+      <result property="name" column="computerCondition.name" />
+    </association>
+    <association property="recruitmentMode" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="recruitmentMode.id" />
+      <result property="name" column="recruitmentMode.name" />
+    </association>
+    <association property="contractType" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="contractType.id" />
+      <result property="name" column="contractType.name" />
+    </association>
+    <association property="contractProperty" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="contractProperty.id" />
+      <result property="name" column="contractProperty.name" />
+    </association>
+    <association property="entryType" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="entryType.id" />
+      <result property="name" column="entryType.name" />
+    </association>
+  </resultMap>
+  <select id="get" resultMap="resultTsmContractInformationMap">
+    SELECT
+    <include refid="tsmContractInformationColumns" />
+    FROM tsm_contract_information a
+    <include refid="tsmContractInformationJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM tsm_contract_information a
+    <include refid="tsmContractInformationJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultMap="resultTsmContractInformationMap">
+    SELECT
+    <include refid="tsmContractInformationColumns" />
+    FROM tsm_contract_information a
+    <include refid="tsmContractInformationJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultMap="resultTsmContractInformationMap">
+    SELECT
+    <include refid="tsmContractInformationColumns" />
+    FROM tsm_contract_information a
+    <include refid="tsmContractInformationJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO tsm_contract_information(
+    <trim suffixOverrides=",">
+      id,
+      induction_id,
+      entry_time,
+      probation_month,
+      probation_end_time,
+      tech_position,
+      employee_level,
+      computer_condition,
+      recruitment_mode,
+      contract_type,
+      contract_property,
+      contract_sign_unit,
+      contract_start_time,
+      contract_months,
+      contract_end_time,
+      full_wages,
+      probation_wages,
+      probation_basic_wages,
+      basic_wages,
+      secrecy_reward,
+      system_reward,
+      basic_performance,
+      floating_performance,
+      probation_basic_performance,
+      probation_floating_performance,
+      report_time,
+      entry_type,
+      employee_belongs,
+      report_address,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      company_legal_person,
+      job_type,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ inductionId },
+      #{ entryTime },
+      #{ probationMonth.id },
+      #{ probationEndTime },
+      #{ techPosition.id },
+      #{ employeeLevel },
+      #{ computerCondition.id },
+      #{ recruitmentMode.id },
+      #{ contractType.id },
+      #{ contractProperty.id },
+      #{ contractSignUnit },
+      #{ contractStartTime },
+      #{ contractMonths },
+      #{ contractEndTime },
+      #{ fullWages },
+      #{ probationWages },
+      #{ probationBasicWages },
+      #{ basicWages },
+      #{ secrecyReward },
+      #{ systemReward },
+      #{ basicPerformance },
+      #{ floatingPerformance },
+      #{ probationBasicPerformance },
+      #{ probationFloatingPerformance },
+      #{ reportTime },
+      #{ entryType.id },
+      #{ employeeBelongs },
+      #{ reportAddress },
+      #{ remarks },
+      #{ createBy },
+      #{ createDate },
+      #{ updateBy },
+      #{ updateDate },
+      #{ delFlag },
+      #{ companyLegalPerson },
+      #{ jobType },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE tsm_contract_information SET
+    <trim suffixOverrides=",">
+      induction_id = #{ inductionId },
+      entry_time = #{ entryTime },
+      probation_month = #{ probationMonth.id },
+      probation_end_time = #{ probationEndTime },
+      tech_position = #{ techPosition.id },
+      employee_level = #{ employeeLevel },
+      computer_condition = #{ computerCondition.id },
+      recruitment_mode = #{ recruitmentMode.id },
+      contract_type = #{ contractType.id },
+      contract_property = #{ contractProperty.id },
+      contract_sign_unit = #{ contractSignUnit },
+      contract_start_time = #{ contractStartTime },
+      contract_months = #{ contractMonths },
+      contract_end_time = #{ contractEndTime },
+      full_wages = #{ fullWages },
+      probation_wages = #{ probationWages },
+      probation_basic_wages = #{ probationBasicWages },
+      basic_wages = #{ basicWages },
+      secrecy_reward = #{ secrecyReward },
+      system_reward = #{ systemReward },
+      basic_performance = #{ basicPerformance },
+      floating_performance = #{ floatingPerformance },
+      probation_basic_performance = #{ probationBasicPerformance },
+      probation_floating_performance = #{ probationFloatingPerformance },
+      report_time = #{ reportTime },
+      entry_type = #{ entryType.id },
+      employee_belongs = #{ employeeBelongs },
+      report_address = #{ reportAddress },
+      remarks = #{ remarks },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+      company_legal_person = #{ companyLegalPerson },
+      job_type = #{ jobType },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE tsm_contract_information SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO tsm_contract_information(
+    <trim suffixOverrides=",">
+      id,
+      induction_id,
+      entry_time,
+      probation_month,
+      probation_end_time,
+      tech_position,
+      employee_level,
+      computer_condition,
+      recruitment_mode,
+      contract_type,
+      contract_property,
+      contract_sign_unit,
+      contract_start_time,
+      contract_months,
+      contract_end_time,
+      full_wages,
+      probation_wages,
+      probation_basic_wages,
+      basic_wages,
+      secrecy_reward,
+      system_reward,
+      basic_performance,
+      floating_performance,
+      probation_basic_performance,
+      probation_floating_performance,
+      report_time,
+      entry_type,
+      employee_belongs,
+      report_address,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      company_legal_person,
+      job_type,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.inductionId},
+        #{entity.entryTime},
+        #{entity.probationMonth.id},
+        #{entity.probationEndTime},
+        #{entity.techPosition.id},
+        #{entity.employeeLevel},
+        #{entity.computerCondition.id},
+        #{entity.recruitmentMode.id},
+        #{entity.contractType.id},
+        #{entity.contractProperty.id},
+        #{entity.contractSignUnit},
+        #{entity.contractStartTime},
+        #{entity.contractMonths},
+        #{entity.contractEndTime},
+        #{entity.fullWages},
+        #{entity.probationWages},
+        #{entity.probationBasicWages},
+        #{entity.basicWages},
+        #{entity.secrecyReward},
+        #{entity.systemReward},
+        #{entity.basicPerformance},
+        #{entity.floatingPerformance},
+        #{entity.probationBasicPerformance},
+        #{entity.probationFloatingPerformance},
+        #{entity.reportTime},
+        #{entity.entryType.id},
+        #{entity.employeeBelongs},
+        #{entity.reportAddress},
+        #{entity.remarks},
+        #{entity.createBy},
+        #{entity.createDate},
+        #{entity.updateBy},
+        #{entity.updateDate},
+        #{entity.delFlag},
+        #{entity.companyLegalPerson},
+        #{entity.jobType},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE tsm_contract_information
+    <set>
+      <trim prefix="induction_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.inductionId}
+        </foreach>
+      </trim>
+      <trim prefix="entry_time=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.entryTime}
+        </foreach>
+      </trim>
+      <trim prefix="probation_month=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.probationMonth.id}
+        </foreach>
+      </trim>
+      <trim prefix="probation_end_time=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.probationEndTime}
+        </foreach>
+      </trim>
+      <trim prefix="tech_position=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.techPosition.id}
+        </foreach>
+      </trim>
+      <trim prefix="employee_level=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeLevel}
+        </foreach>
+      </trim>
+      <trim prefix="computer_condition=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.computerCondition.id}
+        </foreach>
+      </trim>
+      <trim prefix="recruitment_mode=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.recruitmentMode.id}
+        </foreach>
+      </trim>
+      <trim prefix="contract_type=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.contractType.id}
+        </foreach>
+      </trim>
+      <trim prefix="contract_property=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.contractProperty.id}
+        </foreach>
+      </trim>
+      <trim prefix="contract_sign_unit=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.contractSignUnit}
+        </foreach>
+      </trim>
+      <trim prefix="contract_start_time=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.contractStartTime}
+        </foreach>
+      </trim>
+      <trim prefix="contract_months=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.contractMonths}
+        </foreach>
+      </trim>
+      <trim prefix="contract_end_time=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.contractEndTime}
+        </foreach>
+      </trim>
+      <trim prefix="full_wages=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.fullWages}
+        </foreach>
+      </trim>
+      <trim prefix="probation_wages=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.probationWages}
+        </foreach>
+      </trim>
+      <trim prefix="probation_basic_wages=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.probationBasicWages}
+        </foreach>
+      </trim>
+      <trim prefix="basic_wages=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.basicWages}
+        </foreach>
+      </trim>
+      <trim prefix="secrecy_reward=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.secrecyReward}
+        </foreach>
+      </trim>
+      <trim prefix="system_reward=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.systemReward}
+        </foreach>
+      </trim>
+      <trim prefix="basic_performance=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.basicPerformance}
+        </foreach>
+      </trim>
+      <trim prefix="floating_performance=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.floatingPerformance}
+        </foreach>
+      </trim>
+      <trim prefix="probation_basic_performance=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.probationBasicPerformance}
+        </foreach>
+      </trim>
+      <trim prefix="probation_floating_performance=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.probationFloatingPerformance}
+        </foreach>
+      </trim>
+      <trim prefix="report_time=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.reportTime}
+        </foreach>
+      </trim>
+      <trim prefix="entry_type=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.entryType.id}
+        </foreach>
+      </trim>
+      <trim prefix="employee_belongs=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeBelongs}
+        </foreach>
+      </trim>
+      <trim prefix="report_address=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.reportAddress}
+        </foreach>
+      </trim>
+      <trim prefix="remarks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+      <trim prefix="company_legal_person=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyLegalPerson}
+        </foreach>
+      </trim>
+      <trim prefix="job_type=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.jobType}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE tsm_contract_information
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+</mapper>

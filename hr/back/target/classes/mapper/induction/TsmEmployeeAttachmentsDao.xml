@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.induction.dao.TsmEmployeeAttachmentsDao">
+  <sql id="tsmEmployeeAttachmentsColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.induction_id AS "inductionId",
+      a.attachment_name AS "attachmentName",
+      a.attachment_url AS "attachmentUrl",
+      a.is_required AS "isRequired.id",
+      IFNULL(isRequired.name,'') AS "isRequired.name",
+      a.is_uploaded AS "isUploaded.id",
+      IFNULL(isUploaded.name,'') AS "isUploaded.name",
+      a.remarks AS "remarks",
+      a.create_by AS "createBy",
+      a.create_date AS "createDate",
+      a.update_by AS "updateBy",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+    </trim>
+  </sql>
+  <sql id="tsmEmployeeAttachmentsJoins">
+    LEFT JOIN sys_dict_item isRequired ON isRequired.id = a.is_required
+    LEFT JOIN sys_dict_item isUploaded ON isUploaded.id = a.is_uploaded
+  </sql>
+  <resultMap id="resultTsmEmployeeAttachmentsMap" type="com.geeke.induction.entity.TsmEmployeeAttachments">
+    <result property="id" column="id" />
+    <result property="inductionId" column="inductionId" />
+    <result property="attachmentName" column="attachmentName" />
+    <result property="attachmentUrl" column="attachmentUrl" />
+    <result property="remarks" column="remarks" />
+    <result property="createBy" column="createBy" />
+    <result property="createDate" column="createDate" />
+    <result property="updateBy" column="updateBy" />
+    <result property="updateDate" column="updateDate" />
+    <result property="delFlag" column="delFlag" />
+    <association property="isRequired" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="isRequired.id" />
+      <result property="name" column="isRequired.name" />
+    </association>
+    <association property="isUploaded" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="isUploaded.id" />
+      <result property="name" column="isUploaded.name" />
+    </association>
+  </resultMap>
+  <select id="get" resultMap="resultTsmEmployeeAttachmentsMap">
+    SELECT
+    <include refid="tsmEmployeeAttachmentsColumns" />
+    FROM tsm_employee_attachments a
+    <include refid="tsmEmployeeAttachmentsJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM tsm_employee_attachments a
+    <include refid="tsmEmployeeAttachmentsJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultMap="resultTsmEmployeeAttachmentsMap">
+    SELECT
+    <include refid="tsmEmployeeAttachmentsColumns" />
+    FROM tsm_employee_attachments a
+    <include refid="tsmEmployeeAttachmentsJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultMap="resultTsmEmployeeAttachmentsMap">
+    SELECT
+    <include refid="tsmEmployeeAttachmentsColumns" />
+    FROM tsm_employee_attachments a
+    <include refid="tsmEmployeeAttachmentsJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO tsm_employee_attachments(
+    <trim suffixOverrides=",">
+      id,
+      induction_id,
+      attachment_name,
+      attachment_url,
+      is_required,
+      is_uploaded,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ inductionId },
+      #{ attachmentName },
+      #{ attachmentUrl },
+      #{ isRequired.id },
+      #{ isUploaded.id },
+      #{ remarks },
+      #{ createBy },
+      #{ createDate },
+      #{ updateBy },
+      #{ updateDate },
+      #{ delFlag },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE tsm_employee_attachments SET
+    <trim suffixOverrides=",">
+      induction_id = #{ inductionId },
+      attachment_name = #{ attachmentName },
+      attachment_url = #{ attachmentUrl },
+      is_required = #{ isRequired.id },
+      is_uploaded = #{ isUploaded.id },
+      remarks = #{ remarks },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE tsm_employee_attachments SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO tsm_employee_attachments(
+    <trim suffixOverrides=",">
+      id,
+      induction_id,
+      attachment_name,
+      attachment_url,
+      is_required,
+      is_uploaded,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.inductionId},
+        #{entity.attachmentName},
+        #{entity.attachmentUrl},
+        #{entity.isRequired.id},
+        #{entity.isUploaded.id},
+        #{entity.remarks},
+        #{entity.createBy},
+        #{entity.createDate},
+        #{entity.updateBy},
+        #{entity.updateDate},
+        #{entity.delFlag},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE tsm_employee_attachments
+    <set>
+      <trim prefix="induction_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.inductionId}
+        </foreach>
+      </trim>
+      <trim prefix="attachment_name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.attachmentName}
+        </foreach>
+      </trim>
+      <trim prefix="attachment_url=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.attachmentUrl}
+        </foreach>
+      </trim>
+      <trim prefix="is_required=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isRequired.id}
+        </foreach>
+      </trim>
+      <trim prefix="is_uploaded=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isUploaded.id}
+        </foreach>
+      </trim>
+      <trim prefix="remarks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE tsm_employee_attachments
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+</mapper>

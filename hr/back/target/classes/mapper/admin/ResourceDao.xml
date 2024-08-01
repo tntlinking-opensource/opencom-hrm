@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.admin.dao.ResourceDao">
+  <sql id="resourceColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.name AS "name",
+      a.code AS "code",
+      a.url AS "url",
+      a.permission AS "permission",
+      a.can_permission AS "canPermission",
+      a.is_default AS "isDefault",
+      a.is_locked AS "isLocked",
+      a.router_id AS "router.id",
+      IFNULL(router.name,'') AS "router.name",
+      a.remarks AS "remarks",
+      a.create_by AS "createBy",
+      a.create_date AS "createDate",
+      a.update_by AS "updateBy",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+      a.properties AS "properties",
+    </trim>
+  </sql>
+  <sql id="resourceJoins">
+    LEFT JOIN sys_router router ON router.id = a.router_id
+  </sql>
+  <select id="get" resultType="com.geeke.admin.entity.Resource">
+    SELECT
+    <include refid="resourceColumns" />
+    FROM sys_resource a
+    <include refid="resourceJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM sys_resource a
+    <include refid="resourceJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultType="com.geeke.admin.entity.Resource">
+    SELECT
+    <include refid="resourceColumns" />
+    FROM sys_resource a
+    <include refid="resourceJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultType="com.geeke.admin.entity.Resource">
+    SELECT
+    <include refid="resourceColumns" />
+    FROM sys_resource a
+    <include refid="resourceJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO sys_resource(
+    <trim suffixOverrides=",">
+      id,
+      name,
+      code,
+      url,
+      permission,
+      can_permission,
+      is_default,
+      is_locked,
+      router_id,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      properties,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ name },
+      #{ code },
+      #{ url },
+      #{ permission },
+      #{ canPermission },
+      #{ isDefault },
+      #{ isLocked },
+      #{ router.id },
+      #{ remarks },
+      #{ createBy },
+      #{ createDate },
+      #{ updateBy },
+      #{ updateDate },
+      #{ delFlag },
+      #{ properties },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE sys_resource SET
+    <trim suffixOverrides=",">
+      name = #{ name },
+      code = #{ code },
+      url = #{ url },
+      permission = #{ permission },
+      can_permission = #{ canPermission },
+      is_default = #{ isDefault },
+      is_locked = #{ isLocked },
+      router_id = #{ router.id },
+      remarks = #{ remarks },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+      properties = #{ properties },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE sys_resource SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO sys_resource(
+    <trim suffixOverrides=",">
+      id,
+      name,
+      code,
+      url,
+      permission,
+      can_permission,
+      is_default,
+      is_locked,
+      router_id,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      properties,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.name},
+        #{entity.code},
+        #{entity.url},
+        #{entity.permission},
+        #{entity.canPermission},
+        #{entity.isDefault},
+        #{entity.isLocked},
+        #{entity.router.id},
+        #{entity.remarks},
+        #{entity.createBy},
+        #{entity.createDate},
+        #{entity.updateBy},
+        #{entity.updateDate},
+        #{entity.delFlag},
+        #{entity.properties},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE sys_resource
+    <set>
+      <trim prefix="name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.name}
+        </foreach>
+      </trim>
+      <trim prefix="code=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.code}
+        </foreach>
+      </trim>
+      <trim prefix="url=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.url}
+        </foreach>
+      </trim>
+      <trim prefix="permission=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.permission}
+        </foreach>
+      </trim>
+      <trim prefix="can_permission=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.canPermission}
+        </foreach>
+      </trim>
+      <trim prefix="is_default=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isDefault}
+        </foreach>
+      </trim>
+      <trim prefix="is_locked=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isLocked}
+        </foreach>
+      </trim>
+      <trim prefix="router_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.router.id}
+        </foreach>
+      </trim>
+      <trim prefix="remarks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+      <trim prefix="properties=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.properties}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE sys_resource
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+</mapper>

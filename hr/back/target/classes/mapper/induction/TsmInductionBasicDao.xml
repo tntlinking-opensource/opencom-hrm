@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.induction.dao.TsmInductionBasicDao">
+  <sql id="tsmInductionBasicColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.name AS "name",
+      a.gender AS "gender.id",
+      IFNULL(gender.name,'') AS "gender.name",
+      a.ethnicity AS "ethnicity.id",
+      IFNULL(ethnicity.name,'') AS "ethnicity.name",
+      a.id_number AS "idNumber",
+      a.birth_date AS "birthDate",
+      a.age AS "age",
+      a.id_card_expiry_date AS "idCardExpiryDate",
+      a.phone_number AS "phoneNumber",
+      a.residence_address AS "residenceAddress",
+      a.native_place AS "nativePlace",
+      a.health_status AS "healthStatus.id",
+      IFNULL(healthStatus.name,'') AS "healthStatus.name",
+      a.email AS "email",
+      a.remarks AS "remarks",
+      a.create_by AS "createBy",
+      a.create_date AS "createDate",
+      a.update_by AS "updateBy",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+      a.proc_inst AS "procInst",
+      a.proc_status AS "procStatus.id",
+      IFNULL(procStatus.name,'') AS "procStatus.name",
+      a.data_validation AS "dataValidation",
+    </trim>
+  </sql>
+  <sql id="tsmInductionBasicJoins">
+    LEFT JOIN sys_dict_item gender ON gender.id = a.gender
+    LEFT JOIN sys_dict_item ethnicity ON ethnicity.id = a.ethnicity
+    LEFT JOIN sys_dict_item healthStatus ON healthStatus.id = a.health_status
+    LEFT JOIN sys_dict_item procStatus ON procStatus.id = a.proc_status
+  </sql>
+  <resultMap id="resultTsmInductionBasicMap" type="com.geeke.induction.entity.TsmInductionBasic">
+    <result property="id" column="id" />
+    <result property="name" column="name" />
+    <result property="idNumber" column="idNumber" />
+    <result property="birthDate" column="birthDate" />
+    <result property="age" column="age" />
+    <result property="idCardExpiryDate" column="idCardExpiryDate" />
+    <result property="phoneNumber" column="phoneNumber" />
+    <result property="residenceAddress" column="residenceAddress" />
+    <result property="nativePlace" column="nativePlace" />
+    <result property="email" column="email" />
+    <result property="remarks" column="remarks" />
+    <result property="createBy" column="createBy" />
+    <result property="createDate" column="createDate" />
+    <result property="updateBy" column="updateBy" />
+    <result property="updateDate" column="updateDate" />
+    <result property="delFlag" column="delFlag" />
+    <result property="procInst" column="procInst" />
+    <result property="dataValidation" column="dataValidation" />
+    <association property="gender" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="gender.id" />
+      <result property="name" column="gender.name" />
+    </association>
+    <association property="ethnicity" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="ethnicity.id" />
+      <result property="name" column="ethnicity.name" />
+    </association>
+    <association property="healthStatus" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="healthStatus.id" />
+      <result property="name" column="healthStatus.name" />
+    </association>
+    <association property="procStatus" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="procStatus.id" />
+      <result property="name" column="procStatus.name" />
+    </association>
+  </resultMap>
+  <select id="get" resultMap="resultTsmInductionBasicMap">
+    SELECT
+    <include refid="tsmInductionBasicColumns" />
+    FROM tsm_induction_basic a
+    <include refid="tsmInductionBasicJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM tsm_induction_basic a
+    <include refid="tsmInductionBasicJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultMap="resultTsmInductionBasicMap">
+    SELECT
+    <include refid="tsmInductionBasicColumns" />
+    FROM tsm_induction_basic a
+    <include refid="tsmInductionBasicJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultMap="resultTsmInductionBasicMap">
+    SELECT
+    <include refid="tsmInductionBasicColumns" />
+    FROM tsm_induction_basic a
+    <include refid="tsmInductionBasicJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO tsm_induction_basic(
+    <trim suffixOverrides=",">
+      id,
+      name,
+      gender,
+      ethnicity,
+      id_number,
+      birth_date,
+      age,
+      id_card_expiry_date,
+      phone_number,
+      residence_address,
+      native_place,
+      health_status,
+      email,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      proc_inst,
+      proc_status,
+      data_validation,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ name },
+      #{ gender.id },
+      #{ ethnicity.id },
+      #{ idNumber },
+      #{ birthDate },
+      #{ age },
+      #{ idCardExpiryDate },
+      #{ phoneNumber },
+      #{ residenceAddress },
+      #{ nativePlace },
+      #{ healthStatus.id },
+      #{ email },
+      #{ remarks },
+      #{ createBy },
+      #{ createDate },
+      #{ updateBy },
+      #{ updateDate },
+      #{ delFlag },
+      #{ procInst },
+      #{ procStatus.id },
+      #{ dataValidation },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE tsm_induction_basic SET
+    <trim suffixOverrides=",">
+      name = #{ name },
+      gender = #{ gender.id },
+      ethnicity = #{ ethnicity.id },
+      id_number = #{ idNumber },
+      birth_date = #{ birthDate },
+      age = #{ age },
+      id_card_expiry_date = #{ idCardExpiryDate },
+      phone_number = #{ phoneNumber },
+      residence_address = #{ residenceAddress },
+      native_place = #{ nativePlace },
+      health_status = #{ healthStatus.id },
+      email = #{ email },
+      remarks = #{ remarks },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+      proc_inst = #{ procInst },
+      proc_status = #{ procStatus.id },
+      data_validation = #{ dataValidation },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE tsm_induction_basic SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO tsm_induction_basic(
+    <trim suffixOverrides=",">
+      id,
+      name,
+      gender,
+      ethnicity,
+      id_number,
+      birth_date,
+      age,
+      id_card_expiry_date,
+      phone_number,
+      residence_address,
+      native_place,
+      health_status,
+      email,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      proc_inst,
+      proc_status,
+      data_validation,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.name},
+        #{entity.gender.id},
+        #{entity.ethnicity.id},
+        #{entity.idNumber},
+        #{entity.birthDate},
+        #{entity.age},
+        #{entity.idCardExpiryDate},
+        #{entity.phoneNumber},
+        #{entity.residenceAddress},
+        #{entity.nativePlace},
+        #{entity.healthStatus.id},
+        #{entity.email},
+        #{entity.remarks},
+        #{entity.createBy},
+        #{entity.createDate},
+        #{entity.updateBy},
+        #{entity.updateDate},
+        #{entity.delFlag},
+        #{entity.procInst},
+        #{entity.procStatus.id},
+        #{entity.dataValidation},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE tsm_induction_basic
+    <set>
+      <trim prefix="name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.name}
+        </foreach>
+      </trim>
+      <trim prefix="gender=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.gender.id}
+        </foreach>
+      </trim>
+      <trim prefix="ethnicity=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.ethnicity.id}
+        </foreach>
+      </trim>
+      <trim prefix="id_number=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.idNumber}
+        </foreach>
+      </trim>
+      <trim prefix="birth_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.birthDate}
+        </foreach>
+      </trim>
+      <trim prefix="age=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.age}
+        </foreach>
+      </trim>
+      <trim prefix="id_card_expiry_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.idCardExpiryDate}
+        </foreach>
+      </trim>
+      <trim prefix="phone_number=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.phoneNumber}
+        </foreach>
+      </trim>
+      <trim prefix="residence_address=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.residenceAddress}
+        </foreach>
+      </trim>
+      <trim prefix="native_place=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.nativePlace}
+        </foreach>
+      </trim>
+      <trim prefix="health_status=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.healthStatus.id}
+        </foreach>
+      </trim>
+      <trim prefix="email=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.email}
+        </foreach>
+      </trim>
+      <trim prefix="remarks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+      <trim prefix="proc_inst=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.procInst}
+        </foreach>
+      </trim>
+      <trim prefix="proc_status=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.procStatus.id}
+        </foreach>
+      </trim>
+      <trim prefix="data_validation=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.dataValidation}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE tsm_induction_basic
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+
+  <select id="homeSearchCount" resultType="int">
+    SELECT COUNT(*) FROM tsm_induction_basic a
+    INNER JOIN tsm_induction_info tsmInfo ON a.id = tsmInfo.induction_id
+    INNER JOIN tsm_post tsmPost ON tsmInfo.induction_id = tsmPost.induction_id
+    <include refid="tsmInductionBasicJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <choose>
+        <when test="name != null and name != ''"> AND a.name LIKE CONCAT('%', #{name}, '%') </when>
+        <when test="phoneNumber != null and phoneNumber != ''"> AND a.phone_number LIKE CONCAT('%', #{phoneNumber}, '%') </when>
+        <when test="actStatus != null and actStatus != ''"> AND a.proc_status = #{actStatus} </when>
+        <when test="entryTime != null and entryTime != ''"> AND tsmPost.entry_time = #{entryTime} </when>
+        <when test="dataSubmission != null and dataSubmission != ''"> AND tsmInfo.data_Submission = #{dataSubmission} </when>
+        <when test="dataValidation != null and dataValidation != ''"> AND a.data_validation = #{dataValidation} </when>
+        <when test="recordStatus != null and recordStatus != ''"> AND tsmInfo.record_status = #{recordStatus} </when>
+        <when test="abandonReporting != null and abandonReporting != ''"> AND tsmPost.abandon_reporting = #{abandonReporting} </when>
+      </choose>
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+
+  <select id="homeSearchListPage" resultMap="resultTsmInductionBasicMap">
+    SELECT
+    <include refid="tsmInductionBasicColumns" />
+    FROM tsm_induction_basic a
+    INNER JOIN tsm_induction_info tsmInfo ON a.id = tsmInfo.induction_id
+    INNER JOIN tsm_post tsmPost ON tsmInfo.induction_id = tsmPost.induction_id
+    <include refid="tsmInductionBasicJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <choose>
+        <when test="name != null and name != ''"> AND a.name LIKE CONCAT('%', #{name}, '%') </when>
+        <when test="phoneNumber != null and phoneNumber != ''"> AND a.phone_number LIKE CONCAT('%', #{phoneNumber}, '%') </when>
+        <when test="actStatus != null and actStatus != ''"> AND a.proc_status = #{actStatus} </when>
+        <when test="entryTime != null and entryTime != ''"> AND tsmPost.entry_time = #{entryTime} </when>
+        <when test="dataValidation != null and dataValidation != ''"> AND a.data_validation = #{dataValidation} </when>
+        <when test="dataSubmission != null and dataSubmission != ''"> AND tsmInfo.data_Submission = #{dataSubmission} </when>
+        <when test="recordStatus != null and recordStatus != ''"> AND tsmInfo.record_status = #{recordStatus} </when>
+        <when test="abandonReporting != null and abandonReporting != ''"> AND tsmPost.abandon_reporting = #{abandonReporting} </when>
+      </choose>
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+</mapper>

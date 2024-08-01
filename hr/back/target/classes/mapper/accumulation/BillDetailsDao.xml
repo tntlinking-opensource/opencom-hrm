@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.accumulation.dao.BillDetailsDao">
+  <sql id="billDetailsColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.company_id As "companyId",
+      a.city_name AS "cityName",
+      a.employee_name AS "employeeName",
+      a.employee_no AS "employeeNo",
+      a.dept_id AS "deptId",
+      a.id_card_no AS "idCardNo",
+      a.social_security_pay_month AS "socialSecurityPayMonth",
+      a.social_security_pay_base AS "socialSecurityPayBase",
+      a.accumula_fund_pay_month AS "accumulaFundPayMonth",
+      a.accumula_fund_pay_base AS "accumulaFundPayBase",
+      a.unit_annuity AS "unitAnnuity",
+      a.unit_medical AS "unitMedical",
+      a.unit_bear AS "unitBear",
+      a.unit_ill_medical AS "unitIllMedical",
+      a.unit_unemploy AS "unitUnemploy",
+      a.unit_injury AS "unitInjury",
+      a.unit_disabled_hund AS "unitDisabledHund",
+      a.unit_accumula_hund AS "unitAccumulaHund",
+      a.unit_social_security_amount AS "unitSocialSecurityAmount",
+      a.person_annuity AS "personAnnuity",
+      a.person_medical AS "personMedical",
+      a.person_ill_medical AS "personIllMedical",
+      a.person_unemploy AS "personUnemploy",
+      a.person_social_security_amount AS "personSocialSecurityAmount",
+      a.person_accumula_hund AS "personAccumulaHund",
+      a.person_amount AS "personAmount",
+      a.amount AS "amount",
+      a.batch_no AS "batchNo",
+      a.bill_year_month AS "billYearMonth",
+      a.create_by AS "createBy",
+      a.update_by AS "updateBy",
+      a.create_date AS "createDate",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+    </trim>
+  </sql>
+  <sql id="billDetailsJoins">
+  </sql>
+  <select id="get" resultType="com.geeke.accumulation.entity.BillDetails">
+    SELECT
+    <include refid="billDetailsColumns" />
+    FROM bill_details a
+    <include refid="billDetailsJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM bill_details a
+    <include refid="billDetailsJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultType="com.geeke.accumulation.entity.BillDetails">
+    SELECT
+    <include refid="billDetailsColumns" />
+    FROM bill_details a
+    <include refid="billDetailsJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC,a.create_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultType="com.geeke.accumulation.entity.BillDetails">
+    SELECT
+    <include refid="billDetailsColumns" />
+    FROM bill_details a
+    <include refid="billDetailsJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC,a.create_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO bill_details(
+    <trim suffixOverrides=",">
+      id,
+      company_id,
+      city_name,
+      employee_name,
+      employee_no,
+      dept_id,
+      id_card_no,
+      social_security_pay_month,
+      social_security_pay_base,
+      accumula_fund_pay_month,
+      accumula_fund_pay_base,
+      unit_annuity,
+      unit_medical,
+      unit_bear,
+      unit_ill_medical,
+      unit_unemploy,
+      unit_injury,
+      unit_disabled_hund,
+      unit_accumula_hund,
+      unit_social_security_amount,
+      person_annuity,
+      person_medical,
+      person_ill_medical,
+      person_unemploy,
+      person_social_security_amount,
+      person_accumula_hund,
+      person_amount,
+      amount,
+      batch_no,
+      bill_year_month,
+      create_by,
+      update_by,
+      create_date,
+      update_date,
+      del_flag,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ companyId },
+      #{ cityName },
+      #{ employeeName },
+      #{ employeeNo },
+      #{ deptId },
+      #{ idCardNo },
+      #{ socialSecurityPayMonth },
+      #{ socialSecurityPayBase },
+      #{ accumulaFundPayMonth },
+      #{ accumulaFundPayBase },
+      #{ unitAnnuity },
+      #{ unitMedical },
+      #{ unitBear },
+      #{ unitIllMedical },
+      #{ unitUnemploy },
+      #{ unitInjury },
+      #{ unitDisabledHund },
+      #{ unitAccumulaHund },
+      #{ unitSocialSecurityAmount },
+      #{ personAnnuity },
+      #{ personMedical },
+      #{ personIllMedical },
+      #{ personUnemploy },
+      #{ personSocialSecurityAmount },
+      #{ personAccumulaHund },
+      #{ personAmount },
+      #{ amount },
+      #{ batchNo },
+      #{ billYearMonth },
+      #{ createBy },
+      #{ updateBy },
+      #{ createDate },
+      #{ updateDate },
+      #{ delFlag },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE bill_details SET
+    <trim suffixOverrides=",">
+      company_id = #{ companyId },
+      city_name = #{ cityName },
+      employee_name = #{ employeeName },
+      employee_no = #{ employeeNo },
+      dept_id = #{ deptId },
+      id_card_no = #{ idCardNo },
+      social_security_pay_month = #{ socialSecurityPayMonth },
+      social_security_pay_base = #{ socialSecurityPayBase },
+      accumula_fund_pay_month = #{ accumulaFundPayMonth },
+      accumula_fund_pay_base = #{ accumulaFundPayBase },
+      unit_annuity = #{ unitAnnuity },
+      unit_medical = #{ unitMedical },
+      unit_bear = #{ unitBear },
+      unit_ill_medical = #{ unitIllMedical },
+      unit_unemploy = #{ unitUnemploy },
+      unit_injury = #{ unitInjury },
+      unit_disabled_hund = #{ unitDisabledHund },
+      unit_accumula_hund = #{ unitAccumulaHund },
+      unit_social_security_amount = #{ unitSocialSecurityAmount },
+      person_annuity = #{ personAnnuity },
+      person_medical = #{ personMedical },
+      person_ill_medical = #{ personIllMedical },
+      person_unemploy = #{ personUnemploy },
+      person_social_security_amount = #{ personSocialSecurityAmount },
+      person_accumula_hund = #{ personAccumulaHund },
+      person_amount = #{ personAmount },
+      amount = #{ amount },
+      batch_no = #{ batchNo },
+      bill_year_month = #{ billYearMonth },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE bill_details SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO bill_details(
+    <trim suffixOverrides=",">
+      id,
+      company_id,
+      city_name,
+      employee_name,
+      employee_no,
+      dept_id,
+      id_card_no,
+      social_security_pay_month,
+      social_security_pay_base,
+      accumula_fund_pay_month,
+      accumula_fund_pay_base,
+      unit_annuity,
+      unit_medical,
+      unit_bear,
+      unit_ill_medical,
+      unit_unemploy,
+      unit_injury,
+      unit_disabled_hund,
+      unit_accumula_hund,
+      unit_social_security_amount,
+      person_annuity,
+      person_medical,
+      person_ill_medical,
+      person_unemploy,
+      person_social_security_amount,
+      person_accumula_hund,
+      person_amount,
+      amount,
+      batch_no,
+      bill_year_month,
+      create_by,
+      update_by,
+      create_date,
+      update_date,
+      del_flag,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.companyId},
+        #{entity.cityName},
+        #{entity.employeeName},
+        #{entity.employeeNo},
+        #{entity.deptId},
+        #{entity.idCardNo},
+        #{entity.socialSecurityPayMonth},
+        #{entity.socialSecurityPayBase},
+        #{entity.accumulaFundPayMonth},
+        #{entity.accumulaFundPayBase},
+        #{entity.unitAnnuity},
+        #{entity.unitMedical},
+        #{entity.unitBear},
+        #{entity.unitIllMedical},
+        #{entity.unitUnemploy},
+        #{entity.unitInjury},
+        #{entity.unitDisabledHund},
+        #{entity.unitAccumulaHund},
+        #{entity.unitSocialSecurityAmount},
+        #{entity.personAnnuity},
+        #{entity.personMedical},
+        #{entity.personIllMedical},
+        #{entity.personUnemploy},
+        #{entity.personSocialSecurityAmount},
+        #{entity.personAccumulaHund},
+        #{entity.personAmount},
+        #{entity.amount},
+        #{entity.batchNo},
+        #{entity.billYearMonth},
+        #{entity.createBy},
+        #{entity.updateBy},
+        #{entity.createDate},
+        #{entity.updateDate},
+        #{entity.delFlag},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE bill_details
+    <set>
+      <trim prefix="company_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyId}
+        </foreach>
+      </trim>
+      <trim prefix="city_name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.cityName}
+        </foreach>
+      </trim>
+      <trim prefix="employee_name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeName}
+        </foreach>
+      </trim>
+      <trim prefix="employee_no=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeNo}
+        </foreach>
+      </trim>
+      <trim prefix="dept_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.deptId}
+        </foreach>
+      </trim>
+      <trim prefix="id_card_no=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.idCardNo}
+        </foreach>
+      </trim>
+      <trim prefix="social_security_pay_month=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.socialSecurityPayMonth}
+        </foreach>
+      </trim>
+      <trim prefix="social_security_pay_base=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.socialSecurityPayBase}
+        </foreach>
+      </trim>
+      <trim prefix="accumula_fund_pay_month=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.accumulaFundPayMonth}
+        </foreach>
+      </trim>
+      <trim prefix="accumula_fund_pay_base=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.accumulaFundPayBase}
+        </foreach>
+      </trim>
+      <trim prefix="unit_annuity=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.unitAnnuity}
+        </foreach>
+      </trim>
+      <trim prefix="unit_medical=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.unitMedical}
+        </foreach>
+      </trim>
+      <trim prefix="unit_bear=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.unitBear}
+        </foreach>
+      </trim>
+      <trim prefix="unit_ill_medical=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.unitIllMedical}
+        </foreach>
+      </trim>
+      <trim prefix="unit_unemploy=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.unitUnemploy}
+        </foreach>
+      </trim>
+      <trim prefix="unit_injury=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.unitInjury}
+        </foreach>
+      </trim>
+      <trim prefix="unit_disabled_hund=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.unitDisabledHund}
+        </foreach>
+      </trim>
+      <trim prefix="unit_accumula_hund=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.unitAccumulaHund}
+        </foreach>
+      </trim>
+      <trim prefix="unit_social_security_amount=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.unitSocialSecurityAmount}
+        </foreach>
+      </trim>
+      <trim prefix="person_annuity=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personAnnuity}
+        </foreach>
+      </trim>
+      <trim prefix="person_medical=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personMedical}
+        </foreach>
+      </trim>
+      <trim prefix="person_ill_medical=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personIllMedical}
+        </foreach>
+      </trim>
+      <trim prefix="person_unemploy=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personUnemploy}
+        </foreach>
+      </trim>
+      <trim prefix="person_social_security_amount=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personSocialSecurityAmount}
+        </foreach>
+      </trim>
+      <trim prefix="person_accumula_hund=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personAccumulaHund}
+        </foreach>
+      </trim>
+      <trim prefix="person_amount=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personAmount}
+        </foreach>
+      </trim>
+      <trim prefix="amount=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.amount}
+        </foreach>
+      </trim>
+      <trim prefix="batch_no=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.batchNo}
+        </foreach>
+      </trim>
+      <trim prefix="bill_year_month=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.billYearMonth}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE bill_details
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+
+  <select id="getEmployeeNo" resultType="java.lang.String">
+    SELECT DISTINCT
+      ( salary.employee_no )
+    FROM
+      salary_archives_info salary
+    WHERE employee_status != '4'
+        AND del_flag = '0'
+--         INNER JOIN bill_details bill ON bill.employee_no = salary.employee_no
+--         AND bill.employee_name = salary.employee_name
+--         AND bill.dept_id = salary.dept_id
+--         AND bill.id_card_no = salary.id_card_no
+  </select>
+
+  <select id="getProductPayByEmployeeNo" resultType="java.util.Map">
+    SELECT
+      city_name as cityName,
+      product_type AS productType,
+      company_pay_base as  companyPayBase,
+      person_pay_base as personPayBase,
+      CONVERT(company_pay_base * (company_pay_scale/100), DECIMAL(15,2)) AS companyBase,
+      CONVERT(person_pay_base * (person_pay_scale/100), DECIMAL(15,2)) AS personBase
+    FROM
+      social_security_fund
+    WHERE
+      employee_no = #{employeeNo}
+  </select>
+
+  <select id="getBillListVos" resultType="com.geeke.accumulation.entity.vo.BillListVo">
+    SELECT
+      a.batch_no as batchNo,
+      a.bill_year_month as billYearMonth,
+      b2.amount as billAmount,
+      count( distinct(a.employee_no ) ) as billPeopleNumber,
+      a.create_date as createDate,
+      a.create_by as createBy
+    FROM
+      bill_details a
+        LEFT JOIN (
+        SELECT
+          batch_no,
+          (
+              sum( ifnull( unit_annuity, 0 ) ) + sum( ifnull( unit_medical, 0 ) ) + sum( ifnull( unit_bear, 0 ) ) +
+              sum( ifnull( unit_ill_medical, 0 ) ) + sum( ifnull( unit_unemploy, 0 ) ) + sum( ifnull( unit_injury, 0 ) ) +
+              sum( ifnull( person_annuity, 0 ) ) + sum( ifnull( person_medical, 0 ) ) + sum( ifnull( person_ill_medical, 0 ) ) +
+              sum( ifnull( person_unemploy, 0 ) ) + sum( ifnull( unit_accumula_hund, 0 ) ) + sum( ifnull( person_accumula_hund, 0 ) )
+            ) AS amount
+        FROM
+          bill_details a
+        <where>
+          1=1
+          AND a.id > 0
+          AND a.del_flag = #{DEL_FLAG_NORMAL}
+          <include refid="Common.whereParams" />
+        </where>
+        GROUP BY
+          a.batch_no
+      ) b2 ON b2.batch_no = a.batch_no
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      AND a.batch_no != 'bill_default_config'
+      <include refid="Common.whereParams" />
+    </where>
+    GROUP BY
+      a.batch_no
+    ORDER BY a.batch_no desc
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+
+  <select id="getBillSummaryList" resultType="com.geeke.accumulation.entity.vo.BillDetailsVo">
+    SELECT
+      b1.batch_no AS batchNo,
+      b1.bill_year_month AS billYearMonth,
+      b2.amount1 AS unitSocialSecurityAmount,
+      b2.amount2 AS personSocialSecurityAmount,
+      b2.amount1 + b2.amount2 AS totalSocialSecurityAmount,
+      b2.amount3 AS unitAccumulaHund,
+      b2.amount4 AS personAccumulaHund,
+      b2.amount3 + b2.amount4 AS totalAccumulaHundAmount,
+      b2.amount5 AS unitDisabledHund,
+      b2.amount1 + b2.amount2 + b2.amount3 + b2.amount4 AS totalAmount,
+      count( b1.batch_no ) AS billPeopleNumber,
+      b1.create_date AS createDate,
+      b1.create_by AS createBy
+    FROM
+      bill_details b1
+        LEFT JOIN (
+        SELECT
+          batch_no,
+          company_id,
+          (
+              sum( ifnull( unit_annuity, 0 ) ) + sum( ifnull( unit_medical, 0 ) ) + sum( ifnull( unit_bear, 0 ) ) + sum( ifnull( unit_ill_medical, 0 ) ) + sum( ifnull( unit_unemploy, 0 ) ) + sum( ifnull( unit_injury, 0 ) )
+            ) AS amount1,
+          (
+              sum( ifnull( person_annuity, 0 ) ) + sum( ifnull( person_medical, 0 ) ) + sum( ifnull( person_ill_medical, 0 ) ) + sum( ifnull( person_unemploy, 0 ) )
+            ) AS amount2,
+          sum( ifnull( unit_accumula_hund, 0 ) ) AS amount3,
+          sum( ifnull( person_accumula_hund, 0 ) ) AS amount4,
+          sum( ifnull( unit_disabled_hund, 0 ) ) AS amount5
+        FROM
+          bill_details
+        GROUP BY
+          batch_no
+      ) b2 ON b2.batch_no = b1.batch_no and b2.company_id = b1.company_id
+    where 1=1
+     <if test="object != null and object.batchNo != null">
+       and b1.batch_no = #{object.batchNo}
+     </if>
+    <if test="object != null and object.companyId != null">
+      and b1.company_id = #{object.companyId}
+    </if>
+    GROUP BY
+      b1.batch_no
+  </select>
+
+  <select id="getBillDetailsList" resultType="com.geeke.accumulation.entity.vo.BillDetailsVo">
+    SELECT
+    <include refid="billDetailsColumns" />
+    FROM
+      bill_details a
+    WHERE 1=1
+      and del_flag = '0'
+      <if test="object != null and object.batchNo != null">
+        and a.batch_no = #{object.batchNo}
+      </if>
+      <if test="object != null and object.companyId != null">
+        and a.company_id = #{object.companyId}
+      </if>
+      <if test="object != null and object.employeeNoOrName != null">
+        and (a.employee_no = #{object.employeeNoOrName} or a.employee_name = #{object.employeeNoOrName})
+      </if>
+    ORDER BY
+        a.employee_no
+    LIMIT #{object.limit} OFFSET #{object.offset}
+  </select>
+
+  <select id="getMaxBatchNo" resultType="java.lang.String">
+    SELECT
+    max(batch_no)
+    FROM
+    bill_details
+    where batch_no != 'bill_default_config'
+  </select>
+
+  <delete id="deleteByBatchNo">
+    delete from bill_details
+    where batch_no = #{batchNo}
+  </delete>
+</mapper>

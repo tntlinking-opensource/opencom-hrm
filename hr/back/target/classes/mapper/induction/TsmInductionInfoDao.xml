@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.induction.dao.TsmInductionInfoDao">
+  <sql id="tsmInductionInfoColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.induction_id AS "inductionId",
+      a.work_start_date AS "workStartDate",
+      a.marital_status AS "maritalStatus.id",
+      IFNULL(maritalStatus.name,'') AS "maritalStatus.name",
+      a.childbirth_status AS "childbirthStatus.id",
+      IFNULL(childbirthStatus.name,'') AS "childbirthStatus.name",
+      a.political_status AS "politicalStatus.id",
+      IFNULL(politicalStatus.name,'') AS "politicalStatus.name",
+      a.nationality AS "nationality",
+      a.education_background AS "educationBackground.id",
+      IFNULL(educationBackground.name,'') AS "educationBackground.name",
+      a.highest_degree AS "highestDegree.id",
+      IFNULL(highestDegree.name,'') AS "highestDegree.name",
+      a.household_register_location AS "householdRegisterLocation",
+      a.household_register_type AS "householdRegisterType.id",
+      IFNULL(householdRegisterType.name,'') AS "householdRegisterType.name",
+      a.zodiac AS "zodiac",
+      a.blood_type AS "bloodType.id",
+      IFNULL(bloodType.name,'') AS "bloodType.name",
+      a.horoscope AS "horoscope",
+      a.employee_number AS "employeeNumber",
+      a.employee_status AS "employeeStatus.id",
+      IFNULL(employeeStatus.name,'') AS "employeeStatus.name",
+      a.accumulation_fund_id AS "accumulationFundId",
+      a.salary_card_id AS "salaryCardId",
+      a.qq_number AS "qqNumber",
+      a.wechat_id AS "wechatId",
+      a.other_contact_information AS "otherContactInformation",
+      a.company_phone_number AS "companyPhoneNumber",
+      a.company_extension_number AS "companyExtensionNumber",
+      a.company_email AS "companyEmail",
+      a.remarks AS "remarks",
+      a.create_by AS "createBy",
+      a.create_date AS "createDate",
+      a.update_by AS "updateBy",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+      a.record_status AS "recordStatus",
+      a.data_submission AS "dataSubmission",
+    </trim>
+  </sql>
+  <sql id="tsmInductionInfoJoins">
+    LEFT JOIN sys_dict_item maritalStatus ON maritalStatus.id = a.marital_status
+    LEFT JOIN sys_dict_item childbirthStatus ON childbirthStatus.id = a.childbirth_status
+    LEFT JOIN sys_dict_item politicalStatus ON politicalStatus.id = a.political_status
+    LEFT JOIN sys_dict_item educationBackground ON educationBackground.id = a.education_background
+    LEFT JOIN sys_dict_item highestDegree ON highestDegree.id = a.highest_degree
+    LEFT JOIN sys_dict_item householdRegisterType ON householdRegisterType.id = a.household_register_type
+    LEFT JOIN sys_dict_item bloodType ON bloodType.id = a.blood_type
+    LEFT JOIN sys_dict_item employeeStatus ON employeeStatus.id = a.employee_status
+  </sql>
+  <resultMap id="resultTsmInductionInfoMap" type="com.geeke.induction.entity.TsmInductionInfo">
+    <result property="id" column="id" />
+    <result property="inductionId" column="inductionId" />
+    <result property="workStartDate" column="workStartDate" />
+    <result property="nationality" column="nationality" />
+    <result property="householdRegisterLocation" column="householdRegisterLocation" />
+    <result property="zodiac" column="zodiac" />
+    <result property="horoscope" column="horoscope" />
+    <result property="employeeNumber" column="employeeNumber" />
+    <result property="accumulationFundId" column="accumulationFundId" />
+    <result property="salaryCardId" column="salaryCardId" />
+    <result property="qqNumber" column="qqNumber" />
+    <result property="wechatId" column="wechatId" />
+    <result property="otherContactInformation" column="otherContactInformation" />
+    <result property="companyPhoneNumber" column="companyPhoneNumber" />
+    <result property="companyExtensionNumber" column="companyExtensionNumber" />
+    <result property="companyEmail" column="companyEmail" />
+    <result property="remarks" column="remarks" />
+    <result property="createBy" column="createBy" />
+    <result property="createDate" column="createDate" />
+    <result property="updateBy" column="updateBy" />
+    <result property="updateDate" column="updateDate" />
+    <result property="delFlag" column="delFlag" />
+    <result property="recordStatus" column="recordStatus" />
+    <result property="dataSubmission" column="dataSubmission" />
+    <association property="maritalStatus" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="maritalStatus.id" />
+      <result property="name" column="maritalStatus.name" />
+    </association>
+    <association property="childbirthStatus" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="childbirthStatus.id" />
+      <result property="name" column="childbirthStatus.name" />
+    </association>
+    <association property="politicalStatus" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="politicalStatus.id" />
+      <result property="name" column="politicalStatus.name" />
+    </association>
+    <association property="educationBackground" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="educationBackground.id" />
+      <result property="name" column="educationBackground.name" />
+    </association>
+    <association property="highestDegree" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="highestDegree.id" />
+      <result property="name" column="highestDegree.name" />
+    </association>
+    <association property="householdRegisterType" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="householdRegisterType.id" />
+      <result property="name" column="householdRegisterType.name" />
+    </association>
+    <association property="bloodType" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="bloodType.id" />
+      <result property="name" column="bloodType.name" />
+    </association>
+    <association property="employeeStatus" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="employeeStatus.id" />
+      <result property="name" column="employeeStatus.name" />
+    </association>
+  </resultMap>
+  <select id="get" resultMap="resultTsmInductionInfoMap">
+    SELECT
+    <include refid="tsmInductionInfoColumns" />
+    FROM tsm_induction_info a
+    <include refid="tsmInductionInfoJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM tsm_induction_info a
+    <include refid="tsmInductionInfoJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultMap="resultTsmInductionInfoMap">
+    SELECT
+    <include refid="tsmInductionInfoColumns" />
+    FROM tsm_induction_info a
+    <include refid="tsmInductionInfoJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultMap="resultTsmInductionInfoMap">
+    SELECT
+    <include refid="tsmInductionInfoColumns" />
+    FROM tsm_induction_info a
+    <include refid="tsmInductionInfoJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO tsm_induction_info(
+    <trim suffixOverrides=",">
+      id,
+      induction_id,
+      work_start_date,
+      marital_status,
+      childbirth_status,
+      political_status,
+      nationality,
+      education_background,
+      highest_degree,
+      household_register_location,
+      household_register_type,
+      zodiac,
+      blood_type,
+      horoscope,
+      employee_number,
+      employee_status,
+      accumulation_fund_id,
+      salary_card_id,
+      qq_number,
+      wechat_id,
+      other_contact_information,
+      company_phone_number,
+      company_extension_number,
+      company_email,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      record_status,
+      data_submission,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ inductionId },
+      #{ workStartDate },
+      #{ maritalStatus.id },
+      #{ childbirthStatus.id },
+      #{ politicalStatus.id },
+      #{ nationality },
+      #{ educationBackground.id },
+      #{ highestDegree.id },
+      #{ householdRegisterLocation },
+      #{ householdRegisterType.id },
+      #{ zodiac },
+      #{ bloodType.id },
+      #{ horoscope },
+      #{ employeeNumber },
+      #{ employeeStatus.id },
+      #{ accumulationFundId },
+      #{ salaryCardId },
+      #{ qqNumber },
+      #{ wechatId },
+      #{ otherContactInformation },
+      #{ companyPhoneNumber },
+      #{ companyExtensionNumber },
+      #{ companyEmail },
+      #{ remarks },
+      #{ createBy },
+      #{ createDate },
+      #{ updateBy },
+      #{ updateDate },
+      #{ delFlag },
+      #{ recordStatus },
+      #{ dataSubmission },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE tsm_induction_info SET
+    <trim suffixOverrides=",">
+      induction_id = #{ inductionId },
+      work_start_date = #{ workStartDate },
+      marital_status = #{ maritalStatus.id },
+      childbirth_status = #{ childbirthStatus.id },
+      political_status = #{ politicalStatus.id },
+      nationality = #{ nationality },
+      education_background = #{ educationBackground.id },
+      highest_degree = #{ highestDegree.id },
+      household_register_location = #{ householdRegisterLocation },
+      household_register_type = #{ householdRegisterType.id },
+      zodiac = #{ zodiac },
+      blood_type = #{ bloodType.id },
+      horoscope = #{ horoscope },
+      employee_number = #{ employeeNumber },
+      employee_status = #{ employeeStatus.id },
+      accumulation_fund_id = #{ accumulationFundId },
+      salary_card_id = #{ salaryCardId },
+      qq_number = #{ qqNumber },
+      wechat_id = #{ wechatId },
+      other_contact_information = #{ otherContactInformation },
+      company_phone_number = #{ companyPhoneNumber },
+      company_extension_number = #{ companyExtensionNumber },
+      company_email = #{ companyEmail },
+      remarks = #{ remarks },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+      record_status = #{ recordStatus },
+      data_submission = #{ dataSubmission },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE tsm_induction_info SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO tsm_induction_info(
+    <trim suffixOverrides=",">
+      id,
+      induction_id,
+      work_start_date,
+      marital_status,
+      childbirth_status,
+      political_status,
+      nationality,
+      education_background,
+      highest_degree,
+      household_register_location,
+      household_register_type,
+      zodiac,
+      blood_type,
+      horoscope,
+      employee_number,
+      employee_status,
+      accumulation_fund_id,
+      salary_card_id,
+      qq_number,
+      wechat_id,
+      other_contact_information,
+      company_phone_number,
+      company_extension_number,
+      company_email,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      record_status,
+      data_submission,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.inductionId},
+        #{entity.workStartDate},
+        #{entity.maritalStatus.id},
+        #{entity.childbirthStatus.id},
+        #{entity.politicalStatus.id},
+        #{entity.nationality},
+        #{entity.educationBackground.id},
+        #{entity.highestDegree.id},
+        #{entity.householdRegisterLocation},
+        #{entity.householdRegisterType.id},
+        #{entity.zodiac},
+        #{entity.bloodType.id},
+        #{entity.horoscope},
+        #{entity.employeeNumber},
+        #{entity.employeeStatus.id},
+        #{entity.accumulationFundId},
+        #{entity.salaryCardId},
+        #{entity.qqNumber},
+        #{entity.wechatId},
+        #{entity.otherContactInformation},
+        #{entity.companyPhoneNumber},
+        #{entity.companyExtensionNumber},
+        #{entity.companyEmail},
+        #{entity.remarks},
+        #{entity.createBy},
+        #{entity.createDate},
+        #{entity.updateBy},
+        #{entity.updateDate},
+        #{entity.delFlag},
+        #{entity.recordStatus},
+        #{entity.dataSubmission},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE tsm_induction_info
+    <set>
+      <trim prefix="induction_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.inductionId}
+        </foreach>
+      </trim>
+      <trim prefix="work_start_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.workStartDate}
+        </foreach>
+      </trim>
+      <trim prefix="marital_status=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.maritalStatus.id}
+        </foreach>
+      </trim>
+      <trim prefix="childbirth_status=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.childbirthStatus.id}
+        </foreach>
+      </trim>
+      <trim prefix="political_status=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.politicalStatus.id}
+        </foreach>
+      </trim>
+      <trim prefix="nationality=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.nationality}
+        </foreach>
+      </trim>
+      <trim prefix="education_background=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.educationBackground.id}
+        </foreach>
+      </trim>
+      <trim prefix="highest_degree=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.highestDegree.id}
+        </foreach>
+      </trim>
+      <trim prefix="household_register_location=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.householdRegisterLocation}
+        </foreach>
+      </trim>
+      <trim prefix="household_register_type=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.householdRegisterType.id}
+        </foreach>
+      </trim>
+      <trim prefix="zodiac=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.zodiac}
+        </foreach>
+      </trim>
+      <trim prefix="blood_type=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.bloodType.id}
+        </foreach>
+      </trim>
+      <trim prefix="horoscope=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.horoscope}
+        </foreach>
+      </trim>
+      <trim prefix="employee_number=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeNumber}
+        </foreach>
+      </trim>
+      <trim prefix="employee_status=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeStatus.id}
+        </foreach>
+      </trim>
+      <trim prefix="accumulation_fund_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.accumulationFundId}
+        </foreach>
+      </trim>
+      <trim prefix="salary_card_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.salaryCardId}
+        </foreach>
+      </trim>
+      <trim prefix="qq_number=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.qqNumber}
+        </foreach>
+      </trim>
+      <trim prefix="wechat_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.wechatId}
+        </foreach>
+      </trim>
+      <trim prefix="other_contact_information=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.otherContactInformation}
+        </foreach>
+      </trim>
+      <trim prefix="company_phone_number=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyPhoneNumber}
+        </foreach>
+      </trim>
+      <trim prefix="company_extension_number=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyExtensionNumber}
+        </foreach>
+      </trim>
+      <trim prefix="company_email=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyEmail}
+        </foreach>
+      </trim>
+      <trim prefix="remarks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+      <trim prefix="record_status=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.recordStatus}
+        </foreach>
+      </trim>
+      <trim prefix="data_submission=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.dataSubmission}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE tsm_induction_info
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+</mapper>

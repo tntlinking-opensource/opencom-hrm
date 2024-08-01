@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.admin.dao.UserDao">
+  <sql id="userColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.company_id AS "company.id",
+      IFNULL(company.name,'') AS "company.name",
+      IFNULL(company.code,'') AS "company.code",
+      IFNULL(company.full_name,'') AS "company.fullName",
+      IFNULL(company.ids,'') AS "company.ids",
+      IFNULL(company.app_url,'') AS "company.appUrl",
+      a.department_id AS "department.id",
+      IFNULL(department.name,'') AS "department.name",
+      IFNULL(department.code,'') AS "department.code",
+      IFNULL(department.ids,'') AS "department.ids",
+      a.name AS "name",
+      a.login_name AS "loginName",
+      a.login_password AS "loginPassword",
+      a.is_locked AS "isLocked",
+      a.phone AS "phone",
+      a.email AS "email",
+      a.remarks AS "remarks",
+      a.create_by AS "createBy",
+      a.create_date AS "createDate",
+      a.update_by AS "updateBy",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+      a.empolyno AS "empolyno",
+      a.ranks AS "ranks.id",
+      IFNULL(ranks.name,'') AS "ranks.name",
+      IFNULL(ranks.value,'') AS "ranks.value",
+      a.post AS "post.id",
+      IFNULL(post.name,'') AS "post.name",
+      IFNULL(post.value,'') AS "post.value",
+    </trim>
+  </sql>
+  <sql id="userJoins">
+    LEFT JOIN org_company company ON company.id = a.company_id
+    LEFT JOIN org_department department ON department.id = a.department_id
+    LEFT JOIN sys_dict_item ranks ON ranks.id = a.ranks
+    LEFT JOIN sys_dict_item post ON post.id = a.post
+  </sql>
+  <select id="get" resultType="com.geeke.admin.entity.User">
+    SELECT
+    <include refid="userColumns" />
+    FROM sys_user a
+    <include refid="userJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM sys_user a
+    <include refid="userJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultType="com.geeke.admin.entity.User">
+    SELECT
+    <include refid="userColumns" />
+    FROM sys_user a
+    <include refid="userJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.id ASC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultType="com.geeke.admin.entity.User">
+    SELECT
+    <include refid="userColumns" />
+    FROM sys_user a
+    <include refid="userJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.id ASC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO sys_user(
+    <trim suffixOverrides=",">
+      id,
+      company_id,
+      department_id,
+      name,
+      login_name,
+      is_locked,
+      phone,
+      email,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      empolyno,
+      ranks,
+      post,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ company.id },
+      #{ department.id },
+      #{ name },
+      #{ loginName },
+      #{ isLocked },
+      #{ phone },
+      #{ email },
+      #{ remarks },
+      #{ createBy },
+      #{ createDate },
+      #{ updateBy },
+      #{ updateDate },
+      #{ delFlag },
+      #{ empolyno },
+      #{ ranks.id },
+      #{ post.id },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE sys_user SET
+    <trim suffixOverrides=",">
+      company_id = #{ company.id },
+      department_id = #{ department.id },
+      name = #{ name },
+      login_name = #{ loginName },
+      is_locked = #{ isLocked },
+      phone = #{ phone },
+      email = #{ email },
+      remarks = #{ remarks },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+      empolyno = #{ empolyno },
+      ranks = #{ ranks.id },
+      post = #{ post.id },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE sys_user SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO sys_user(
+    <trim suffixOverrides=",">
+      id,
+      company_id,
+      department_id,
+      name,
+      login_name,
+      is_locked,
+      phone,
+      email,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      empolyno,
+      ranks,
+      post,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.company.id},
+        #{entity.department.id},
+        #{entity.name},
+        #{entity.loginName},
+        #{entity.isLocked},
+        #{entity.phone},
+        #{entity.email},
+        #{entity.remarks},
+        #{entity.createBy},
+        #{entity.createDate},
+        #{entity.updateBy},
+        #{entity.updateDate},
+        #{entity.delFlag},
+        #{entity.empolyno},
+        #{entity.ranks.id},
+        #{entity.post.id},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE sys_user
+    <set>
+      <trim prefix="company_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.company.id}
+        </foreach>
+      </trim>
+      <trim prefix="department_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.department.id}
+        </foreach>
+      </trim>
+      <trim prefix="name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.name}
+        </foreach>
+      </trim>
+      <trim prefix="login_name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.loginName}
+        </foreach>
+      </trim>
+      <trim prefix="is_locked=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isLocked}
+        </foreach>
+      </trim>
+      <trim prefix="phone=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.phone}
+        </foreach>
+      </trim>
+      <trim prefix="email=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.email}
+        </foreach>
+      </trim>
+      <trim prefix="remarks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+            <trim prefix="empolyno=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.empolyno}
+        </foreach>
+      </trim>
+      <trim prefix="ranks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.ranks.id}
+        </foreach>
+      </trim>
+      <trim prefix="post=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.post.id}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE sys_user
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="updateLoginPassword">
+    UPDATE sys_user SET
+    login_password = #{pass}
+    WHERE id = #{id}
+  </update>
+</mapper>

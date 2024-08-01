@@ -1,0 +1,4 @@
+2024-03-03 22:50:37.718 ERROR --- [MqProduce.java:36][http-nio-5001-exec-1] - 【ERROR】消息发送失败: ==>> 
+唯一标识: 1c5d7db2-c443-4594-b48b-e907227c21c6 
+消息内容{"actionRecycleList":[],"actionType":{"busTableComments":"","busTableHasDelFlag":true,"busTableId":"1290867985774919713","busTableName":"sys_dict_item","delFlag":"0","value":"login"},"busTableComments":"","busTableHasDelFlag":true,"busTableId":"1220000000000000005","busTableName":"sys_action","createBy":"yd1(yd1)","createDate":"2024-03-03 22:50:35","delFlag":"0","id":"1959256568825643008","objectComments":"","objectId":"1457259193529540752","objectName":"yd1","objectType":"sys_user","status":"0","updateBy":"yd1(yd1)","updateDate":"2024-03-03 22:50:35"}
+2024-03-03 22:50:37.720 ERROR --- [MqProduce.java:37][http-nio-5001-exec-1] - nested exception is java.lang.IllegalStateException: org.apache.rocketmq.remoting.exception.RemotingConnectException: connect to [61.172.179.56:9876] failed

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.induction.dao.TsmFamilyMemberInfoDao">
+  <sql id="tsmFamilyMemberInfoColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.induction_id AS "inductionId",
+      a.family_name AS "familyName",
+      a.kinship AS "kinship.id",
+      IFNULL(kinship.name,'') AS "kinship.name",
+      a.career AS "career",
+      a.contact_address AS "contactAddress",
+      a.contact_Type AS "contactType",
+      a.remarks AS "remarks",
+      a.create_by AS "createBy",
+      a.create_date AS "createDate",
+      a.update_by AS "updateBy",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+    </trim>
+  </sql>
+  <sql id="tsmFamilyMemberInfoJoins">
+    LEFT JOIN sys_dict_item kinship ON kinship.id = a.kinship
+  </sql>
+  <resultMap id="resultTsmFamilyMemberInfoMap" type="com.geeke.induction.entity.TsmFamilyMemberInfo">
+    <result property="id" column="id" />
+    <result property="inductionId" column="inductionId" />
+    <result property="familyName" column="familyName" />
+    <result property="career" column="career" />
+    <result property="contactAddress" column="contactAddress" />
+    <result property="contactType" column="contactType" />
+    <result property="remarks" column="remarks" />
+    <result property="createBy" column="createBy" />
+    <result property="createDate" column="createDate" />
+    <result property="updateBy" column="updateBy" />
+    <result property="updateDate" column="updateDate" />
+    <result property="delFlag" column="delFlag" />
+    <association property="kinship" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="kinship.id" />
+      <result property="name" column="kinship.name" />
+    </association>
+  </resultMap>
+  <select id="get" resultMap="resultTsmFamilyMemberInfoMap">
+    SELECT
+    <include refid="tsmFamilyMemberInfoColumns" />
+    FROM tsm_family_member_info a
+    <include refid="tsmFamilyMemberInfoJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM tsm_family_member_info a
+    <include refid="tsmFamilyMemberInfoJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultMap="resultTsmFamilyMemberInfoMap">
+    SELECT
+    <include refid="tsmFamilyMemberInfoColumns" />
+    FROM tsm_family_member_info a
+    <include refid="tsmFamilyMemberInfoJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultMap="resultTsmFamilyMemberInfoMap">
+    SELECT
+    <include refid="tsmFamilyMemberInfoColumns" />
+    FROM tsm_family_member_info a
+    <include refid="tsmFamilyMemberInfoJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO tsm_family_member_info(
+    <trim suffixOverrides=",">
+      id,
+      induction_id,
+      family_name,
+      kinship,
+      career,
+      contact_address,
+      contact_Type,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ inductionId },
+      #{ familyName },
+      #{ kinship.id },
+      #{ career },
+      #{ contactAddress },
+      #{ contactType },
+      #{ remarks },
+      #{ createBy },
+      #{ createDate },
+      #{ updateBy },
+      #{ updateDate },
+      #{ delFlag },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE tsm_family_member_info SET
+    <trim suffixOverrides=",">
+      induction_id = #{ inductionId },
+      family_name = #{ familyName },
+      kinship = #{ kinship.id },
+      career = #{ career },
+      contact_address = #{ contactAddress },
+      contact_Type = #{ contactType },
+      remarks = #{ remarks },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE tsm_family_member_info SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO tsm_family_member_info(
+    <trim suffixOverrides=",">
+      id,
+      induction_id,
+      family_name,
+      kinship,
+      career,
+      contact_address,
+      contact_Type,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.inductionId},
+        #{entity.familyName},
+        #{entity.kinship.id},
+        #{entity.career},
+        #{entity.contactAddress},
+        #{entity.contactType},
+        #{entity.remarks},
+        #{entity.createBy},
+        #{entity.createDate},
+        #{entity.updateBy},
+        #{entity.updateDate},
+        #{entity.delFlag},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE tsm_family_member_info
+    <set>
+      <trim prefix="induction_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.inductionId}
+        </foreach>
+      </trim>
+      <trim prefix="family_name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.familyName}
+        </foreach>
+      </trim>
+      <trim prefix="kinship=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.kinship.id}
+        </foreach>
+      </trim>
+      <trim prefix="career=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.career}
+        </foreach>
+      </trim>
+      <trim prefix="contact_address=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.contactAddress}
+        </foreach>
+      </trim>
+      <trim prefix="contact_Type=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.contactType}
+        </foreach>
+      </trim>
+      <trim prefix="remarks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE tsm_family_member_info
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+</mapper>

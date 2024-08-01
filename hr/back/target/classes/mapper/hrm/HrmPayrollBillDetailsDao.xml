@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.hrm.dao.HrmPayrollBillDetailsDao">
+  <sql id="hrmPayrollBillDetailsColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.summary_table_id AS "summary.id",
+      IFNULL(summary.name,'') AS "summary.name",
+      a.salary_year_and_month AS "salaryYearAndMonth",
+      a.empolyno AS "empolyno",
+      a.name AS "name",
+      a.dept_name AS "deptName",
+      a.total_salary AS "totalSalary",
+      a.total_bonus AS "totalBonus",
+      a.total_allowance_and_deduction AS "totalAllowanceAndDeduction",
+      a.personal_social_insurance AS "personalSocialInsurance",
+      a.personal_accumulation_fund AS "personalAccumulationFund",
+      a.salary_need_tax AS "salaryNeedTax",
+      a.personal_tax AS "personalTax",
+      a.total_after_tax AS "totalAfterTax",
+      a.remark AS "remark",
+      a.net_salary2 AS "netSalary2",
+      a.remark2 AS "remark2",
+      a.net_salary AS "netSalary",
+      a.tenant_id AS "tenantId",
+      a.state_type AS "stateType",
+      a.CREATOR AS "creator",
+      a.UPDATOR AS "updator",
+      a.salary_tax AS "salaryTax",
+      a.remarks AS "remarks",
+      a.create_by AS "createBy",
+      a.create_date AS "createDate",
+      a.update_by AS "updateBy",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+    </trim>
+  </sql>
+  <sql id="hrmPayrollBillDetailsJoins">
+    LEFT JOIN hrm_salary_upload_summary summary ON summary.id = a.summary_table_id
+  </sql>
+  <select id="get" resultType="com.geeke.hrm.entity.HrmPayrollBillDetails">
+    SELECT
+    <include refid="hrmPayrollBillDetailsColumns" />
+    FROM hrm_payroll_bill_details a
+    <include refid="hrmPayrollBillDetailsJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM hrm_payroll_bill_details a
+    <include refid="hrmPayrollBillDetailsJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultType="com.geeke.hrm.entity.HrmPayrollBillDetails">
+    SELECT
+    <include refid="hrmPayrollBillDetailsColumns" />
+    FROM hrm_payroll_bill_details a
+    <include refid="hrmPayrollBillDetailsJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultType="com.geeke.hrm.entity.HrmPayrollBillDetails">
+    SELECT
+    <include refid="hrmPayrollBillDetailsColumns" />
+    FROM hrm_payroll_bill_details a
+    <include refid="hrmPayrollBillDetailsJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO hrm_payroll_bill_details(
+    <trim suffixOverrides=",">
+      id,
+      summary_table_id,
+      salary_year_and_month,
+      empolyno,
+      name,
+      dept_name,
+      total_salary,
+      total_bonus,
+      total_allowance_and_deduction,
+      personal_social_insurance,
+      personal_accumulation_fund,
+      salary_need_tax,
+      personal_tax,
+      total_after_tax,
+      remark,
+      net_salary2,
+      remark2,
+      net_salary,
+      tenant_id,
+      state_type,
+      CREATOR,
+      UPDATOR,
+      salary_tax,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ summary.id },
+      #{ salaryYearAndMonth },
+      #{ empolyno },
+      #{ name },
+      #{ deptName },
+      #{ totalSalary },
+      #{ totalBonus },
+      #{ totalAllowanceAndDeduction },
+      #{ personalSocialInsurance },
+      #{ personalAccumulationFund },
+      #{ salaryNeedTax },
+      #{ personalTax },
+      #{ totalAfterTax },
+      #{ remark },
+      #{ netSalary2 },
+      #{ remark2 },
+      #{ netSalary },
+      #{ tenantId },
+      #{ stateType },
+      #{ creator },
+      #{ updator },
+      #{ salaryTax },
+      #{ remarks },
+      #{ createBy },
+      #{ createDate },
+      #{ updateBy },
+      #{ updateDate },
+      #{ delFlag },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE hrm_payroll_bill_details SET
+    <trim suffixOverrides=",">
+      summary_table_id = #{ summary.id },
+      salary_year_and_month = #{ salaryYearAndMonth },
+      empolyno = #{ empolyno },
+      name = #{ name },
+      dept_name = #{ deptName },
+      total_salary = #{ totalSalary },
+      total_bonus = #{ totalBonus },
+      total_allowance_and_deduction = #{ totalAllowanceAndDeduction },
+      personal_social_insurance = #{ personalSocialInsurance },
+      personal_accumulation_fund = #{ personalAccumulationFund },
+      salary_need_tax = #{ salaryNeedTax },
+      personal_tax = #{ personalTax },
+      total_after_tax = #{ totalAfterTax },
+      remark = #{ remark },
+      net_salary2 = #{ netSalary2 },
+      remark2 = #{ remark2 },
+      net_salary = #{ netSalary },
+      tenant_id = #{ tenantId },
+      state_type = #{ stateType },
+      CREATOR = #{ creator },
+      UPDATOR = #{ updator },
+      salary_tax = #{ salaryTax },
+      remarks = #{ remarks },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE hrm_payroll_bill_details SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO hrm_payroll_bill_details(
+    <trim suffixOverrides=",">
+      id,
+      summary_table_id,
+      salary_year_and_month,
+      empolyno,
+      name,
+      dept_name,
+      total_salary,
+      total_bonus,
+      total_allowance_and_deduction,
+      personal_social_insurance,
+      personal_accumulation_fund,
+      salary_need_tax,
+      personal_tax,
+      total_after_tax,
+      remark,
+      net_salary2,
+      remark2,
+      net_salary,
+      tenant_id,
+      state_type,
+      CREATOR,
+      UPDATOR,
+      salary_tax,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.summary.id},
+        #{entity.salaryYearAndMonth},
+        #{entity.empolyno},
+        #{entity.name},
+        #{entity.deptName},
+        #{entity.totalSalary},
+        #{entity.totalBonus},
+        #{entity.totalAllowanceAndDeduction},
+        #{entity.personalSocialInsurance},
+        #{entity.personalAccumulationFund},
+        #{entity.salaryNeedTax},
+        #{entity.personalTax},
+        #{entity.totalAfterTax},
+        #{entity.remark},
+        #{entity.netSalary2},
+        #{entity.remark2},
+        #{entity.netSalary},
+        #{entity.tenantId},
+        #{entity.stateType},
+        #{entity.creator},
+        #{entity.updator},
+        #{entity.salaryTax},
+        #{entity.remarks},
+        #{entity.createBy},
+        #{entity.createDate},
+        #{entity.updateBy},
+        #{entity.updateDate},
+        #{entity.delFlag},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE hrm_payroll_bill_details
+    <set>
+      <trim prefix="summary_table_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.summary.id}
+        </foreach>
+      </trim>
+      <trim prefix="salary_year_and_month=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.salaryYearAndMonth}
+        </foreach>
+      </trim>
+      <trim prefix="empolyno=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.empolyno}
+        </foreach>
+      </trim>
+      <trim prefix="name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.name}
+        </foreach>
+      </trim>
+      <trim prefix="dept_name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.deptName}
+        </foreach>
+      </trim>
+      <trim prefix="total_salary=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.totalSalary}
+        </foreach>
+      </trim>
+      <trim prefix="total_bonus=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.totalBonus}
+        </foreach>
+      </trim>
+      <trim prefix="total_allowance_and_deduction=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.totalAllowanceAndDeduction}
+        </foreach>
+      </trim>
+      <trim prefix="personal_social_insurance=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personalSocialInsurance}
+        </foreach>
+      </trim>
+      <trim prefix="personal_accumulation_fund=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personalAccumulationFund}
+        </foreach>
+      </trim>
+      <trim prefix="salary_need_tax=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.salaryNeedTax}
+        </foreach>
+      </trim>
+      <trim prefix="personal_tax=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personalTax}
+        </foreach>
+      </trim>
+      <trim prefix="total_after_tax=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.totalAfterTax}
+        </foreach>
+      </trim>
+      <trim prefix="remark=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remark}
+        </foreach>
+      </trim>
+      <trim prefix="net_salary2=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.netSalary2}
+        </foreach>
+      </trim>
+      <trim prefix="remark2=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remark2}
+        </foreach>
+      </trim>
+      <trim prefix="net_salary=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.netSalary}
+        </foreach>
+      </trim>
+      <trim prefix="tenant_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.tenantId}
+        </foreach>
+      </trim>
+      <trim prefix="state_type=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.stateType}
+        </foreach>
+      </trim>
+      <trim prefix="CREATOR=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.creator}
+        </foreach>
+      </trim>
+      <trim prefix="UPDATOR=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updator}
+        </foreach>
+      </trim>
+      <trim prefix="salary_tax=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.salaryTax}
+        </foreach>
+      </trim>
+      <trim prefix="remarks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE hrm_payroll_bill_details
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+</mapper>

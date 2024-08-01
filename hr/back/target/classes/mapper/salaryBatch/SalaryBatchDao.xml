@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.salaryBatch.dao.SalaryBatchDao">
+  <sql id="salaryBatchColumns">
+    <trim suffixOverrides=",">
+      a.COMPANY_ID AS "companyId",
+      a.ID AS "id",
+      a.SA_BATCH_CODE AS "saBatchCode",
+      a.CUSTOMER_NAME AS "customerName",
+      a.CUSTOMER_CODE AS "customerCode",
+      a.CUSTOMER_ID AS "customerId",
+      a.SA_CLASS_ID AS "saClassId",
+      a.PAY_YEAR_MONTH AS "payYearMonth",
+      a.IS_VERIFY AS "isVerify",
+      a.VERIFY_TIME AS "verifyTime",
+      a.IS_PAY AS "isPay",
+      a.PAY_TIME AS "payTime",
+      a.PAY_AUDIT_ID AS "payAuditId",
+      a.AUDIT_USER AS "auditUser",
+      a.PAY_NAME AS "payName",
+      a.BILL_YEAR_MONTH AS "billYearMonth",
+      a.TAX_MONTH AS "taxMonth",
+      a.IS_UNITE_TAX AS "isUniteTax",
+      a.REMARKS AS "remarks",
+      a.SUBMIT_USER_ID AS "submitUserId",
+      a.SUBMIT_TIME AS "submitTime",
+      a.APPLY_STATE AS "applyState",
+      a.AUDIT_STATE AS "auditState",
+      a.MUST_DAY AS "mustDay",
+      a.REJECT_CAUSE AS "rejectCause",
+      a.EBANK_TIME AS "ebankTime",
+      a.TOTAL_DECIMAL AS "totalDecimal",
+      a.TOTAL_AMOUNT AS "totalAmount",
+      a.FAIL_DECIMAL AS "failDecimal",
+      a.PAYROLL_TYPE_BD AS "payrollTypeBd",
+      a.PAYROLL_STATE_BD AS "payrollStateBd",
+      a.IS_DEL AS "isDel",
+      a.CREATE_USER_ID AS "createUserId",
+      a.CREATE_DATE AS "createDate",
+      a.LAST_UPDATE_USER_ID AS "lastUpdateUserId",
+      a.LAST_UPDATE_DATE AS "lastUpdateDate",
+      a.APPLY_PAY_DATE AS "applyPayDate",
+      a.AUDIT_TIME AS "auditTime",
+      a.GEN_MONEY_CODE AS "genMoneyCode",
+      a.PAY_SALARY_TYPE AS "paySalaryType",
+      a.NOT_CODE_REASON AS "notCodeReason",
+      a.CLAIM_USER_ID AS "claimUserId",
+      a.CLAIM_DATE AS "claimDate",
+      a.REAL_PAY_DAY AS "realPayDay",
+      a.PAY_STATE AS "payState",
+      a.APPLY_PAY_TIME AS "applyPayTime",
+      a.APPLY_PAY_USER_ID AS "applyPayUserId",
+      a.IS_CS_VERIFY AS "isCsVerify",
+      a.APPLY_PAY_STATE AS "applyPayState",
+      a.OLD_ID AS "oldId",
+      a.BATCH_CODE_QG AS "batchCodeQg",
+      a.PRINT_DATE AS "printDate",
+      a.REJECT_REASON AS "rejectReason",
+      a.REJECT_NUMBER AS "rejectNumber",
+    </trim>
+  </sql>
+  <sql id="salaryBatchJoins">
+  </sql>
+  <select id="get" resultType="com.geeke.salaryBatch.entity.SalaryBatch">
+    SELECT
+    <include refid="salaryBatchColumns" />
+    FROM salary_batch a
+    <include refid="salaryBatchJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM salary_batch a
+    <include refid="salaryBatchJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultType="com.geeke.salaryBatch.entity.SalaryBatch">
+    SELECT
+    <include refid="salaryBatchColumns" />
+    FROM salary_batch a
+    <include refid="salaryBatchJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.ID ASC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultType="com.geeke.salaryBatch.entity.SalaryBatch">
+    SELECT
+    <include refid="salaryBatchColumns" />
+    FROM salary_batch a
+    <include refid="salaryBatchJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.ID ASC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO salary_batch(
+    <trim suffixOverrides=",">
+      COMPANY_ID,
+      ID,
+      SA_BATCH_CODE,
+      CUSTOMER_NAME,
+      CUSTOMER_CODE,
+      CUSTOMER_ID,
+      SA_CLASS_ID,
+      PAY_YEAR_MONTH,
+      IS_VERIFY,
+      VERIFY_TIME,
+      IS_PAY,
+      PAY_TIME,
+      PAY_AUDIT_ID,
+      AUDIT_USER,
+      PAY_NAME,
+      BILL_YEAR_MONTH,
+      TAX_MONTH,
+      IS_UNITE_TAX,
+      REMARKS,
+      SUBMIT_USER_ID,
+      SUBMIT_TIME,
+      APPLY_STATE,
+      AUDIT_STATE,
+      MUST_DAY,
+      REJECT_CAUSE,
+      EBANK_TIME,
+      TOTAL_DECIMAL,
+      TOTAL_AMOUNT,
+      FAIL_DECIMAL,
+      PAYROLL_TYPE_BD,
+      PAYROLL_STATE_BD,
+      IS_DEL,
+      CREATE_USER_ID,
+      CREATE_DATE,
+      LAST_UPDATE_USER_ID,
+      LAST_UPDATE_DATE,
+      APPLY_PAY_DATE,
+      AUDIT_TIME,
+      GEN_MONEY_CODE,
+      PAY_SALARY_TYPE,
+      NOT_CODE_REASON,
+      CLAIM_USER_ID,
+      CLAIM_DATE,
+      REAL_PAY_DAY,
+      PAY_STATE,
+      APPLY_PAY_TIME,
+      APPLY_PAY_USER_ID,
+      IS_CS_VERIFY,
+      APPLY_PAY_STATE,
+      OLD_ID,
+      BATCH_CODE_QG,
+      PRINT_DATE,
+      REJECT_REASON,
+      REJECT_NUMBER,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ companyId },
+      #{ id },
+      #{ saBatchCode },
+      #{ customerName },
+      #{ customerCode },
+      #{ customerId },
+      #{ saClassId },
+      #{ payYearMonth },
+      #{ isVerify },
+      #{ verifyTime },
+      #{ isPay },
+      #{ payTime },
+      #{ payAuditId },
+      #{ auditUser },
+      #{ payName },
+      #{ billYearMonth },
+      #{ taxMonth },
+      #{ isUniteTax },
+      #{ remarks },
+      #{ submitUserId },
+      #{ submitTime },
+      #{ applyState },
+      #{ auditState },
+      #{ mustDay },
+      #{ rejectCause },
+      #{ ebankTime },
+      #{ totalDecimal },
+      #{ totalAmount },
+      #{ failDecimal },
+      #{ payrollTypeBd },
+      #{ payrollStateBd },
+      #{ isDel },
+      #{ createUserId },
+      #{ createDate },
+      #{ lastUpdateUserId },
+      #{ lastUpdateDate },
+      #{ applyPayDate },
+      #{ auditTime },
+      #{ genMoneyCode },
+      #{ paySalaryType },
+      #{ notCodeReason },
+      #{ claimUserId },
+      #{ claimDate },
+      #{ realPayDay },
+      #{ payState },
+      #{ applyPayTime },
+      #{ applyPayUserId },
+      #{ isCsVerify },
+      #{ applyPayState },
+      #{ oldId },
+      #{ batchCodeQg },
+      #{ printDate },
+      #{ rejectReason },
+      #{ rejectNumber },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE salary_batch SET
+    <trim suffixOverrides=",">
+      COMPANY_ID = #{ companyId },
+      SA_BATCH_CODE = #{ saBatchCode },
+      CUSTOMER_NAME = #{ customerName },
+      CUSTOMER_CODE = #{ customerCode },
+      CUSTOMER_ID = #{ customerId },
+      SA_CLASS_ID = #{ saClassId },
+      PAY_YEAR_MONTH = #{ payYearMonth },
+      IS_VERIFY = #{ isVerify },
+      VERIFY_TIME = #{ verifyTime },
+      IS_PAY = #{ isPay },
+      PAY_TIME = #{ payTime },
+      PAY_AUDIT_ID = #{ payAuditId },
+      AUDIT_USER = #{ auditUser },
+      PAY_NAME = #{ payName },
+      BILL_YEAR_MONTH = #{ billYearMonth },
+      TAX_MONTH = #{ taxMonth },
+      IS_UNITE_TAX = #{ isUniteTax },
+      REMARKS = #{ remarks },
+      SUBMIT_USER_ID = #{ submitUserId },
+      SUBMIT_TIME = #{ submitTime },
+      APPLY_STATE = #{ applyState },
+      AUDIT_STATE = #{ auditState },
+      MUST_DAY = #{ mustDay },
+      REJECT_CAUSE = #{ rejectCause },
+      EBANK_TIME = #{ ebankTime },
+      TOTAL_DECIMAL = #{ totalDecimal },
+      TOTAL_AMOUNT = #{ totalAmount },
+      FAIL_DECIMAL = #{ failDecimal },
+      PAYROLL_TYPE_BD = #{ payrollTypeBd },
+      PAYROLL_STATE_BD = #{ payrollStateBd },
+      IS_DEL = #{ isDel },
+      CREATE_USER_ID = #{ createUserId },
+      LAST_UPDATE_USER_ID = #{ lastUpdateUserId },
+      LAST_UPDATE_DATE = #{ lastUpdateDate },
+      APPLY_PAY_DATE = #{ applyPayDate },
+      AUDIT_TIME = #{ auditTime },
+      GEN_MONEY_CODE = #{ genMoneyCode },
+      PAY_SALARY_TYPE = #{ paySalaryType },
+      NOT_CODE_REASON = #{ notCodeReason },
+      CLAIM_USER_ID = #{ claimUserId },
+      CLAIM_DATE = #{ claimDate },
+      REAL_PAY_DAY = #{ realPayDay },
+      PAY_STATE = #{ payState },
+      APPLY_PAY_TIME = #{ applyPayTime },
+      APPLY_PAY_USER_ID = #{ applyPayUserId },
+      IS_CS_VERIFY = #{ isCsVerify },
+      APPLY_PAY_STATE = #{ applyPayState },
+      OLD_ID = #{ oldId },
+      BATCH_CODE_QG = #{ batchCodeQg },
+      PRINT_DATE = #{ printDate },
+      REJECT_REASON = #{ rejectReason },
+      REJECT_NUMBER = #{ rejectNumber },
+    </trim>
+    WHERE id = #{id}
+  </update>
+  <update id="delete">
+    DELETE FROM salary_batch
+    WHERE id = #{id}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO salary_batch(
+    <trim suffixOverrides=",">
+      COMPANY_ID,
+      ID,
+      SA_BATCH_CODE,
+      CUSTOMER_NAME,
+      CUSTOMER_CODE,
+      CUSTOMER_ID,
+      SA_CLASS_ID,
+      PAY_YEAR_MONTH,
+      IS_VERIFY,
+      VERIFY_TIME,
+      IS_PAY,
+      PAY_TIME,
+      PAY_AUDIT_ID,
+      AUDIT_USER,
+      PAY_NAME,
+      BILL_YEAR_MONTH,
+      TAX_MONTH,
+      IS_UNITE_TAX,
+      REMARKS,
+      SUBMIT_USER_ID,
+      SUBMIT_TIME,
+      APPLY_STATE,
+      AUDIT_STATE,
+      MUST_DAY,
+      REJECT_CAUSE,
+      EBANK_TIME,
+      TOTAL_DECIMAL,
+      TOTAL_AMOUNT,
+      FAIL_DECIMAL,
+      PAYROLL_TYPE_BD,
+      PAYROLL_STATE_BD,
+      IS_DEL,
+      CREATE_USER_ID,
+      CREATE_DATE,
+      LAST_UPDATE_USER_ID,
+      LAST_UPDATE_DATE,
+      APPLY_PAY_DATE,
+      AUDIT_TIME,
+      GEN_MONEY_CODE,
+      PAY_SALARY_TYPE,
+      NOT_CODE_REASON,
+      CLAIM_USER_ID,
+      CLAIM_DATE,
+      REAL_PAY_DAY,
+      PAY_STATE,
+      APPLY_PAY_TIME,
+      APPLY_PAY_USER_ID,
+      IS_CS_VERIFY,
+      APPLY_PAY_STATE,
+      OLD_ID,
+      BATCH_CODE_QG,
+      PRINT_DATE,
+      REJECT_REASON,
+      REJECT_NUMBER,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.companyId},
+        #{entity.id},
+        #{entity.saBatchCode},
+        #{entity.customerName},
+        #{entity.customerCode},
+        #{entity.customerId},
+        #{entity.saClassId},
+        #{entity.payYearMonth},
+        #{entity.isVerify},
+        #{entity.verifyTime},
+        #{entity.isPay},
+        #{entity.payTime},
+        #{entity.payAuditId},
+        #{entity.auditUser},
+        #{entity.payName},
+        #{entity.billYearMonth},
+        #{entity.taxMonth},
+        #{entity.isUniteTax},
+        #{entity.remarks},
+        #{entity.submitUserId},
+        #{entity.submitTime},
+        #{entity.applyState},
+        #{entity.auditState},
+        #{entity.mustDay},
+        #{entity.rejectCause},
+        #{entity.ebankTime},
+        #{entity.totalDecimal},
+        #{entity.totalAmount},
+        #{entity.failDecimal},
+        #{entity.payrollTypeBd},
+        #{entity.payrollStateBd},
+        #{entity.isDel},
+        #{entity.createUserId},
+        #{entity.createDate},
+        #{entity.lastUpdateUserId},
+        #{entity.lastUpdateDate},
+        #{entity.applyPayDate},
+        #{entity.auditTime},
+        #{entity.genMoneyCode},
+        #{entity.paySalaryType},
+        #{entity.notCodeReason},
+        #{entity.claimUserId},
+        #{entity.claimDate},
+        #{entity.realPayDay},
+        #{entity.payState},
+        #{entity.applyPayTime},
+        #{entity.applyPayUserId},
+        #{entity.isCsVerify},
+        #{entity.applyPayState},
+        #{entity.oldId},
+        #{entity.batchCodeQg},
+        #{entity.printDate},
+        #{entity.rejectReason},
+        #{entity.rejectNumber},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE salary_batch
+    <set>
+      <trim prefix="COMPANY_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyId}
+        </foreach>
+      </trim>
+      <trim prefix="SA_BATCH_CODE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.saBatchCode}
+        </foreach>
+      </trim>
+      <trim prefix="CUSTOMER_NAME=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.customerName}
+        </foreach>
+      </trim>
+      <trim prefix="CUSTOMER_CODE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.customerCode}
+        </foreach>
+      </trim>
+      <trim prefix="CUSTOMER_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.customerId}
+        </foreach>
+      </trim>
+      <trim prefix="SA_CLASS_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.saClassId}
+        </foreach>
+      </trim>
+      <trim prefix="PAY_YEAR_MONTH=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.payYearMonth}
+        </foreach>
+      </trim>
+      <trim prefix="IS_VERIFY=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isVerify}
+        </foreach>
+      </trim>
+      <trim prefix="VERIFY_TIME=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.verifyTime}
+        </foreach>
+      </trim>
+      <trim prefix="IS_PAY=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isPay}
+        </foreach>
+      </trim>
+      <trim prefix="PAY_TIME=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.payTime}
+        </foreach>
+      </trim>
+      <trim prefix="PAY_AUDIT_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.payAuditId}
+        </foreach>
+      </trim>
+      <trim prefix="AUDIT_USER=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.auditUser}
+        </foreach>
+      </trim>
+      <trim prefix="PAY_NAME=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.payName}
+        </foreach>
+      </trim>
+      <trim prefix="BILL_YEAR_MONTH=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.billYearMonth}
+        </foreach>
+      </trim>
+      <trim prefix="TAX_MONTH=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.taxMonth}
+        </foreach>
+      </trim>
+      <trim prefix="IS_UNITE_TAX=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isUniteTax}
+        </foreach>
+      </trim>
+      <trim prefix="REMARKS=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+      <trim prefix="SUBMIT_USER_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.submitUserId}
+        </foreach>
+      </trim>
+      <trim prefix="SUBMIT_TIME=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.submitTime}
+        </foreach>
+      </trim>
+      <trim prefix="APPLY_STATE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.applyState}
+        </foreach>
+      </trim>
+      <trim prefix="AUDIT_STATE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.auditState}
+        </foreach>
+      </trim>
+      <trim prefix="MUST_DAY=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.mustDay}
+        </foreach>
+      </trim>
+      <trim prefix="REJECT_CAUSE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.rejectCause}
+        </foreach>
+      </trim>
+      <trim prefix="EBANK_TIME=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.ebankTime}
+        </foreach>
+      </trim>
+      <trim prefix="TOTAL_DECIMAL=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.totalDecimal}
+        </foreach>
+      </trim>
+      <trim prefix="TOTAL_AMOUNT=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.totalAmount}
+        </foreach>
+      </trim>
+      <trim prefix="FAIL_DECIMAL=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.failDecimal}
+        </foreach>
+      </trim>
+      <trim prefix="PAYROLL_TYPE_BD=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.payrollTypeBd}
+        </foreach>
+      </trim>
+      <trim prefix="PAYROLL_STATE_BD=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.payrollStateBd}
+        </foreach>
+      </trim>
+      <trim prefix="IS_DEL=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isDel}
+        </foreach>
+      </trim>
+      <trim prefix="CREATE_USER_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.createUserId}
+        </foreach>
+      </trim>
+      <trim prefix="LAST_UPDATE_USER_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.lastUpdateUserId}
+        </foreach>
+      </trim>
+      <trim prefix="LAST_UPDATE_DATE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.lastUpdateDate}
+        </foreach>
+      </trim>
+      <trim prefix="APPLY_PAY_DATE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.applyPayDate}
+        </foreach>
+      </trim>
+      <trim prefix="AUDIT_TIME=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.auditTime}
+        </foreach>
+      </trim>
+      <trim prefix="GEN_MONEY_CODE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.genMoneyCode}
+        </foreach>
+      </trim>
+      <trim prefix="PAY_SALARY_TYPE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.paySalaryType}
+        </foreach>
+      </trim>
+      <trim prefix="NOT_CODE_REASON=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.notCodeReason}
+        </foreach>
+      </trim>
+      <trim prefix="CLAIM_USER_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.claimUserId}
+        </foreach>
+      </trim>
+      <trim prefix="CLAIM_DATE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.claimDate}
+        </foreach>
+      </trim>
+      <trim prefix="REAL_PAY_DAY=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.realPayDay}
+        </foreach>
+      </trim>
+      <trim prefix="PAY_STATE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.payState}
+        </foreach>
+      </trim>
+      <trim prefix="APPLY_PAY_TIME=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.applyPayTime}
+        </foreach>
+      </trim>
+      <trim prefix="APPLY_PAY_USER_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.applyPayUserId}
+        </foreach>
+      </trim>
+      <trim prefix="IS_CS_VERIFY=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isCsVerify}
+        </foreach>
+      </trim>
+      <trim prefix="APPLY_PAY_STATE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.applyPayState}
+        </foreach>
+      </trim>
+      <trim prefix="OLD_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.oldId}
+        </foreach>
+      </trim>
+      <trim prefix="BATCH_CODE_QG=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.batchCodeQg}
+        </foreach>
+      </trim>
+      <trim prefix="PRINT_DATE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.printDate}
+        </foreach>
+      </trim>
+      <trim prefix="REJECT_REASON=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.rejectReason}
+        </foreach>
+      </trim>
+      <trim prefix="REJECT_NUMBER=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.rejectNumber}
+        </foreach>
+      </trim>
+    </set>
+    WHERE id IN
+    <foreach collection="entitys" item="entity" index="index" separator="," open="(" close=")">
+      #{entity.id}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    DELETE FROM salary_batch
+    WHERE id IN
+    <foreach collection="entitys" item="entity" index="index" separator="," open="(" close=")">
+      #{entity.id}
+    </foreach>
+  </update>
+</mapper>

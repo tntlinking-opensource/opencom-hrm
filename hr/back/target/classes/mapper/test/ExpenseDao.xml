@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.test.dao.ExpenseDao">
+    
+    <sql id="expenseColumns">
+        a.id AS "id",
+        a.applier AS "applier.id",
+        IFNULL(applier.name,'') AS "applier.name",
+        a.name AS "name",
+        a.amount AS "amount",
+        a.proc_inst AS "procInst",
+        a.proc_status AS "procStatus.value",
+        IFNULL(procStatus.name,'') AS "procStatus.name",
+        a.remarks AS "remarks",
+        a.create_by AS "createBy",
+        a.create_date AS "createDate",
+        a.update_by AS "updateBy",
+        a.update_date AS "updateDate",
+        a.del_flag AS "delFlag"
+    </sql>
+    
+    <sql id="expenseJoins">
+        LEFT JOIN sys_user applier ON applier.id = a.applier
+        LEFT JOIN sys_dict_item procStatus ON procStatus.value = a.proc_status
+                    AND procStatus.dict_type_id = '5005'
+    </sql>
+    
+    <select id="get" resultType="com.geeke.test.entity.Expense">
+        SELECT 
+            <include refid="expenseColumns"/>
+        FROM test_expense a
+        <include refid="expenseJoins"/>
+        WHERE a.id = #{id}
+    </select>
+    
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM test_expense a
+        <include refid="expenseJoins"/>
+        <where>
+            1=1
+            AND a.id > 0
+            AND a.del_flag = #{DEL_FLAG_NORMAL}
+            <include refid="Common.whereParams"/>
+        </where>
+    </select>    
+    
+    <select id="listPage" resultType="com.geeke.test.entity.Expense">
+        SELECT 
+            <include refid="expenseColumns"/>
+        FROM test_expense a
+        <include refid="expenseJoins"/>
+        <where>
+            1=1
+            AND a.id > 0
+            AND a.del_flag = #{DEL_FLAG_NORMAL}
+            <include refid="Common.whereParams"/>
+        </where>
+        <choose>
+            <when test="order != null and order != ''">
+                ORDER BY ${order}
+            </when>            
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+    
+    <select id="listAll" resultType="com.geeke.test.entity.Expense">
+        SELECT 
+            <include refid="expenseColumns"/>
+        FROM test_expense a
+        <include refid="expenseJoins"/>
+        <where>
+            1=1
+            AND a.id > 0
+            AND a.del_flag = #{DEL_FLAG_NORMAL}
+            <include refid="Common.whereParams"/>
+        </where>
+        <choose>
+            <when test="order != null and order != ''">
+                ORDER BY ${order}
+            </when> 
+            <otherwise>
+                ORDER BY a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+    
+    
+    <insert id="insert">
+        INSERT INTO test_expense(
+            id,
+            applier,
+            name,
+            amount,
+            proc_inst,
+            proc_status,
+            remarks,
+            create_by,
+            create_date,
+            update_by,
+            update_date,
+            del_flag
+        ) VALUES (
+            #{id},
+            #{applier.id},                    
+            #{name},
+            #{amount},
+            #{procInst},
+            #{procStatus.value},                    
+            #{remarks},
+            #{createBy},
+            #{createDate},
+            #{updateBy},
+            #{updateDate},
+            #{delFlag}
+        )
+    </insert>
+    
+    <update id="update">
+        UPDATE test_expense SET     
+            applier = #{applier.id},                    
+            name = #{name},
+            amount = #{amount},
+            proc_inst = #{procInst},
+            proc_status = #{procStatus.value},                    
+            remarks = #{remarks},
+            update_by = #{updateBy},
+            update_date = #{updateDate}
+        WHERE id = #{id}
+    </update>
+    
+    <update id="delete">
+        UPDATE test_expense SET
+            update_by = #{updateBy},
+            update_date = #{updateDate},
+            del_flag = #{DEL_FLAG_DELETE}
+        WHERE id = #{id}
+    </update>
+    
+    
+</mapper>

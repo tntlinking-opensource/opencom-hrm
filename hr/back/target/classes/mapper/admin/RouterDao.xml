@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.admin.dao.RouterDao">
+  <sql id="routerColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.code AS "code",
+      a.url AS "url",
+      a.parent_id AS "parent.id",
+      IFNULL(parent.name,'') AS "parent.name",
+      IFNULL(parent.code,'') AS "parent.code",
+      IFNULL(parent.url,'') AS "parent.url",
+      IFNULL(parent.parent_id,'') AS "parent.parentId",
+      IFNULL(parent.ids,'') AS "parent.ids",
+      a.ids AS "ids",
+      a.name AS "name",
+      a.sort AS "sort",
+      a.can_permission AS "canPermission",
+      a.is_locked AS "isLocked",
+      a.properties AS "properties",
+      a.remarks AS "remarks",
+      a.create_by AS "createBy",
+      a.create_date AS "createDate",
+      a.update_by AS "updateBy",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+      a.system_code AS "systemCode",
+      a.icon_id AS "iconId",
+    </trim>
+  </sql>
+  <sql id="routerJoins">
+    LEFT JOIN sys_router parent ON parent.id = a.parent_id
+  </sql>
+  <select id="get" resultType="com.geeke.admin.entity.Router">
+    SELECT
+    <include refid="routerColumns" />
+    FROM sys_router a
+    <include refid="routerJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM sys_router a
+    <include refid="routerJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultType="com.geeke.admin.entity.Router">
+    SELECT
+    <include refid="routerColumns" />
+    FROM sys_router a
+    <include refid="routerJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.sort ASC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultType="com.geeke.admin.entity.Router">
+    SELECT
+    <include refid="routerColumns" />
+    FROM sys_router a
+    <include refid="routerJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.sort ASC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO sys_router(
+    <trim suffixOverrides=",">
+      id,
+      code,
+      url,
+      parent_id,
+      ids,
+      name,
+      sort,
+      can_permission,
+      is_locked,
+      properties,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      system_code,
+      icon_id,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ code },
+      #{ url },
+      #{ parent.id },
+      #{ ids },
+      #{ name },
+      #{ sort },
+      #{ canPermission },
+      #{ isLocked },
+      #{ properties },
+      #{ remarks },
+      #{ createBy },
+      #{ createDate },
+      #{ updateBy },
+      #{ updateDate },
+      #{ delFlag },
+      #{ systemCode },
+      #{ iconId },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE sys_router SET
+    <trim suffixOverrides=",">
+      code = #{ code },
+      url = #{ url },
+      parent_id = #{ parent.id },
+      ids = #{ ids },
+      name = #{ name },
+      sort = #{ sort },
+      can_permission = #{ canPermission },
+      is_locked = #{ isLocked },
+      properties = #{ properties },
+      remarks = #{ remarks },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+      system_code = #{ systemCode },
+      icon_id = #{ iconId },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE sys_router SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO sys_router(
+    <trim suffixOverrides=",">
+      id,
+      code,
+      url,
+      parent_id,
+      ids,
+      name,
+      sort,
+      can_permission,
+      is_locked,
+      properties,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      system_code,
+      icon_id,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.code},
+        #{entity.url},
+        #{entity.parent.id},
+        #{entity.ids},
+        #{entity.name},
+        #{entity.sort},
+        #{entity.canPermission},
+        #{entity.isLocked},
+        #{entity.properties},
+        #{entity.remarks},
+        #{entity.createBy},
+        #{entity.createDate},
+        #{entity.updateBy},
+        #{entity.updateDate},
+        #{entity.delFlag},
+        #{entity.systemCode},
+        #{entity.iconId},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE sys_router
+    <set>
+      <trim prefix="code=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.code}
+        </foreach>
+      </trim>
+      <trim prefix="url=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.url}
+        </foreach>
+      </trim>
+      <trim prefix="parent_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.parent.id}
+        </foreach>
+      </trim>
+      <trim prefix="ids=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.ids}
+        </foreach>
+      </trim>
+      <trim prefix="name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.name}
+        </foreach>
+      </trim>
+      <trim prefix="sort=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.sort}
+        </foreach>
+      </trim>
+      <trim prefix="can_permission=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.canPermission}
+        </foreach>
+      </trim>
+      <trim prefix="is_locked=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isLocked}
+        </foreach>
+      </trim>
+      <trim prefix="properties=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.properties}
+        </foreach>
+      </trim>
+      <trim prefix="remarks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+      <trim prefix="system_code=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.systemCode}
+        </foreach>
+      </trim>
+      <trim prefix="icon_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.iconId}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE sys_router
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+</mapper>

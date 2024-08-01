@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.taxRate.dao.TaxDetailsInfoDao">
+    <sql id="taxDetailsInfoColumns">
+        <trim suffixOverrides=",">
+            a.id AS "id",
+            a.tax_type_info_id AS "taxTypeInfoId",
+            a.rate_level AS "rateLevel",
+            a.amount_down AS "amountDown",
+            a.amount_up AS "amountUp",
+            a.rate AS "rate",
+            a.speed_deduct_amount AS "speedDeductAmount",
+            a.month_tax_amount AS "monthTaxAmount",
+            a.free_tax_amount AS "freeTaxAmount",
+            a.create_by AS "createBy",
+            a.update_by AS "updateBy",
+            a.create_date AS "createDate",
+            a.update_date AS "updateDate",
+            a.del_flag AS "delFlag",
+        </trim>
+    </sql>
+    <sql id="taxDetailsInfoJoins">
+    </sql>
+    <resultMap id="resultTaxDetailsInfoMap" type="com.geeke.taxRate.entity.TaxDetailsInfo">
+        <result property="id" column="id" />
+        <result property="taxTypeInfoId" column="taxTypeInfoId" />
+        <result property="rateLevel" column="rateLevel" />
+        <result property="amountDown" column="amountDown" />
+        <result property="amountUp" column="amountUp" />
+        <result property="rate" column="rate" />
+        <result property="speedDeductAmount" column="speedDeductAmount" />
+        <result property="monthTaxAmount" column="monthTaxAmount" />
+        <result property="freeTaxAmount" column="freeTaxAmount" />
+        <result property="createBy" column="createBy" />
+        <result property="updateBy" column="updateBy" />
+        <result property="createDate" column="createDate" />
+        <result property="updateDate" column="updateDate" />
+        <result property="delFlag" column="delFlag" />
+    </resultMap>
+    <select id="get" resultMap="resultTaxDetailsInfoMap">
+        SELECT
+        <include refid="taxDetailsInfoColumns" />
+        FROM tax_details_info a
+        <include refid="taxDetailsInfoJoins" />
+        WHERE a.id = #{id}
+    </select>
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM tax_details_info a
+        <include refid="taxDetailsInfoJoins" />
+        <where>
+            1=1
+            AND a.id > 0
+            AND a.del_flag = #{DEL_FLAG_NORMAL}
+            <include refid="Common.whereParams" />
+        </where>
+    </select>
+    <select id="listPage" resultMap="resultTaxDetailsInfoMap">
+        SELECT
+        <include refid="taxDetailsInfoColumns" />
+        FROM tax_details_info a
+        <include refid="taxDetailsInfoJoins" />
+        <where>
+            1=1
+            AND a.id > 0
+            AND a.del_flag = #{DEL_FLAG_NORMAL}
+            <include refid="Common.whereParams" />
+        </where>
+        <choose>
+            <when test="order != null and order != ''">
+                ORDER BY ${order}
+            </when>
+            <otherwise>
+                ORDER BY a.create_date DESC,a.update_date DESC
+            </otherwise>
+        </choose>
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+    <select id="listAll" resultMap="resultTaxDetailsInfoMap">
+        SELECT
+        <include refid="taxDetailsInfoColumns" />
+        FROM tax_details_info a
+        <include refid="taxDetailsInfoJoins" />
+        <where>
+            1=1
+            AND a.id > 0
+            AND a.del_flag = #{DEL_FLAG_NORMAL}
+            <include refid="Common.whereParams" />
+        </where>
+        <choose>
+            <when test="order != null and order != ''">
+                ORDER BY ${order}
+            </when>
+            <otherwise>
+                ORDER BY a.create_date DESC,a.update_date DESC
+            </otherwise>
+        </choose>
+    </select>
+    <insert id="insert">
+        INSERT INTO tax_details_info(
+        <trim suffixOverrides=",">
+            id,
+            tax_type_info_id,
+            rate_level,
+            amount_down,
+            amount_up,
+            rate,
+            speed_deduct_amount,
+            month_tax_amount,
+            free_tax_amount,
+            create_by,
+            update_by,
+            create_date,
+            update_date,
+            del_flag,
+        </trim>
+        ) VALUES (
+        <trim suffixOverrides=",">
+            #{ id },
+            #{ taxTypeInfoId },
+            #{ rateLevel },
+            #{ amountDown },
+            #{ amountUp },
+            #{ rate },
+            #{ speedDeductAmount },
+            #{ monthTaxAmount },
+            #{ freeTaxAmount },
+            #{ createBy },
+            #{ updateBy },
+            #{ createDate },
+            #{ updateDate },
+            #{ delFlag },
+        </trim>
+        )
+    </insert>
+    <update id="update">
+        UPDATE tax_details_info SET
+        <trim suffixOverrides=",">
+            tax_type_info_id = #{ taxTypeInfoId },
+            rate_level = #{ rateLevel },
+            amount_down = #{ amountDown },
+            amount_up = #{ amountUp },
+            rate = #{ rate },
+            speed_deduct_amount = #{ speedDeductAmount },
+            month_tax_amount = #{ monthTaxAmount },
+            free_tax_amount = #{ freeTaxAmount },
+            update_by = #{ updateBy },
+            update_date = #{ updateDate },
+        </trim>
+        WHERE id = #{id}
+        and update_date = #{oldUpdateDate}
+    </update>
+    <update id="delete">
+        UPDATE tax_details_info SET
+                                    update_by = #{updateBy},
+                                    update_date = #{updateDate},
+                                    del_flag = #{DEL_FLAG_DELETE}
+        WHERE id = #{id}
+          and update_date = #{oldUpdateDate}
+    </update>
+    <insert id="bulkInsert" parameterType="java.util.List">
+        INSERT INTO tax_details_info(
+        <trim suffixOverrides=",">
+            id,
+            tax_type_info_id,
+            rate_level,
+            amount_down,
+            amount_up,
+            rate,
+            speed_deduct_amount,
+            month_tax_amount,
+            free_tax_amount,
+            create_by,
+            update_by,
+            create_date,
+            update_date,
+            del_flag,
+        </trim>
+        ) VALUES
+        <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+            (
+            <trim suffixOverrides=",">
+                #{entity.id},
+                #{entity.taxTypeInfoId},
+                #{entity.rateLevel},
+                #{entity.amountDown},
+                #{entity.amountUp},
+                #{entity.rate},
+                #{entity.speedDeductAmount},
+                #{entity.monthTaxAmount},
+                #{entity.freeTaxAmount},
+                #{entity.createBy},
+                #{entity.updateBy},
+                #{entity.createDate},
+                #{entity.updateDate},
+                #{entity.delFlag},
+            </trim>
+            )
+        </foreach>
+    </insert>
+    <update id="bulkUpdate" parameterType="java.util.List">
+        UPDATE tax_details_info
+        <set>
+            <trim prefix="tax_type_info_id=case" suffix="end,">
+                <foreach collection="entitys" item="entity" index="index">
+                    when id=#{entity.id} then #{entity.taxTypeInfoId}
+                </foreach>
+            </trim>
+            <trim prefix="rate_level=case" suffix="end,">
+                <foreach collection="entitys" item="entity" index="index">
+                    when id=#{entity.id} then #{entity.rateLevel}
+                </foreach>
+            </trim>
+            <trim prefix="amount_down=case" suffix="end,">
+                <foreach collection="entitys" item="entity" index="index">
+                    when id=#{entity.id} then #{entity.amountDown}
+                </foreach>
+            </trim>
+            <trim prefix="amount_up=case" suffix="end,">
+                <foreach collection="entitys" item="entity" index="index">
+                    when id=#{entity.id} then #{entity.amountUp}
+                </foreach>
+            </trim>
+            <trim prefix="rate=case" suffix="end,">
+                <foreach collection="entitys" item="entity" index="index">
+                    when id=#{entity.id} then #{entity.rate}
+                </foreach>
+            </trim>
+            <trim prefix="speed_deduct_amount=case" suffix="end,">
+                <foreach collection="entitys" item="entity" index="index">
+                    when id=#{entity.id} then #{entity.speedDeductAmount}
+                </foreach>
+            </trim>
+            <trim prefix="month_tax_amount=case" suffix="end,">
+                <foreach collection="entitys" item="entity" index="index">
+                    when id=#{entity.id} then #{entity.monthTaxAmount}
+                </foreach>
+            </trim>
+            <trim prefix="free_tax_amount=case" suffix="end,">
+                <foreach collection="entitys" item="entity" index="index">
+                    when id=#{entity.id} then #{entity.freeTaxAmount}
+                </foreach>
+            </trim>
+            <trim prefix="update_by=case" suffix="end,">
+                <foreach collection="entitys" item="entity" index="index">
+                    when id=#{entity.id} then #{entity.updateBy}
+                </foreach>
+            </trim>
+            <trim prefix="update_date=case" suffix="end,">
+                <foreach collection="entitys" item="entity" index="index">
+                    when id=#{entity.id} then #{entity.updateDate}
+                </foreach>
+            </trim>
+        </set>
+        WHERE
+        <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+            id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+        </foreach>
+    </update>
+    <update id="bulkDelete" parameterType="java.util.List">
+        UPDATE tax_details_info
+        <set>
+            <trim prefix="del_flag=case" suffix="end,">
+                <foreach collection="entitys" item="entity" index="index">
+                    when id=#{entity.id} then 1
+                </foreach>
+            </trim>
+            <trim prefix="update_by=case" suffix="end,">
+                <foreach collection="entitys" item="entity" index="index">
+                    when id=#{entity.id} then #{entity.updateBy}
+                </foreach>
+            </trim>
+            <trim prefix="update_date=case" suffix="end,">
+                <foreach collection="entitys" item="entity" index="index">
+                    when id=#{entity.id} then #{entity.updateDate}
+                </foreach>
+            </trim>
+        </set>
+        WHERE
+        <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+            id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+        </foreach>
+    </update>
+    <select id="getTaxTableList" resultType="com.geeke.taxRate.entity.TaxDetailsInfo">
+        select * from tax_details_info where tax_type_info_id = #{taxId} and del_flag = '0'
+    </select>
+</mapper>

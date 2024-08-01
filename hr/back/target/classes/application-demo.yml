@@ -1,0 +1,39 @@
+server:
+  port: 9502
+
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.0.5:3306/geedb_lease_demo?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: root
+    password: Ntcom01!
+  cache:
+    type: redis  # 可选 redis、none、ehcache
+  redis:
+    host: 192.168.0.4 # server host
+    password: bW9IvztOCAQdoJTDZ2wAnduvi
+    port: 6379
+    database: 0
+  rabbitmq:
+    host: 192.168.0.4
+    port: 5672
+    username: newtouch
+    password: Newtouch1!
+
+jwtUtils:
+  id: jwt
+  secret: 6686df7fc3a34e26a61c034d5ec82488
+  ttlMillis: 3600000
+
+#启信宝
+qixin:
+  appkey: f51ed35b-759c-4bb6-bec7-7a6b0aac6d24
+  secretKey: 0ce6febc-198b-47ed-83f1-7ed922d9508c
+  host: https://api.qixin.com/
+  profile: APIService
+
+
+#企业微信
+weChat:
+  corpid: ww21ecf19d6c519f83
+  corpsecret: G3rf94sZqkZJ90duduA-TDRGSzibhAOQhN07C4eUneA
+  agentid: 1000006
