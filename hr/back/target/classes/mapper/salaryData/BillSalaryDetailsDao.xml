@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.geeke.salaryData.dao.BillSalaryDetailsDao">
-  <select id="salaryCountBill" resultType="com.geeke.salaryData.entity.BillSalaryDetails">
-    select * from bill_details where employee_no = #{ob.employeeNo} and bill_year_month = #{ob.billYearMonth} order by update_date desc
-  </select>
-</mapper>

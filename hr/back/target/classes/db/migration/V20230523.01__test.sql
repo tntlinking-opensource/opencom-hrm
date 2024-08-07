@@ -1,1 +1,0 @@
-select * from sys.sys_config
