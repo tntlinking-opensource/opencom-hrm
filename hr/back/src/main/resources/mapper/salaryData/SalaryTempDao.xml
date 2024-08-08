@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.salaryData.dao.SalaryTempDao">
+  <sql id="salaryTempColumns">
+    <trim suffixOverrides=",">
+      a.ID AS "id",
+      a.CUSTOMER_ID AS "customerId",
+      a.SA_ITEM_NAME AS "saItemName",
+      a.SA_ITEM_ENAME AS "saItemEname",
+      a.SA_ITEM_DESC AS "saItemDesc",
+      a.PROPERTY AS "property",
+      a.DECIMAL_NUM AS "decimalNum",
+      a.IS_VALID AS "isValid",
+      a.DATA_SOURCE AS "dataSource",
+      a.COMPUTE_ORDER AS "computeOrder",
+      a.IS_DISPLAY AS "isDisplay",
+      a.CREATE_USER_ID AS "createUserId",
+      a.CREATE_DATE AS "createDate",
+      a.LAST_UPDATE_USER_ID AS "lastUpdateUserId",
+      a.LAST_UPDATE_DATE AS "lastUpdateDate",
+      a.DATA_FIELD AS "dataField",
+      a.IS_TAX AS "isTax",
+      a.ITEM_COST_GROUP AS "itemCostGroup",
+      a.COMPUTE_LEVEL AS "computeLevel",
+      a.IS_SYSTEM AS "isSystem",
+      a.SA_TYPE AS "saType",
+    </trim>
+  </sql>
+  <sql id="salaryTempJoins">
+  </sql>
+  <select id="get" resultType="com.geeke.salaryData.entity.SalaryTemp">
+    SELECT
+    <include refid="salaryTempColumns" />
+    FROM salary_temp a
+    <include refid="salaryTempJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM salary_temp a
+    <include refid="salaryTempJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultType="com.geeke.salaryData.entity.SalaryTemp">
+    SELECT
+    <include refid="salaryTempColumns" />
+    FROM salary_temp a
+    <include refid="salaryTempJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.create_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultType="com.geeke.salaryData.entity.SalaryTemp">
+    SELECT
+    <include refid="salaryTempColumns" />
+    FROM salary_temp a
+    <include refid="salaryTempJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.create_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO salary_temp(
+    <trim suffixOverrides=",">
+      ID,
+      CUSTOMER_ID,
+      SA_ITEM_NAME,
+      SA_ITEM_ENAME,
+      SA_ITEM_DESC,
+      PROPERTY,
+      DECIMAL_NUM,
+      IS_VALID,
+      DATA_SOURCE,
+      COMPUTE_ORDER,
+      IS_DISPLAY,
+      CREATE_USER_ID,
+      CREATE_DATE,
+      LAST_UPDATE_USER_ID,
+      LAST_UPDATE_DATE,
+      DATA_FIELD,
+      IS_TAX,
+      ITEM_COST_GROUP,
+      COMPUTE_LEVEL,
+      IS_SYSTEM,
+      SA_TYPE,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ customerId },
+      #{ saItemName },
+      #{ saItemEname },
+      #{ saItemDesc },
+      #{ property },
+      #{ decimalNum },
+      #{ isValid },
+      #{ dataSource },
+      #{ computeOrder },
+      #{ isDisplay },
+      #{ createUserId },
+      #{ createDate },
+      #{ lastUpdateUserId },
+      #{ lastUpdateDate },
+      #{ dataField },
+      #{ isTax },
+      #{ itemCostGroup },
+      #{ computeLevel },
+      #{ isSystem },
+      #{ saType },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE salary_temp SET
+    <trim suffixOverrides=",">
+      CUSTOMER_ID = #{ customerId },
+      SA_ITEM_NAME = #{ saItemName },
+      SA_ITEM_ENAME = #{ saItemEname },
+      SA_ITEM_DESC = #{ saItemDesc },
+      PROPERTY = #{ property },
+      DECIMAL_NUM = #{ decimalNum },
+      IS_VALID = #{ isValid },
+      DATA_SOURCE = #{ dataSource },
+      COMPUTE_ORDER = #{ computeOrder },
+      IS_DISPLAY = #{ isDisplay },
+      CREATE_USER_ID = #{ createUserId },
+      LAST_UPDATE_USER_ID = #{ lastUpdateUserId },
+      LAST_UPDATE_DATE = #{ lastUpdateDate },
+      DATA_FIELD = #{ dataField },
+      IS_TAX = #{ isTax },
+      ITEM_COST_GROUP = #{ itemCostGroup },
+      COMPUTE_LEVEL = #{ computeLevel },
+      IS_SYSTEM = #{ isSystem },
+      SA_TYPE = #{ saType },
+    </trim>
+    WHERE id = #{id}
+  </update>
+  <update id="delete">
+    DELETE FROM salary_temp
+    WHERE id = #{id}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO salary_temp(
+    <trim suffixOverrides=",">
+      ID,
+      CUSTOMER_ID,
+      SA_ITEM_NAME,
+      SA_ITEM_ENAME,
+      SA_ITEM_DESC,
+      PROPERTY,
+      DECIMAL_NUM,
+      IS_VALID,
+      DATA_SOURCE,
+      COMPUTE_ORDER,
+      IS_DISPLAY,
+      CREATE_USER_ID,
+      CREATE_DATE,
+      LAST_UPDATE_USER_ID,
+      LAST_UPDATE_DATE,
+      DATA_FIELD,
+      IS_TAX,
+      ITEM_COST_GROUP,
+      COMPUTE_LEVEL,
+      IS_SYSTEM,
+      SA_TYPE,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.customerId},
+        #{entity.saItemName},
+        #{entity.saItemEname},
+        #{entity.saItemDesc},
+        #{entity.property},
+        #{entity.decimalNum},
+        #{entity.isValid},
+        #{entity.dataSource},
+        #{entity.computeOrder},
+        #{entity.isDisplay},
+        #{entity.createUserId},
+        #{entity.createDate},
+        #{entity.lastUpdateUserId},
+        #{entity.lastUpdateDate},
+        #{entity.dataField},
+        #{entity.isTax},
+        #{entity.itemCostGroup},
+        #{entity.computeLevel},
+        #{entity.isSystem},
+        #{entity.saType},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE salary_temp
+    <set>
+      <trim prefix="CUSTOMER_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.customerId}
+        </foreach>
+      </trim>
+      <trim prefix="SA_ITEM_NAME=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.saItemName}
+        </foreach>
+      </trim>
+      <trim prefix="SA_ITEM_ENAME=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.saItemEname}
+        </foreach>
+      </trim>
+      <trim prefix="SA_ITEM_DESC=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.saItemDesc}
+        </foreach>
+      </trim>
+      <trim prefix="PROPERTY=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.property}
+        </foreach>
+      </trim>
+      <trim prefix="DECIMAL_NUM=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.decimalNum}
+        </foreach>
+      </trim>
+      <trim prefix="IS_VALID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isValid}
+        </foreach>
+      </trim>
+      <trim prefix="DATA_SOURCE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.dataSource}
+        </foreach>
+      </trim>
+      <trim prefix="COMPUTE_ORDER=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.computeOrder}
+        </foreach>
+      </trim>
+      <trim prefix="IS_DISPLAY=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isDisplay}
+        </foreach>
+      </trim>
+      <trim prefix="CREATE_USER_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.createUserId}
+        </foreach>
+      </trim>
+      <trim prefix="LAST_UPDATE_USER_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.lastUpdateUserId}
+        </foreach>
+      </trim>
+      <trim prefix="LAST_UPDATE_DATE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.lastUpdateDate}
+        </foreach>
+      </trim>
+      <trim prefix="DATA_FIELD=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.dataField}
+        </foreach>
+      </trim>
+      <trim prefix="IS_TAX=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isTax}
+        </foreach>
+      </trim>
+      <trim prefix="ITEM_COST_GROUP=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.itemCostGroup}
+        </foreach>
+      </trim>
+      <trim prefix="COMPUTE_LEVEL=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.computeLevel}
+        </foreach>
+      </trim>
+      <trim prefix="IS_SYSTEM=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isSystem}
+        </foreach>
+      </trim>
+      <trim prefix="SA_TYPE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.saType}
+        </foreach>
+      </trim>
+    </set>
+    WHERE id IN
+    <foreach collection="entitys" item="entity" index="index" separator="," open="(" close=")">
+      #{entity.id}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    DELETE FROM salary_temp
+    WHERE id IN
+    <foreach collection="entitys" item="entity" index="index" separator="," open="(" close=")">
+      #{entity.id}
+    </foreach>
+  </update>
+  <select id="getSalaryItemA1" resultType="com.geeke.salaryData.entity.SalaryTemp">
+    select * from salary_temp where ITEM_COST_GROUP = 'a1'
+  </select>
+  <select id="getSalaryItemA7" resultType="com.geeke.salaryData.entity.SalaryTemp">
+    select * from salary_temp where ITEM_COST_GROUP = 'a7'
+  </select>
+  <select id="getSalaryItemAll" resultType="com.geeke.salaryData.entity.SalaryTemp">
+    select * from salary_temp
+  </select>
+</mapper>

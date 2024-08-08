@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.basic.dao.UserPropDetailsDao">
+  <sql id="userPropDetailsColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.user_prop_list_id AS "userPropList.id",
+      IFNULL(userPropList.name,'') AS "userPropList.name",
+      IFNULL(userPropList.code,'') AS "userPropList.code",
+      IFNULL(userPropList.tenant_id,'') AS "userPropList.tenantId",
+      IFNULL(userPropList.attribute4,'') AS "userPropList.attribute4",
+      IFNULL(userPropList.attribute3,'') AS "userPropList.attribute3",
+      IFNULL(userPropList.attribute2,'') AS "userPropList.attribute2",
+      IFNULL(userPropList.attribute1,'') AS "userPropList.attribute1",
+      IFNULL(userPropList.attribute0,'') AS "userPropList.attribute0",
+      a.attribute0 AS "attribute0",
+      a.attribute1 AS "attribute1",
+      a.attribute2 AS "attribute2",
+      a.attribute3 AS "attribute3",
+      a.attribute4 AS "attribute4",
+      a.tenant_id AS "tenantId",
+      a.remarks AS "remarks",
+      a.create_by AS "createBy",
+      a.create_date AS "createDate",
+      a.update_by AS "updateBy",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+      a.used AS "used",
+    </trim>
+  </sql>
+  <sql id="userPropDetailsJoins">
+    LEFT JOIN user_prop_list userPropList ON userPropList.id = a.user_prop_list_id
+  </sql>
+  <select id="get" resultType="com.geeke.basic.entity.UserPropDetails">
+    SELECT
+    <include refid="userPropDetailsColumns" />
+    FROM user_prop_details a
+    <include refid="userPropDetailsJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM user_prop_details a
+    <include refid="userPropDetailsJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultType="com.geeke.basic.entity.UserPropDetails">
+    SELECT
+    <include refid="userPropDetailsColumns" />
+    FROM user_prop_details a
+    <include refid="userPropDetailsJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultType="com.geeke.basic.entity.UserPropDetails">
+    SELECT
+    <include refid="userPropDetailsColumns" />
+    FROM user_prop_details a
+    <include refid="userPropDetailsJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO user_prop_details(
+    <trim suffixOverrides=",">
+      id,
+      user_prop_list_id,
+      attribute0,
+      attribute1,
+      attribute2,
+      attribute3,
+      attribute4,
+      tenant_id,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      used,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ userPropList.id },
+      #{ attribute0 },
+      #{ attribute1 },
+      #{ attribute2 },
+      #{ attribute3 },
+      #{ attribute4 },
+      #{ tenantId },
+      #{ remarks },
+      #{ createBy },
+      #{ createDate },
+      #{ updateBy },
+      #{ updateDate },
+      #{ delFlag },
+      #{ used },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE user_prop_details SET
+    <trim suffixOverrides=",">
+      user_prop_list_id = #{ userPropList.id },
+      attribute0 = #{ attribute0 },
+      attribute1 = #{ attribute1 },
+      attribute2 = #{ attribute2 },
+      attribute3 = #{ attribute3 },
+      attribute4 = #{ attribute4 },
+      tenant_id = #{ tenantId },
+      remarks = #{ remarks },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+      used = #{ used },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE user_prop_details SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO user_prop_details(
+    <trim suffixOverrides=",">
+      id,
+      user_prop_list_id,
+      attribute0,
+      attribute1,
+      attribute2,
+      attribute3,
+      attribute4,
+      tenant_id,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      used,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.userPropList.id},
+        #{entity.attribute0},
+        #{entity.attribute1},
+        #{entity.attribute2},
+        #{entity.attribute3},
+        #{entity.attribute4},
+        #{entity.tenantId},
+        #{entity.remarks},
+        #{entity.createBy},
+        #{entity.createDate},
+        #{entity.updateBy},
+        #{entity.updateDate},
+        #{entity.delFlag},
+        #{entity.used},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE user_prop_details
+    <set>
+      <trim prefix="user_prop_list_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.userPropList.id}
+        </foreach>
+      </trim>
+      <trim prefix="attribute0=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.attribute0}
+        </foreach>
+      </trim>
+      <trim prefix="attribute1=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.attribute1}
+        </foreach>
+      </trim>
+      <trim prefix="attribute2=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.attribute2}
+        </foreach>
+      </trim>
+      <trim prefix="attribute3=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.attribute3}
+        </foreach>
+      </trim>
+      <trim prefix="attribute4=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.attribute4}
+        </foreach>
+      </trim>
+      <trim prefix="tenant_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.tenantId}
+        </foreach>
+      </trim>
+      <trim prefix="remarks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+      <trim prefix="used=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.used}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE user_prop_details
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+</mapper>

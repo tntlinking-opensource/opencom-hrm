@@ -1,0 +1,36 @@
+.dm-van-popup_VanPopup {
+  background-color: #f6f8fb;
+}
+.dm-van-popup_Wrapper {
+  height: 100%;
+  width: 100%;
+  // overflow-y: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  .dm-van-popup_VanPopup_header {
+
+  }
+  .dm-van-popup_VanPopup_body {
+    overflow-y: auto;
+    flex: 1;
+  }
+  .dm-van-popup_VanPopup_footer {
+    width: 100%;
+    padding: 10px 0;
+    .van-button {
+      margin: 0 10px;
+    }
+  }
+}
+.van-overlay .dm-van-overlay_Wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.dm-van-list_VanEditList .dm-van-row_VanRow .dm-van-button_VanButton.van-button--default.van-button--small.van-button--block {
+  border: none;
+  border: 0;
+}

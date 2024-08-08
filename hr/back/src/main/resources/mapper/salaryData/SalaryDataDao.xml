@@ -1,0 +1,2246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.salaryData.dao.SalaryDataDao">
+  <sql id="salaryDataColumns">
+    <trim suffixOverrides=",">
+      a.COMPANY_ID AS "companyId",
+      a.ID AS "id",
+      a.SA_BATCH_ID AS "saBatchId",
+      a.SA_CLASS_ID AS "saClassId",
+      a.SA_DOC_ID AS "saDoc.id",
+      IFNULL(saDoc.employee_no,'') AS "saDoc.employeeNo",
+      IFNULL(saDoc.employee_name,'') AS "saDoc.employeeName",
+      IFNULL(saDoc.id_card_no,'') AS "saDoc.idCardNo",
+      a.EMP_ID AS "empId",
+      a.DEPARTMENT_ID AS "departmentId",
+      a.PAY_YEAR_MONTH AS "payYearMonth",
+      a.STOP_FLAG AS "stopFlag",
+      a.IS_VERIFY AS "isVerify",
+      a.IS_DEL AS "isDel",
+      a.IS_POSTPONE AS "isPostpone",
+      a.IS_EMAIL AS "isEmail",
+      a.EMIAL_TIME AS "emialTime",
+      a.EMAIL_USER AS "emailUser",
+      a.EMAIL_REMARKS AS "emailRemarks",
+      a.DEF1 AS "def1",
+      a.DEF2 AS "def2",
+      a.DEF3 AS "def3",
+      a.DEF4 AS "def4",
+      a.DEF5 AS "def5",
+      a.DEF6 AS "def6",
+      a.DEF7 AS "def7",
+      a.DEF8 AS "def8",
+      a.DEF9 AS "def9",
+      a.DEF10 AS "def10",
+      a.DEF11 AS "def11",
+      a.DEF12 AS "def12",
+      a.DEF13 AS "def13",
+      a.DEF14 AS "def14",
+      a.DEF15 AS "def15",
+      a.DEF16 AS "def16",
+      a.DEF17 AS "def17",
+      a.DEF18 AS "def18",
+      a.DEF19 AS "def19",
+      a.DEF20 AS "def20",
+      a.DEF21 AS "def21",
+      a.DEF22 AS "def22",
+      a.DEF23 AS "def23",
+      a.DEF24 AS "def24",
+      a.DEF25 AS "def25",
+      a.DEF26 AS "def26",
+      a.DEF27 AS "def27",
+      a.DEF29 AS "def29",
+      a.DEF28 AS "def28",
+      a.DEF30 AS "def30",
+      a.DEF31 AS "def31",
+      a.DEF32 AS "def32",
+      a.DEF33 AS "def33",
+      a.DEF34 AS "def34",
+      a.DEF35 AS "def35",
+      a.DEF36 AS "def36",
+      a.DEF37 AS "def37",
+      a.DEF38 AS "def38",
+      a.DEF39 AS "def39",
+      a.DEF40 AS "def40",
+      a.DEF41 AS "def41",
+      a.DEF42 AS "def42",
+      a.DEF43 AS "def43",
+      a.DEF44 AS "def44",
+      a.DEF45 AS "def45",
+      a.SALARY_TAX_BD AS "salaryTaxBd",
+      a.IS_LOCAL_PAY AS "isLocalPay",
+      a.TAX_FLAG AS "taxFlag",
+      a.IS_VALID AS "isValid",
+      a.TAX_REGION_BD AS "taxRegionBd",
+      a.DEF46 AS "def46",
+      a.DEF47 AS "def47",
+      a.DEF48 AS "def48",
+      a.DEF49 AS "def49",
+      a.DEF50 AS "def50",
+      a.DEF51 AS "def51",
+      a.DEF52 AS "def52",
+      a.DEF53 AS "def53",
+      a.DEF54 AS "def54",
+      a.DEF55 AS "def55",
+      a.DEF56 AS "def56",
+      a.DEF57 AS "def57",
+      a.DEF58 AS "def58",
+      a.DEF59 AS "def59",
+      a.DEF60 AS "def60",
+      a.DEF61 AS "def61",
+      a.DEF62 AS "def62",
+      a.DEF63 AS "def63",
+      a.NOTE AS "note",
+      a.OLD_ID AS "oldId",
+      a.DEF64 AS "def64",
+      a.DEF65 AS "def65",
+      a.DEF66 AS "def66",
+      a.DEF67 AS "def67",
+      a.DEF68 AS "def68",
+      a.DEF69 AS "def69",
+      a.DEF70 AS "def70",
+      a.DEF71 AS "def71",
+      a.DEF72 AS "def72",
+      a.DEF73 AS "def73",
+      a.DEF74 AS "def74",
+      a.DEF75 AS "def75",
+      a.DEF76 AS "def76",
+      a.DEF77 AS "def77",
+      a.DEF78 AS "def78",
+      a.DEF79 AS "def79",
+      a.DEF80 AS "def80",
+      a.DEF81 AS "def81",
+      a.DEF82 AS "def82",
+      a.DEF83 AS "def83",
+      a.DEF84 AS "def84",
+      a.DEF85 AS "def85",
+      a.DEF86 AS "def86",
+      a.DEF87 AS "def87",
+      a.DEF88 AS "def88",
+      a.DEF89 AS "def89",
+      a.DEF90 AS "def90",
+      a.DEF91 AS "def91",
+      a.DEF92 AS "def92",
+      a.DEF93 AS "def93",
+      a.DEF94 AS "def94",
+      a.DEF95 AS "def95",
+      a.DEF96 AS "def96",
+      a.DEF97 AS "def97",
+      a.DEF98 AS "def98",
+      a.DEF99 AS "def99",
+      a.DEF100 AS "def100",
+      a.DEF101 AS "def101",
+      a.DEF102 AS "def102",
+      a.DEF103 AS "def103",
+      a.DEF104 AS "def104",
+      a.DEF105 AS "def105",
+      a.DEF106 AS "def106",
+      a.DEF107 AS "def107",
+      a.DEF108 AS "def108",
+      a.DEF109 AS "def109",
+      a.DEF110 AS "def110",
+      a.DEF111 AS "def111",
+      a.DEF112 AS "def112",
+      a.DEF113 AS "def113",
+      a.DEF114 AS "def114",
+      a.DEF115 AS "def115",
+      a.DEF116 AS "def116",
+      a.DEF117 AS "def117",
+      a.DEF118 AS "def118",
+      a.DEF119 AS "def119",
+      a.DEF120 AS "def120",
+      a.DEF121 AS "def121",
+      a.DEF122 AS "def122",
+      a.DEF123 AS "def123",
+      a.DEF124 AS "def124",
+      a.DEF125 AS "def125",
+      a.DEF126 AS "def126",
+      a.DEF127 AS "def127",
+      a.DEF128 AS "def128",
+      a.DEF129 AS "def129",
+      a.DEF130 AS "def130",
+      a.DEF131 AS "def131",
+      a.DEF132 AS "def132",
+      a.DEF133 AS "def133",
+      a.DEF134 AS "def134",
+      a.DEF135 AS "def135",
+      a.DEF136 AS "def136",
+      a.DEF137 AS "def137",
+      a.DEF138 AS "def138",
+      a.DEF139 AS "def139",
+      a.DEF140 AS "def140",
+      a.DEF141 AS "def141",
+      a.DEF142 AS "def142",
+      a.DEF143 AS "def143",
+      a.DEF144 AS "def144",
+      a.DEF145 AS "def145",
+      a.DEF146 AS "def146",
+      a.DEF147 AS "def147",
+      a.DEF148 AS "def148",
+      a.DEF149 AS "def149",
+      a.DEF150 AS "def150",
+      a.REMARKS AS "remarks",
+    </trim>
+  </sql>
+  <sql id="salaryDataJoins">
+    LEFT JOIN salary_archives_info saDoc ON saDoc.id = a.SA_DOC_ID
+  </sql>
+  <resultMap id="resultSalaryDataMap" type="com.geeke.salaryData.entity.SalaryData">
+    <result property="companyId" column="companyId" />
+    <result property="id" column="id" />
+    <result property="saBatchId" column="saBatchId" />
+    <result property="saClassId" column="saClassId" />
+    <result property="empId" column="empId" />
+    <result property="departmentId" column="departmentId" />
+    <result property="payYearMonth" column="payYearMonth" />
+    <result property="stopFlag" column="stopFlag" />
+    <result property="isVerify" column="isVerify" />
+    <result property="isDel" column="isDel" />
+    <result property="isPostpone" column="isPostpone" />
+    <result property="isEmail" column="isEmail" />
+    <result property="emialTime" column="emialTime" />
+    <result property="emailUser" column="emailUser" />
+    <result property="emailRemarks" column="emailRemarks" />
+    <result property="def1" column="def1" />
+    <result property="def2" column="def2" />
+    <result property="def3" column="def3" />
+    <result property="def4" column="def4" />
+    <result property="def5" column="def5" />
+    <result property="def6" column="def6" />
+    <result property="def7" column="def7" />
+    <result property="def8" column="def8" />
+    <result property="def9" column="def9" />
+    <result property="def10" column="def10" />
+    <result property="def11" column="def11" />
+    <result property="def12" column="def12" />
+    <result property="def13" column="def13" />
+    <result property="def14" column="def14" />
+    <result property="def15" column="def15" />
+    <result property="def16" column="def16" />
+    <result property="def17" column="def17" />
+    <result property="def18" column="def18" />
+    <result property="def19" column="def19" />
+    <result property="def20" column="def20" />
+    <result property="def21" column="def21" />
+    <result property="def22" column="def22" />
+    <result property="def23" column="def23" />
+    <result property="def24" column="def24" />
+    <result property="def25" column="def25" />
+    <result property="def26" column="def26" />
+    <result property="def27" column="def27" />
+    <result property="def29" column="def29" />
+    <result property="def28" column="def28" />
+    <result property="def30" column="def30" />
+    <result property="def31" column="def31" />
+    <result property="def32" column="def32" />
+    <result property="def33" column="def33" />
+    <result property="def34" column="def34" />
+    <result property="def35" column="def35" />
+    <result property="def36" column="def36" />
+    <result property="def37" column="def37" />
+    <result property="def38" column="def38" />
+    <result property="def39" column="def39" />
+    <result property="def40" column="def40" />
+    <result property="def41" column="def41" />
+    <result property="def42" column="def42" />
+    <result property="def43" column="def43" />
+    <result property="def44" column="def44" />
+    <result property="def45" column="def45" />
+    <result property="salaryTaxBd" column="salaryTaxBd" />
+    <result property="isLocalPay" column="isLocalPay" />
+    <result property="taxFlag" column="taxFlag" />
+    <result property="isValid" column="isValid" />
+    <result property="taxRegionBd" column="taxRegionBd" />
+    <result property="def46" column="def46" />
+    <result property="def47" column="def47" />
+    <result property="def48" column="def48" />
+    <result property="def49" column="def49" />
+    <result property="def50" column="def50" />
+    <result property="def51" column="def51" />
+    <result property="def52" column="def52" />
+    <result property="def53" column="def53" />
+    <result property="def54" column="def54" />
+    <result property="def55" column="def55" />
+    <result property="def56" column="def56" />
+    <result property="def57" column="def57" />
+    <result property="def58" column="def58" />
+    <result property="def59" column="def59" />
+    <result property="def60" column="def60" />
+    <result property="def61" column="def61" />
+    <result property="def62" column="def62" />
+    <result property="def63" column="def63" />
+    <result property="note" column="note" />
+    <result property="oldId" column="oldId" />
+    <result property="def64" column="def64" />
+    <result property="def65" column="def65" />
+    <result property="def66" column="def66" />
+    <result property="def67" column="def67" />
+    <result property="def68" column="def68" />
+    <result property="def69" column="def69" />
+    <result property="def70" column="def70" />
+    <result property="def71" column="def71" />
+    <result property="def72" column="def72" />
+    <result property="def73" column="def73" />
+    <result property="def74" column="def74" />
+    <result property="def75" column="def75" />
+    <result property="def76" column="def76" />
+    <result property="def77" column="def77" />
+    <result property="def78" column="def78" />
+    <result property="def79" column="def79" />
+    <result property="def80" column="def80" />
+    <result property="def81" column="def81" />
+    <result property="def82" column="def82" />
+    <result property="def83" column="def83" />
+    <result property="def84" column="def84" />
+    <result property="def85" column="def85" />
+    <result property="def86" column="def86" />
+    <result property="def87" column="def87" />
+    <result property="def88" column="def88" />
+    <result property="def89" column="def89" />
+    <result property="def90" column="def90" />
+    <result property="def91" column="def91" />
+    <result property="def92" column="def92" />
+    <result property="def93" column="def93" />
+    <result property="def94" column="def94" />
+    <result property="def95" column="def95" />
+    <result property="def96" column="def96" />
+    <result property="def97" column="def97" />
+    <result property="def98" column="def98" />
+    <result property="def99" column="def99" />
+    <result property="def100" column="def100" />
+    <result property="def101" column="def101" />
+    <result property="def102" column="def102" />
+    <result property="def103" column="def103" />
+    <result property="def104" column="def104" />
+    <result property="def105" column="def105" />
+    <result property="def106" column="def106" />
+    <result property="def107" column="def107" />
+    <result property="def108" column="def108" />
+    <result property="def109" column="def109" />
+    <result property="def110" column="def110" />
+    <result property="def111" column="def111" />
+    <result property="def112" column="def112" />
+    <result property="def113" column="def113" />
+    <result property="def114" column="def114" />
+    <result property="def115" column="def115" />
+    <result property="def116" column="def116" />
+    <result property="def117" column="def117" />
+    <result property="def118" column="def118" />
+    <result property="def119" column="def119" />
+    <result property="def120" column="def120" />
+    <result property="def121" column="def121" />
+    <result property="def122" column="def122" />
+    <result property="def123" column="def123" />
+    <result property="def124" column="def124" />
+    <result property="def125" column="def125" />
+    <result property="def126" column="def126" />
+    <result property="def127" column="def127" />
+    <result property="def128" column="def128" />
+    <result property="def129" column="def129" />
+    <result property="def130" column="def130" />
+    <result property="def131" column="def131" />
+    <result property="def132" column="def132" />
+    <result property="def133" column="def133" />
+    <result property="def134" column="def134" />
+    <result property="def135" column="def135" />
+    <result property="def136" column="def136" />
+    <result property="def137" column="def137" />
+    <result property="def138" column="def138" />
+    <result property="def139" column="def139" />
+    <result property="def140" column="def140" />
+    <result property="def141" column="def141" />
+    <result property="def142" column="def142" />
+    <result property="def143" column="def143" />
+    <result property="def144" column="def144" />
+    <result property="def145" column="def145" />
+    <result property="def146" column="def146" />
+    <result property="def147" column="def147" />
+    <result property="def148" column="def148" />
+    <result property="def149" column="def149" />
+    <result property="def150" column="def150" />
+    <result property="remarks" column="remarks" />
+    <association property="saDoc" javaType="com.geeke.salaryData.entity.SalaryArchivesInfo">
+      <result property="id" column="saDoc.id" />
+      <result property="employeeNo" column="saDoc.employeeNo" />
+      <result property="employeeName" column="saDoc.employeeName" />
+      <result property="idCardNo" column="saDoc.idCardNo" />
+    </association>
+  </resultMap>
+  <select id="get" resultMap="resultSalaryDataMap">
+    SELECT
+    <include refid="salaryDataColumns" />
+    FROM salary_data a
+    <include refid="salaryDataJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM salary_data a
+    <include refid="salaryDataJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultMap="resultSalaryDataMap">
+    SELECT
+    <include refid="salaryDataColumns" />
+    FROM salary_data a
+    <include refid="salaryDataJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.ID ASC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultMap="resultSalaryDataMap">
+    SELECT
+    <include refid="salaryDataColumns" />
+    FROM salary_data a
+    <include refid="salaryDataJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.ID ASC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO salary_data(
+    <trim suffixOverrides=",">
+      COMPANY_ID,
+      ID,
+      SA_BATCH_ID,
+      SA_CLASS_ID,
+      SA_DOC_ID,
+      EMP_ID,
+      DEPARTMENT_ID,
+      PAY_YEAR_MONTH,
+      STOP_FLAG,
+      IS_VERIFY,
+      IS_DEL,
+      IS_POSTPONE,
+      IS_EMAIL,
+      EMIAL_TIME,
+      EMAIL_USER,
+      EMAIL_REMARKS,
+      DEF1,
+      DEF2,
+      DEF3,
+      DEF4,
+      DEF5,
+      DEF6,
+      DEF7,
+      DEF8,
+      DEF9,
+      DEF10,
+      DEF11,
+      DEF12,
+      DEF13,
+      DEF14,
+      DEF15,
+      DEF16,
+      DEF17,
+      DEF18,
+      DEF19,
+      DEF20,
+      DEF21,
+      DEF22,
+      DEF23,
+      DEF24,
+      DEF25,
+      DEF26,
+      DEF27,
+      DEF29,
+      DEF28,
+      DEF30,
+      DEF31,
+      DEF32,
+      DEF33,
+      DEF34,
+      DEF35,
+      DEF36,
+      DEF37,
+      DEF38,
+      DEF39,
+      DEF40,
+      DEF41,
+      DEF42,
+      DEF43,
+      DEF44,
+      DEF45,
+      SALARY_TAX_BD,
+      IS_LOCAL_PAY,
+      TAX_FLAG,
+      IS_VALID,
+      TAX_REGION_BD,
+      DEF46,
+      DEF47,
+      DEF48,
+      DEF49,
+      DEF50,
+      DEF51,
+      DEF52,
+      DEF53,
+      DEF54,
+      DEF55,
+      DEF56,
+      DEF57,
+      DEF58,
+      DEF59,
+      DEF60,
+      DEF61,
+      DEF62,
+      DEF63,
+      NOTE,
+      OLD_ID,
+      DEF64,
+      DEF65,
+      DEF66,
+      DEF67,
+      DEF68,
+      DEF69,
+      DEF70,
+      DEF71,
+      DEF72,
+      DEF73,
+      DEF74,
+      DEF75,
+      DEF76,
+      DEF77,
+      DEF78,
+      DEF79,
+      DEF80,
+      DEF81,
+      DEF82,
+      DEF83,
+      DEF84,
+      DEF85,
+      DEF86,
+      DEF87,
+      DEF88,
+      DEF89,
+      DEF90,
+      DEF91,
+      DEF92,
+      DEF93,
+      DEF94,
+      DEF95,
+      DEF96,
+      DEF97,
+      DEF98,
+      DEF99,
+      DEF100,
+      DEF101,
+      DEF102,
+      DEF103,
+      DEF104,
+      DEF105,
+      DEF106,
+      DEF107,
+      DEF108,
+      DEF109,
+      DEF110,
+      DEF111,
+      DEF112,
+      DEF113,
+      DEF114,
+      DEF115,
+      DEF116,
+      DEF117,
+      DEF118,
+      DEF119,
+      DEF120,
+      DEF121,
+      DEF122,
+      DEF123,
+      DEF124,
+      DEF125,
+      DEF126,
+      DEF127,
+      DEF128,
+      DEF129,
+      DEF130,
+      DEF131,
+      DEF132,
+      DEF133,
+      DEF134,
+      DEF135,
+      DEF136,
+      DEF137,
+      DEF138,
+      DEF139,
+      DEF140,
+      DEF141,
+      DEF142,
+      DEF143,
+      DEF144,
+      DEF145,
+      DEF146,
+      DEF147,
+      DEF148,
+      DEF149,
+      DEF150,
+      REMARKS,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ companyId },
+      #{ id },
+      #{ saBatchId },
+      #{ saClassId },
+      #{ saDoc.id },
+      #{ empId },
+      #{ departmentId },
+      #{ payYearMonth },
+      #{ stopFlag },
+      #{ isVerify },
+      #{ isDel },
+      #{ isPostpone },
+      #{ isEmail },
+      #{ emialTime },
+      #{ emailUser },
+      #{ emailRemarks },
+      #{ def1 },
+      #{ def2 },
+      #{ def3 },
+      #{ def4 },
+      #{ def5 },
+      #{ def6 },
+      #{ def7 },
+      #{ def8 },
+      #{ def9 },
+      #{ def10 },
+      #{ def11 },
+      #{ def12 },
+      #{ def13 },
+      #{ def14 },
+      #{ def15 },
+      #{ def16 },
+      #{ def17 },
+      #{ def18 },
+      #{ def19 },
+      #{ def20 },
+      #{ def21 },
+      #{ def22 },
+      #{ def23 },
+      #{ def24 },
+      #{ def25 },
+      #{ def26 },
+      #{ def27 },
+      #{ def29 },
+      #{ def28 },
+      #{ def30 },
+      #{ def31 },
+      #{ def32 },
+      #{ def33 },
+      #{ def34 },
+      #{ def35 },
+      #{ def36 },
+      #{ def37 },
+      #{ def38 },
+      #{ def39 },
+      #{ def40 },
+      #{ def41 },
+      #{ def42 },
+      #{ def43 },
+      #{ def44 },
+      #{ def45 },
+      #{ salaryTaxBd },
+      #{ isLocalPay },
+      #{ taxFlag },
+      #{ isValid },
+      #{ taxRegionBd },
+      #{ def46 },
+      #{ def47 },
+      #{ def48 },
+      #{ def49 },
+      #{ def50 },
+      #{ def51 },
+      #{ def52 },
+      #{ def53 },
+      #{ def54 },
+      #{ def55 },
+      #{ def56 },
+      #{ def57 },
+      #{ def58 },
+      #{ def59 },
+      #{ def60 },
+      #{ def61 },
+      #{ def62 },
+      #{ def63 },
+      #{ note },
+      #{ oldId },
+      #{ def64 },
+      #{ def65 },
+      #{ def66 },
+      #{ def67 },
+      #{ def68 },
+      #{ def69 },
+      #{ def70 },
+      #{ def71 },
+      #{ def72 },
+      #{ def73 },
+      #{ def74 },
+      #{ def75 },
+      #{ def76 },
+      #{ def77 },
+      #{ def78 },
+      #{ def79 },
+      #{ def80 },
+      #{ def81 },
+      #{ def82 },
+      #{ def83 },
+      #{ def84 },
+      #{ def85 },
+      #{ def86 },
+      #{ def87 },
+      #{ def88 },
+      #{ def89 },
+      #{ def90 },
+      #{ def91 },
+      #{ def92 },
+      #{ def93 },
+      #{ def94 },
+      #{ def95 },
+      #{ def96 },
+      #{ def97 },
+      #{ def98 },
+      #{ def99 },
+      #{ def100 },
+      #{ def101 },
+      #{ def102 },
+      #{ def103 },
+      #{ def104 },
+      #{ def105 },
+      #{ def106 },
+      #{ def107 },
+      #{ def108 },
+      #{ def109 },
+      #{ def110 },
+      #{ def111 },
+      #{ def112 },
+      #{ def113 },
+      #{ def114 },
+      #{ def115 },
+      #{ def116 },
+      #{ def117 },
+      #{ def118 },
+      #{ def119 },
+      #{ def120 },
+      #{ def121 },
+      #{ def122 },
+      #{ def123 },
+      #{ def124 },
+      #{ def125 },
+      #{ def126 },
+      #{ def127 },
+      #{ def128 },
+      #{ def129 },
+      #{ def130 },
+      #{ def131 },
+      #{ def132 },
+      #{ def133 },
+      #{ def134 },
+      #{ def135 },
+      #{ def136 },
+      #{ def137 },
+      #{ def138 },
+      #{ def139 },
+      #{ def140 },
+      #{ def141 },
+      #{ def142 },
+      #{ def143 },
+      #{ def144 },
+      #{ def145 },
+      #{ def146 },
+      #{ def147 },
+      #{ def148 },
+      #{ def149 },
+      #{ def150 },
+      #{ remarks },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE salary_data SET
+    <trim suffixOverrides=",">
+      COMPANY_ID = #{ companyId },
+      SA_BATCH_ID = #{ saBatchId },
+      SA_CLASS_ID = #{ saClassId },
+      SA_DOC_ID = #{ saDoc.id },
+      EMP_ID = #{ empId },
+      DEPARTMENT_ID = #{ departmentId },
+      PAY_YEAR_MONTH = #{ payYearMonth },
+      STOP_FLAG = #{ stopFlag },
+      IS_VERIFY = #{ isVerify },
+      IS_DEL = #{ isDel },
+      IS_POSTPONE = #{ isPostpone },
+      IS_EMAIL = #{ isEmail },
+      EMIAL_TIME = #{ emialTime },
+      EMAIL_USER = #{ emailUser },
+      EMAIL_REMARKS = #{ emailRemarks },
+      DEF1 = #{ def1 },
+      DEF2 = #{ def2 },
+      DEF3 = #{ def3 },
+      DEF4 = #{ def4 },
+      DEF5 = #{ def5 },
+      DEF6 = #{ def6 },
+      DEF7 = #{ def7 },
+      DEF8 = #{ def8 },
+      DEF9 = #{ def9 },
+      DEF10 = #{ def10 },
+      DEF11 = #{ def11 },
+      DEF12 = #{ def12 },
+      DEF13 = #{ def13 },
+      DEF14 = #{ def14 },
+      DEF15 = #{ def15 },
+      DEF16 = #{ def16 },
+      DEF17 = #{ def17 },
+      DEF18 = #{ def18 },
+      DEF19 = #{ def19 },
+      DEF20 = #{ def20 },
+      DEF21 = #{ def21 },
+      DEF22 = #{ def22 },
+      DEF23 = #{ def23 },
+      DEF24 = #{ def24 },
+      DEF25 = #{ def25 },
+      DEF26 = #{ def26 },
+      DEF27 = #{ def27 },
+      DEF29 = #{ def29 },
+      DEF28 = #{ def28 },
+      DEF30 = #{ def30 },
+      DEF31 = #{ def31 },
+      DEF32 = #{ def32 },
+      DEF33 = #{ def33 },
+      DEF34 = #{ def34 },
+      DEF35 = #{ def35 },
+      DEF36 = #{ def36 },
+      DEF37 = #{ def37 },
+      DEF38 = #{ def38 },
+      DEF39 = #{ def39 },
+      DEF40 = #{ def40 },
+      DEF41 = #{ def41 },
+      DEF42 = #{ def42 },
+      DEF43 = #{ def43 },
+      DEF44 = #{ def44 },
+      DEF45 = #{ def45 },
+      SALARY_TAX_BD = #{ salaryTaxBd },
+      IS_LOCAL_PAY = #{ isLocalPay },
+      TAX_FLAG = #{ taxFlag },
+      IS_VALID = #{ isValid },
+      TAX_REGION_BD = #{ taxRegionBd },
+      DEF46 = #{ def46 },
+      DEF47 = #{ def47 },
+      DEF48 = #{ def48 },
+      DEF49 = #{ def49 },
+      DEF50 = #{ def50 },
+      DEF51 = #{ def51 },
+      DEF52 = #{ def52 },
+      DEF53 = #{ def53 },
+      DEF54 = #{ def54 },
+      DEF55 = #{ def55 },
+      DEF56 = #{ def56 },
+      DEF57 = #{ def57 },
+      DEF58 = #{ def58 },
+      DEF59 = #{ def59 },
+      DEF60 = #{ def60 },
+      DEF61 = #{ def61 },
+      DEF62 = #{ def62 },
+      DEF63 = #{ def63 },
+      NOTE = #{ note },
+      OLD_ID = #{ oldId },
+      DEF64 = #{ def64 },
+      DEF65 = #{ def65 },
+      DEF66 = #{ def66 },
+      DEF67 = #{ def67 },
+      DEF68 = #{ def68 },
+      DEF69 = #{ def69 },
+      DEF70 = #{ def70 },
+      DEF71 = #{ def71 },
+      DEF72 = #{ def72 },
+      DEF73 = #{ def73 },
+      DEF74 = #{ def74 },
+      DEF75 = #{ def75 },
+      DEF76 = #{ def76 },
+      DEF77 = #{ def77 },
+      DEF78 = #{ def78 },
+      DEF79 = #{ def79 },
+      DEF80 = #{ def80 },
+      DEF81 = #{ def81 },
+      DEF82 = #{ def82 },
+      DEF83 = #{ def83 },
+      DEF84 = #{ def84 },
+      DEF85 = #{ def85 },
+      DEF86 = #{ def86 },
+      DEF87 = #{ def87 },
+      DEF88 = #{ def88 },
+      DEF89 = #{ def89 },
+      DEF90 = #{ def90 },
+      DEF91 = #{ def91 },
+      DEF92 = #{ def92 },
+      DEF93 = #{ def93 },
+      DEF94 = #{ def94 },
+      DEF95 = #{ def95 },
+      DEF96 = #{ def96 },
+      DEF97 = #{ def97 },
+      DEF98 = #{ def98 },
+      DEF99 = #{ def99 },
+      DEF100 = #{ def100 },
+      DEF101 = #{ def101 },
+      DEF102 = #{ def102 },
+      DEF103 = #{ def103 },
+      DEF104 = #{ def104 },
+      DEF105 = #{ def105 },
+      DEF106 = #{ def106 },
+      DEF107 = #{ def107 },
+      DEF108 = #{ def108 },
+      DEF109 = #{ def109 },
+      DEF110 = #{ def110 },
+      DEF111 = #{ def111 },
+      DEF112 = #{ def112 },
+      DEF113 = #{ def113 },
+      DEF114 = #{ def114 },
+      DEF115 = #{ def115 },
+      DEF116 = #{ def116 },
+      DEF117 = #{ def117 },
+      DEF118 = #{ def118 },
+      DEF119 = #{ def119 },
+      DEF120 = #{ def120 },
+      DEF121 = #{ def121 },
+      DEF122 = #{ def122 },
+      DEF123 = #{ def123 },
+      DEF124 = #{ def124 },
+      DEF125 = #{ def125 },
+      DEF126 = #{ def126 },
+      DEF127 = #{ def127 },
+      DEF128 = #{ def128 },
+      DEF129 = #{ def129 },
+      DEF130 = #{ def130 },
+      DEF131 = #{ def131 },
+      DEF132 = #{ def132 },
+      DEF133 = #{ def133 },
+      DEF134 = #{ def134 },
+      DEF135 = #{ def135 },
+      DEF136 = #{ def136 },
+      DEF137 = #{ def137 },
+      DEF138 = #{ def138 },
+      DEF139 = #{ def139 },
+      DEF140 = #{ def140 },
+      DEF141 = #{ def141 },
+      DEF142 = #{ def142 },
+      DEF143 = #{ def143 },
+      DEF144 = #{ def144 },
+      DEF145 = #{ def145 },
+      DEF146 = #{ def146 },
+      DEF147 = #{ def147 },
+      DEF148 = #{ def148 },
+      DEF149 = #{ def149 },
+      DEF150 = #{ def150 },
+      REMARKS = #{ remarks },
+    </trim>
+    WHERE id = #{id}
+  </update>
+  <update id="delete">
+    DELETE FROM salary_data
+    WHERE id = #{id}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO salary_data(
+    <trim suffixOverrides=",">
+      COMPANY_ID,
+      ID,
+      SA_BATCH_ID,
+      SA_CLASS_ID,
+      SA_DOC_ID,
+      EMP_ID,
+      DEPARTMENT_ID,
+      PAY_YEAR_MONTH,
+      STOP_FLAG,
+      IS_VERIFY,
+      IS_DEL,
+      IS_POSTPONE,
+      IS_EMAIL,
+      EMIAL_TIME,
+      EMAIL_USER,
+      EMAIL_REMARKS,
+      DEF1,
+      DEF2,
+      DEF3,
+      DEF4,
+      DEF5,
+      DEF6,
+      DEF7,
+      DEF8,
+      DEF9,
+      DEF10,
+      DEF11,
+      DEF12,
+      DEF13,
+      DEF14,
+      DEF15,
+      DEF16,
+      DEF17,
+      DEF18,
+      DEF19,
+      DEF20,
+      DEF21,
+      DEF22,
+      DEF23,
+      DEF24,
+      DEF25,
+      DEF26,
+      DEF27,
+      DEF29,
+      DEF28,
+      DEF30,
+      DEF31,
+      DEF32,
+      DEF33,
+      DEF34,
+      DEF35,
+      DEF36,
+      DEF37,
+      DEF38,
+      DEF39,
+      DEF40,
+      DEF41,
+      DEF42,
+      DEF43,
+      DEF44,
+      DEF45,
+      SALARY_TAX_BD,
+      IS_LOCAL_PAY,
+      TAX_FLAG,
+      IS_VALID,
+      TAX_REGION_BD,
+      DEF46,
+      DEF47,
+      DEF48,
+      DEF49,
+      DEF50,
+      DEF51,
+      DEF52,
+      DEF53,
+      DEF54,
+      DEF55,
+      DEF56,
+      DEF57,
+      DEF58,
+      DEF59,
+      DEF60,
+      DEF61,
+      DEF62,
+      DEF63,
+      NOTE,
+      OLD_ID,
+      DEF64,
+      DEF65,
+      DEF66,
+      DEF67,
+      DEF68,
+      DEF69,
+      DEF70,
+      DEF71,
+      DEF72,
+      DEF73,
+      DEF74,
+      DEF75,
+      DEF76,
+      DEF77,
+      DEF78,
+      DEF79,
+      DEF80,
+      DEF81,
+      DEF82,
+      DEF83,
+      DEF84,
+      DEF85,
+      DEF86,
+      DEF87,
+      DEF88,
+      DEF89,
+      DEF90,
+      DEF91,
+      DEF92,
+      DEF93,
+      DEF94,
+      DEF95,
+      DEF96,
+      DEF97,
+      DEF98,
+      DEF99,
+      DEF100,
+      DEF101,
+      DEF102,
+      DEF103,
+      DEF104,
+      DEF105,
+      DEF106,
+      DEF107,
+      DEF108,
+      DEF109,
+      DEF110,
+      DEF111,
+      DEF112,
+      DEF113,
+      DEF114,
+      DEF115,
+      DEF116,
+      DEF117,
+      DEF118,
+      DEF119,
+      DEF120,
+      DEF121,
+      DEF122,
+      DEF123,
+      DEF124,
+      DEF125,
+      DEF126,
+      DEF127,
+      DEF128,
+      DEF129,
+      DEF130,
+      DEF131,
+      DEF132,
+      DEF133,
+      DEF134,
+      DEF135,
+      DEF136,
+      DEF137,
+      DEF138,
+      DEF139,
+      DEF140,
+      DEF141,
+      DEF142,
+      DEF143,
+      DEF144,
+      DEF145,
+      DEF146,
+      DEF147,
+      DEF148,
+      DEF149,
+      DEF150,
+      REMARKS,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.companyId},
+        #{entity.id},
+        #{entity.saBatchId},
+        #{entity.saClassId},
+        #{entity.saDoc.id},
+        #{entity.empId},
+        #{entity.departmentId},
+        #{entity.payYearMonth},
+        #{entity.stopFlag},
+        #{entity.isVerify},
+        #{entity.isDel},
+        #{entity.isPostpone},
+        #{entity.isEmail},
+        #{entity.emialTime},
+        #{entity.emailUser},
+        #{entity.emailRemarks},
+        #{entity.def1},
+        #{entity.def2},
+        #{entity.def3},
+        #{entity.def4},
+        #{entity.def5},
+        #{entity.def6},
+        #{entity.def7},
+        #{entity.def8},
+        #{entity.def9},
+        #{entity.def10},
+        #{entity.def11},
+        #{entity.def12},
+        #{entity.def13},
+        #{entity.def14},
+        #{entity.def15},
+        #{entity.def16},
+        #{entity.def17},
+        #{entity.def18},
+        #{entity.def19},
+        #{entity.def20},
+        #{entity.def21},
+        #{entity.def22},
+        #{entity.def23},
+        #{entity.def24},
+        #{entity.def25},
+        #{entity.def26},
+        #{entity.def27},
+        #{entity.def29},
+        #{entity.def28},
+        #{entity.def30},
+        #{entity.def31},
+        #{entity.def32},
+        #{entity.def33},
+        #{entity.def34},
+        #{entity.def35},
+        #{entity.def36},
+        #{entity.def37},
+        #{entity.def38},
+        #{entity.def39},
+        #{entity.def40},
+        #{entity.def41},
+        #{entity.def42},
+        #{entity.def43},
+        #{entity.def44},
+        #{entity.def45},
+        #{entity.salaryTaxBd},
+        #{entity.isLocalPay},
+        #{entity.taxFlag},
+        #{entity.isValid},
+        #{entity.taxRegionBd},
+        #{entity.def46},
+        #{entity.def47},
+        #{entity.def48},
+        #{entity.def49},
+        #{entity.def50},
+        #{entity.def51},
+        #{entity.def52},
+        #{entity.def53},
+        #{entity.def54},
+        #{entity.def55},
+        #{entity.def56},
+        #{entity.def57},
+        #{entity.def58},
+        #{entity.def59},
+        #{entity.def60},
+        #{entity.def61},
+        #{entity.def62},
+        #{entity.def63},
+        #{entity.note},
+        #{entity.oldId},
+        #{entity.def64},
+        #{entity.def65},
+        #{entity.def66},
+        #{entity.def67},
+        #{entity.def68},
+        #{entity.def69},
+        #{entity.def70},
+        #{entity.def71},
+        #{entity.def72},
+        #{entity.def73},
+        #{entity.def74},
+        #{entity.def75},
+        #{entity.def76},
+        #{entity.def77},
+        #{entity.def78},
+        #{entity.def79},
+        #{entity.def80},
+        #{entity.def81},
+        #{entity.def82},
+        #{entity.def83},
+        #{entity.def84},
+        #{entity.def85},
+        #{entity.def86},
+        #{entity.def87},
+        #{entity.def88},
+        #{entity.def89},
+        #{entity.def90},
+        #{entity.def91},
+        #{entity.def92},
+        #{entity.def93},
+        #{entity.def94},
+        #{entity.def95},
+        #{entity.def96},
+        #{entity.def97},
+        #{entity.def98},
+        #{entity.def99},
+        #{entity.def100},
+        #{entity.def101},
+        #{entity.def102},
+        #{entity.def103},
+        #{entity.def104},
+        #{entity.def105},
+        #{entity.def106},
+        #{entity.def107},
+        #{entity.def108},
+        #{entity.def109},
+        #{entity.def110},
+        #{entity.def111},
+        #{entity.def112},
+        #{entity.def113},
+        #{entity.def114},
+        #{entity.def115},
+        #{entity.def116},
+        #{entity.def117},
+        #{entity.def118},
+        #{entity.def119},
+        #{entity.def120},
+        #{entity.def121},
+        #{entity.def122},
+        #{entity.def123},
+        #{entity.def124},
+        #{entity.def125},
+        #{entity.def126},
+        #{entity.def127},
+        #{entity.def128},
+        #{entity.def129},
+        #{entity.def130},
+        #{entity.def131},
+        #{entity.def132},
+        #{entity.def133},
+        #{entity.def134},
+        #{entity.def135},
+        #{entity.def136},
+        #{entity.def137},
+        #{entity.def138},
+        #{entity.def139},
+        #{entity.def140},
+        #{entity.def141},
+        #{entity.def142},
+        #{entity.def143},
+        #{entity.def144},
+        #{entity.def145},
+        #{entity.def146},
+        #{entity.def147},
+        #{entity.def148},
+        #{entity.def149},
+        #{entity.def150},
+        #{entity.remarks},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE salary_data
+    <set>
+      <trim prefix="COMPANY_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyId}
+        </foreach>
+      </trim>
+      <trim prefix="SA_BATCH_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.saBatchId}
+        </foreach>
+      </trim>
+      <trim prefix="SA_CLASS_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.saClassId}
+        </foreach>
+      </trim>
+      <trim prefix="SA_DOC_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.saDoc.id}
+        </foreach>
+      </trim>
+      <trim prefix="EMP_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.empId}
+        </foreach>
+      </trim>
+      <trim prefix="DEPARTMENT_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.departmentId}
+        </foreach>
+      </trim>
+      <trim prefix="PAY_YEAR_MONTH=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.payYearMonth}
+        </foreach>
+      </trim>
+      <trim prefix="STOP_FLAG=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.stopFlag}
+        </foreach>
+      </trim>
+      <trim prefix="IS_VERIFY=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isVerify}
+        </foreach>
+      </trim>
+      <trim prefix="IS_DEL=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isDel}
+        </foreach>
+      </trim>
+      <trim prefix="IS_POSTPONE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isPostpone}
+        </foreach>
+      </trim>
+      <trim prefix="IS_EMAIL=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isEmail}
+        </foreach>
+      </trim>
+      <trim prefix="EMIAL_TIME=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.emialTime}
+        </foreach>
+      </trim>
+      <trim prefix="EMAIL_USER=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.emailUser}
+        </foreach>
+      </trim>
+      <trim prefix="EMAIL_REMARKS=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.emailRemarks}
+        </foreach>
+      </trim>
+      <trim prefix="DEF1=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def1}
+        </foreach>
+      </trim>
+      <trim prefix="DEF2=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def2}
+        </foreach>
+      </trim>
+      <trim prefix="DEF3=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def3}
+        </foreach>
+      </trim>
+      <trim prefix="DEF4=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def4}
+        </foreach>
+      </trim>
+      <trim prefix="DEF5=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def5}
+        </foreach>
+      </trim>
+      <trim prefix="DEF6=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def6}
+        </foreach>
+      </trim>
+      <trim prefix="DEF7=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def7}
+        </foreach>
+      </trim>
+      <trim prefix="DEF8=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def8}
+        </foreach>
+      </trim>
+      <trim prefix="DEF9=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def9}
+        </foreach>
+      </trim>
+      <trim prefix="DEF10=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def10}
+        </foreach>
+      </trim>
+      <trim prefix="DEF11=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def11}
+        </foreach>
+      </trim>
+      <trim prefix="DEF12=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def12}
+        </foreach>
+      </trim>
+      <trim prefix="DEF13=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def13}
+        </foreach>
+      </trim>
+      <trim prefix="DEF14=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def14}
+        </foreach>
+      </trim>
+      <trim prefix="DEF15=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def15}
+        </foreach>
+      </trim>
+      <trim prefix="DEF16=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def16}
+        </foreach>
+      </trim>
+      <trim prefix="DEF17=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def17}
+        </foreach>
+      </trim>
+      <trim prefix="DEF18=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def18}
+        </foreach>
+      </trim>
+      <trim prefix="DEF19=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def19}
+        </foreach>
+      </trim>
+      <trim prefix="DEF20=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def20}
+        </foreach>
+      </trim>
+      <trim prefix="DEF21=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def21}
+        </foreach>
+      </trim>
+      <trim prefix="DEF22=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def22}
+        </foreach>
+      </trim>
+      <trim prefix="DEF23=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def23}
+        </foreach>
+      </trim>
+      <trim prefix="DEF24=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def24}
+        </foreach>
+      </trim>
+      <trim prefix="DEF25=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def25}
+        </foreach>
+      </trim>
+      <trim prefix="DEF26=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def26}
+        </foreach>
+      </trim>
+      <trim prefix="DEF27=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def27}
+        </foreach>
+      </trim>
+      <trim prefix="DEF29=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def29}
+        </foreach>
+      </trim>
+      <trim prefix="DEF28=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def28}
+        </foreach>
+      </trim>
+      <trim prefix="DEF30=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def30}
+        </foreach>
+      </trim>
+      <trim prefix="DEF31=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def31}
+        </foreach>
+      </trim>
+      <trim prefix="DEF32=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def32}
+        </foreach>
+      </trim>
+      <trim prefix="DEF33=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def33}
+        </foreach>
+      </trim>
+      <trim prefix="DEF34=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def34}
+        </foreach>
+      </trim>
+      <trim prefix="DEF35=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def35}
+        </foreach>
+      </trim>
+      <trim prefix="DEF36=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def36}
+        </foreach>
+      </trim>
+      <trim prefix="DEF37=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def37}
+        </foreach>
+      </trim>
+      <trim prefix="DEF38=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def38}
+        </foreach>
+      </trim>
+      <trim prefix="DEF39=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def39}
+        </foreach>
+      </trim>
+      <trim prefix="DEF40=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def40}
+        </foreach>
+      </trim>
+      <trim prefix="DEF41=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def41}
+        </foreach>
+      </trim>
+      <trim prefix="DEF42=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def42}
+        </foreach>
+      </trim>
+      <trim prefix="DEF43=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def43}
+        </foreach>
+      </trim>
+      <trim prefix="DEF44=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def44}
+        </foreach>
+      </trim>
+      <trim prefix="DEF45=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def45}
+        </foreach>
+      </trim>
+      <trim prefix="SALARY_TAX_BD=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.salaryTaxBd}
+        </foreach>
+      </trim>
+      <trim prefix="IS_LOCAL_PAY=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isLocalPay}
+        </foreach>
+      </trim>
+      <trim prefix="TAX_FLAG=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.taxFlag}
+        </foreach>
+      </trim>
+      <trim prefix="IS_VALID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isValid}
+        </foreach>
+      </trim>
+      <trim prefix="TAX_REGION_BD=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.taxRegionBd}
+        </foreach>
+      </trim>
+      <trim prefix="DEF46=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def46}
+        </foreach>
+      </trim>
+      <trim prefix="DEF47=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def47}
+        </foreach>
+      </trim>
+      <trim prefix="DEF48=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def48}
+        </foreach>
+      </trim>
+      <trim prefix="DEF49=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def49}
+        </foreach>
+      </trim>
+      <trim prefix="DEF50=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def50}
+        </foreach>
+      </trim>
+      <trim prefix="DEF51=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def51}
+        </foreach>
+      </trim>
+      <trim prefix="DEF52=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def52}
+        </foreach>
+      </trim>
+      <trim prefix="DEF53=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def53}
+        </foreach>
+      </trim>
+      <trim prefix="DEF54=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def54}
+        </foreach>
+      </trim>
+      <trim prefix="DEF55=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def55}
+        </foreach>
+      </trim>
+      <trim prefix="DEF56=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def56}
+        </foreach>
+      </trim>
+      <trim prefix="DEF57=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def57}
+        </foreach>
+      </trim>
+      <trim prefix="DEF58=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def58}
+        </foreach>
+      </trim>
+      <trim prefix="DEF59=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def59}
+        </foreach>
+      </trim>
+      <trim prefix="DEF60=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def60}
+        </foreach>
+      </trim>
+      <trim prefix="DEF61=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def61}
+        </foreach>
+      </trim>
+      <trim prefix="DEF62=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def62}
+        </foreach>
+      </trim>
+      <trim prefix="DEF63=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def63}
+        </foreach>
+      </trim>
+      <trim prefix="NOTE=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.note}
+        </foreach>
+      </trim>
+      <trim prefix="OLD_ID=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.oldId}
+        </foreach>
+      </trim>
+      <trim prefix="DEF64=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def64}
+        </foreach>
+      </trim>
+      <trim prefix="DEF65=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def65}
+        </foreach>
+      </trim>
+      <trim prefix="DEF66=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def66}
+        </foreach>
+      </trim>
+      <trim prefix="DEF67=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def67}
+        </foreach>
+      </trim>
+      <trim prefix="DEF68=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def68}
+        </foreach>
+      </trim>
+      <trim prefix="DEF69=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def69}
+        </foreach>
+      </trim>
+      <trim prefix="DEF70=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def70}
+        </foreach>
+      </trim>
+      <trim prefix="DEF71=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def71}
+        </foreach>
+      </trim>
+      <trim prefix="DEF72=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def72}
+        </foreach>
+      </trim>
+      <trim prefix="DEF73=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def73}
+        </foreach>
+      </trim>
+      <trim prefix="DEF74=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def74}
+        </foreach>
+      </trim>
+      <trim prefix="DEF75=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def75}
+        </foreach>
+      </trim>
+      <trim prefix="DEF76=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def76}
+        </foreach>
+      </trim>
+      <trim prefix="DEF77=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def77}
+        </foreach>
+      </trim>
+      <trim prefix="DEF78=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def78}
+        </foreach>
+      </trim>
+      <trim prefix="DEF79=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def79}
+        </foreach>
+      </trim>
+      <trim prefix="DEF80=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def80}
+        </foreach>
+      </trim>
+      <trim prefix="DEF81=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def81}
+        </foreach>
+      </trim>
+      <trim prefix="DEF82=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def82}
+        </foreach>
+      </trim>
+      <trim prefix="DEF83=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def83}
+        </foreach>
+      </trim>
+      <trim prefix="DEF84=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def84}
+        </foreach>
+      </trim>
+      <trim prefix="DEF85=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def85}
+        </foreach>
+      </trim>
+      <trim prefix="DEF86=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def86}
+        </foreach>
+      </trim>
+      <trim prefix="DEF87=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def87}
+        </foreach>
+      </trim>
+      <trim prefix="DEF88=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def88}
+        </foreach>
+      </trim>
+      <trim prefix="DEF89=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def89}
+        </foreach>
+      </trim>
+      <trim prefix="DEF90=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def90}
+        </foreach>
+      </trim>
+      <trim prefix="DEF91=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def91}
+        </foreach>
+      </trim>
+      <trim prefix="DEF92=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def92}
+        </foreach>
+      </trim>
+      <trim prefix="DEF93=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def93}
+        </foreach>
+      </trim>
+      <trim prefix="DEF94=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def94}
+        </foreach>
+      </trim>
+      <trim prefix="DEF95=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def95}
+        </foreach>
+      </trim>
+      <trim prefix="DEF96=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def96}
+        </foreach>
+      </trim>
+      <trim prefix="DEF97=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def97}
+        </foreach>
+      </trim>
+      <trim prefix="DEF98=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def98}
+        </foreach>
+      </trim>
+      <trim prefix="DEF99=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def99}
+        </foreach>
+      </trim>
+      <trim prefix="DEF100=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def100}
+        </foreach>
+      </trim>
+      <trim prefix="DEF101=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def101}
+        </foreach>
+      </trim>
+      <trim prefix="DEF102=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def102}
+        </foreach>
+      </trim>
+      <trim prefix="DEF103=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def103}
+        </foreach>
+      </trim>
+      <trim prefix="DEF104=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def104}
+        </foreach>
+      </trim>
+      <trim prefix="DEF105=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def105}
+        </foreach>
+      </trim>
+      <trim prefix="DEF106=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def106}
+        </foreach>
+      </trim>
+      <trim prefix="DEF107=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def107}
+        </foreach>
+      </trim>
+      <trim prefix="DEF108=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def108}
+        </foreach>
+      </trim>
+      <trim prefix="DEF109=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def109}
+        </foreach>
+      </trim>
+      <trim prefix="DEF110=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def110}
+        </foreach>
+      </trim>
+      <trim prefix="DEF111=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def111}
+        </foreach>
+      </trim>
+      <trim prefix="DEF112=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def112}
+        </foreach>
+      </trim>
+      <trim prefix="DEF113=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def113}
+        </foreach>
+      </trim>
+      <trim prefix="DEF114=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def114}
+        </foreach>
+      </trim>
+      <trim prefix="DEF115=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def115}
+        </foreach>
+      </trim>
+      <trim prefix="DEF116=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def116}
+        </foreach>
+      </trim>
+      <trim prefix="DEF117=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def117}
+        </foreach>
+      </trim>
+      <trim prefix="DEF118=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def118}
+        </foreach>
+      </trim>
+      <trim prefix="DEF119=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def119}
+        </foreach>
+      </trim>
+      <trim prefix="DEF120=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def120}
+        </foreach>
+      </trim>
+      <trim prefix="DEF121=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def121}
+        </foreach>
+      </trim>
+      <trim prefix="DEF122=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def122}
+        </foreach>
+      </trim>
+      <trim prefix="DEF123=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def123}
+        </foreach>
+      </trim>
+      <trim prefix="DEF124=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def124}
+        </foreach>
+      </trim>
+      <trim prefix="DEF125=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def125}
+        </foreach>
+      </trim>
+      <trim prefix="DEF126=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def126}
+        </foreach>
+      </trim>
+      <trim prefix="DEF127=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def127}
+        </foreach>
+      </trim>
+      <trim prefix="DEF128=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def128}
+        </foreach>
+      </trim>
+      <trim prefix="DEF129=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def129}
+        </foreach>
+      </trim>
+      <trim prefix="DEF130=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def130}
+        </foreach>
+      </trim>
+      <trim prefix="DEF131=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def131}
+        </foreach>
+      </trim>
+      <trim prefix="DEF132=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def132}
+        </foreach>
+      </trim>
+      <trim prefix="DEF133=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def133}
+        </foreach>
+      </trim>
+      <trim prefix="DEF134=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def134}
+        </foreach>
+      </trim>
+      <trim prefix="DEF135=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def135}
+        </foreach>
+      </trim>
+      <trim prefix="DEF136=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def136}
+        </foreach>
+      </trim>
+      <trim prefix="DEF137=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def137}
+        </foreach>
+      </trim>
+      <trim prefix="DEF138=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def138}
+        </foreach>
+      </trim>
+      <trim prefix="DEF139=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def139}
+        </foreach>
+      </trim>
+      <trim prefix="DEF140=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def140}
+        </foreach>
+      </trim>
+      <trim prefix="DEF141=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def141}
+        </foreach>
+      </trim>
+      <trim prefix="DEF142=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def142}
+        </foreach>
+      </trim>
+      <trim prefix="DEF143=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def143}
+        </foreach>
+      </trim>
+      <trim prefix="DEF144=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def144}
+        </foreach>
+      </trim>
+      <trim prefix="DEF145=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def145}
+        </foreach>
+      </trim>
+      <trim prefix="DEF146=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def146}
+        </foreach>
+      </trim>
+      <trim prefix="DEF147=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def147}
+        </foreach>
+      </trim>
+      <trim prefix="DEF148=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def148}
+        </foreach>
+      </trim>
+      <trim prefix="DEF149=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def149}
+        </foreach>
+      </trim>
+      <trim prefix="DEF150=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.def150}
+        </foreach>
+      </trim>
+      <trim prefix="REMARKS=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+    </set>
+    WHERE id IN
+    <foreach collection="entitys" item="entity" index="index" separator="," open="(" close=")">
+      #{entity.id}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    DELETE FROM salary_data
+    WHERE id IN
+    <foreach collection="entitys" item="entity" index="index" separator="," open="(" close=")">
+      #{entity.id}
+    </foreach>
+  </update>
+  <select id="salaryDataByempAndYear" resultType="com.geeke.salaryData.entity.SalaryData">
+    select sd.* from salary_data sd
+    left join salary_archives_info sai on sai.id = sd.sa_doc_id
+    left join salary_batch sb on sb.id = sd.sa_batch_id
+    where sai.employee_no = #{employeeNo} and sb.tax_month &gt;= #{year} and sb.tax_month &lt;= #{year1}
+  </select>
+  <select id="getListByEmpidAndTaxMonth" resultType="com.geeke.salaryData.entity.SalaryData">
+    select sd.* from salary_data sd
+    left join salary_archives_info sai on sai.id = sd.sa_doc_id
+    left join salary_batch sb on sb.id = sd.sa_batch_id
+    where sai.employee_no = #{employeeNo} and sb.tax_month = #{taxMonth} and sd.is_del = '0' and sb.is_del = '0'
+    and sb.is_verify = '1'
+  </select>
+  <select id="listSalaryPage" resultType="com.geeke.salaryData.entity.SalaryData">
+    SELECT
+    <include refid="salaryDataColumns" />
+    FROM salary_data a
+    <include refid="salaryDataJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      <if test="employeeName != null and employeeName != ''">
+        AND saDoc.employee_name like '%${employeeName}%'
+      </if>
+      <if test="idCardNo != null and idCardNo != ''">
+        AND saDoc.id_card_no like '%${idCardNo}%'
+      </if>
+      <if test="saBatchId != null and saBatchId != ''">
+        AND a.sa_batch_id = '${saBatchId}'
+      </if>
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.ID ASC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+</mapper>

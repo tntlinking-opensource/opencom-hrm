@@ -1,0 +1,2145 @@
+export default {
+  data: [{
+    "id": "1206149206170714872",
+    "name": "我的功能",
+    "parent": {"id": "1205942566704041293"},
+    "code": "",
+    "url": "",
+    "properties": "{\"isChildren\":true,\"path\":\"layout/home/newIndex\",\"type\":\"van\", \"cssClass\": \"my_options\"}",
+    "label": "我的功能"
+  }, {
+    "id": "1206149206170714983",
+    "name": "角色管理",
+    "parent": {"id": "1206149206170714872"},
+    "code": "role",
+    "url": "/role",
+    "properties": "{\"isChildren\":false,\"path\":\"admin/role/index\",\"icon\":\"erweima\",\"color\": \"#339bf3\"}",
+    "label": "角色管理"
+  }, {
+    "id": "1206149206170715577",
+    "name": "移动审批",
+    "parent": {"id": "1206149206170714910"},
+    "code": "",
+    "url": "",
+    "properties": "{\"isChildren\":\"false\",\"path\":\"layout/mytask/index\",\"icon\":\"\",\"color\": \"linear-gradient(180deg, rgba(221, 233, 248, 1) 0%, rgba(235, 241, 248, 1) 40%)\"}",
+    "label": "移动审批"
+  }, {
+    "id": "1206149206170715844",
+    "name": "设置",
+    "parent": {"id": "1206149206170715810"},
+    "code": "settings",
+    "url": "/settings",
+    "properties": "{\"isChildren\":false,\"path\":\"mine/settings/index\"}",
+    "label": "设置"
+  }, {
+    "id": "1206149206170715886",
+    "name": "园区档案",
+    "parent": {"id": "1206149206170715079"},
+    "code": "parkArchives",
+    "url": "/parkArchives",
+    "properties": "{\"isChildren\":false,\"path\":\"assetsManage/assetManagement/parkArchives\",\"keepAlive\":true}",
+    "label": "园区档案"
+  }, {
+    "id": "1214810849538924600",
+    "name": "客户详情",
+    "parent": {"id": "1206149206170715131"},
+    "code": "customerDetails",
+    "url": "/customerDetails",
+    "properties": "{\"isChildren\":false,\"path\":\"merchant/merchantFollowUp/customerDetails\",\"keepAlive\":false}",
+    "label": "客户详情"
+  }, {
+    "id": "1216639990211837846",
+    "name": "任务详情",
+    "parent": {"id": "1216267719626252926"},
+    "code": "facTaskPop",
+    "url": "/facTaskPop",
+    "properties": "{\"isChildren\":false,\"path\":\"fac/facMaintainTask/facTaskPop\",\"keepAlive\":false}",
+    "label": "任务详情"
+  }, {
+    "id": "1218181436794799961",
+    "name": "任务详情",
+    "parent": {"id": "1218181436794799959"},
+    "code": "taskPop",
+    "url": "/taskPop",
+    "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/taskPop\",\"keepAlive\":false}",
+    "label": "任务详情"
+  }, {
+    "id": "1296808080243073064",
+    "name": "抄表",
+    "parent": {"id": "1295190801717641239"},
+    "code": "meterReadingInput",
+    "url": "/kgce/meterReadingInput",
+    "properties": "{\"isChildren\":false,\"path\":\"kgce/meterReadingInput\",\"keepAlive\":false,\"icon\":\"shigongdan\",\"color\": \"#f28a35\"}",
+    "label": "抄表"
+  }, {
+    "id": "1315950251265966240",
+    "name": "受理",
+    "parent": {"id": "1311498603562909696"},
+    "code": "acceptance",
+    "url": "/maint/acceptance",
+    "properties": "{\"isChildren\":false,\"path\":\"maint/acceptance\",\"keepAlive\":false,\"icon\":\"shigongdan\",\"color\": \"#f28a35\"}",
+    "label": "受理"
+  }, {
+    "id": "1206149206170714910",
+    "name": "移动办公",
+    "parent": {"id": "1205942566704041293"},
+    "code": "",
+    "url": "",
+    "properties": "{\"isChildren\":\"true\",\"path\":\"layout/home/newIndex\",\"type\":\"ul\", \"cssClass\": \"move_office\"}",
+    "label": "移动办公"
+  }, {
+    "id": "1206149206170715079",
+    "name": "字典管理",
+    "parent": {"id": "1206149206170714872"},
+    "code": "dict",
+    "url": "/dict",
+    "properties": "{\"isChildren\":false,\"path\":\"test/dict/index\",\"keepAlive\":true,\"icon\":\"zhinenglouyu\",\"color\": \"#f7837c\", \"title\": \"资产管理\"}",
+    "label": "字典管理"
+  }, {
+    "id": "1206149206170715587",
+    "name": "公司公告",
+    "parent": {"id": "1206149206170714910"},
+    "code": "",
+    "url": "",
+    "properties": "{\"isChildren\":\"false\",\"path\":\"layout/mytask/index\",\"icon\":\"\",\"color\": \"linear-gradient(141.709836807757deg, rgba(244, 235, 231, 1) 0%, rgba(255, 252, 250, 1) 99%)\"}",
+    "label": "公司公告"
+  }, {
+    "id": "1206149206170715951",
+    "name": "房间详情",
+    "parent": {"id": "1206149206170715079"},
+    "code": "roomDetails",
+    "url": "/roomDetails",
+    "properties": "{\"isChildren\":false,\"path\":\"assetsManage/assetManagement/roomDetails\",\"keepAlive\":false}",
+    "label": "房间详情"
+  }, {
+    "id": "1214810849538924603",
+    "name": "新增跟进",
+    "parent": {"id": "1206149206170715131"},
+    "code": "addFollowUpRecord",
+    "url": "/addFollowUpRecord",
+    "properties": "{\"isChildren\":false,\"path\":\"merchant/merchantFollowUp/addFollowUpRecord\"}",
+    "label": "新增跟进"
+  }, {
+    "id": "1216640007391699838",
+    "name": "设备维保单",
+    "parent": {"id": "1216267719626252926"},
+    "code": "repairOrderPop",
+    "url": "/repairOrderPop",
+    "properties": "{\"isChildren\":false,\"path\":\"fac/facMaintainTask/repairOrderPop\",\"keepAlive\":false}",
+    "label": "设备维保单"
+  }, {
+    "id": "1218181436794799963",
+    "name": "巡检路线",
+    "parent": {"id": "1218181436794799959"},
+    "code": "linePop",
+    "url": "/linePop",
+    "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/linePop\",\"keepAlive\":false}",
+    "label": "巡检路线"
+  }, {
+    "id": "1296917997046128641",
+    "name": "进度及详情",
+    "parent": {"id": "1295190801717641239"},
+    "code": "meterReadingDetails",
+    "url": "/kgce/meterReadingDetails",
+    "properties": "{\"isChildren\":false,\"path\":\"kgce/meterReadingDetails\",\"keepAlive\":false,\"icon\":\"hetong\",\"color\":\"#339bf3\"}",
+    "label": "进度及详情"
+  }, {
+    "id": "1321974939332313109",
+    "name": "工单详情",
+    "parent": {"id": "1311498603562909696"},
+    "code": "maintOrderDetail",
+    "url": "/maintOrderDetail",
+    "properties": "{\"isChildren\":false,\"path\":\"maint/maintOrderDetail\",\"keepAlive\":false,\"icon\":\"shigongdan\",\"color\": \"#f28a35\"}",
+    "label": "工单详情"
+  }, {
+    "id": "1206149206170715131",
+    "name": "报销申请",
+    "parent": {"id": "1206149206170714872"},
+    "code": "expense",
+    "url": "/expense",
+    "properties": "{\"isChildren\":false,\"path\":\"admin/expense/index\",\"keepAlive\":false,\"icon\":\"kehu\",\"color\": \"#33c9f3\"}",
+    "label": "报销申请"
+  }, {
+    "id": "1206149206170715605",
+    "name": "知识库",
+    "parent": {"id": "1206149206170714910"},
+    "code": "",
+    "url": "",
+    "properties": "{\"isChildren\":\"false\",\"path\":\"layout/mytask/index\",\"icon\":\"\",\"color\": \"linear-gradient(141.709836807757deg, rgba(212, 242, 230, 1) 0%, rgba(236, 250, 245, 1) 99%\"}",
+    "label": "知识库"
+  }, {
+    "id": "1206149206170715962",
+    "name": "其他资产档案",
+    "parent": {"id": "1206149206170715079"},
+    "code": "otherAssetFiles",
+    "url": "/otherAssetFiles",
+    "properties": "{\"isChildren\":false,\"path\":\"assetsManage/assetManagement/otherAssetFiles\",\"keepAlive\":true}",
+    "label": "其他资产档案"
+  }, {
+    "id": "1218181436794799965",
+    "name": "巡检点详情",
+    "parent": {"id": "1218181436794799959"},
+    "code": "pointPop",
+    "url": "/pointPop",
+    "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/pointPop\",\"keepAlive\":false}",
+    "label": "巡检点详情"
+  }, {
+    "id": "1206149206170715211",
+    "name": "请假申请",
+    "parent": {"id": "1206149206170714872"},
+    "code": "leave",
+    "url": "/leave",
+    "properties": "{\"isChildren\":false,\"path\":\"admin/leave/index\",\"keepAlive\":true,\"icon\":\"louyuguanli\",\"color\": \"#f28a35\"}",
+    "label": "请假申请"
+  }, {
+    "id": "1206149206170715615",
+    "name": "移动报表",
+    "parent": {"id": "1206149206170714910"},
+    "code": "",
+    "url": "",
+    "properties": "{\"isChildren\":\"false\",\"path\":\"layout/mytask/index\",\"icon\":\"\",\"color\": \"linear-gradient(141.709836807757deg, rgba(236, 226, 248, 1) 0%, rgba(244, 240, 249, 1) 100%)\"}",
+    "label": "移动报表"
+  }, {
+    "id": "1206149206170715982",
+    "name": "通用资源详情",
+    "parent": {"id": "1206149206170715079"},
+    "code": "genReDetails",
+    "url": "/genReDetails",
+    "properties": "{\"isChildren\":false,\"path\":\"assetsManage/assetManagement/genReDetails\",\"keepAlive\":true}",
+    "label": "通用资源详情"
+  }, {
+    "id": "1218181436794799967",
+    "name": "巡检拍照",
+    "parent": {"id": "1218181436794799959"},
+    "code": "photoUploadPop",
+    "url": "/photoUploadPop",
+    "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/photoUploadPop\",\"keepAlive\":false}",
+    "label": "巡检拍照"
+  }, {
+    "id": "1206149206170715290",
+    "name": "合同管理",
+    "parent": {"id": "1206149206170714872"},
+    "code": "hetong",
+    "url": "/mytask",
+    "properties": "{\"isChildren\":false,\"path\":\"layout/mytask/index\",\"keepAlive\":true,\"icon\":\"hetong\",\"color\": \"#f2c933\"}",
+    "label": "合同管理"
+  }, {
+    "id": "1218181436794799969",
+    "name": "巡检设备",
+    "parent": {"id": "1218181436794799959"},
+    "code": "facPop",
+    "url": "/facPop",
+    "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/linePop\",\"keepAlive\":false}",
+    "label": "巡检设备"
+  }, {
+    "id": "1218181436794799971",
+    "name": "设备详情",
+    "parent": {"id": "1218181436794799959"},
+    "code": "facDetailPop",
+    "url": "/facDetailPop",
+    "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/pointPop\",\"keepAlive\":false}",
+    "label": "设备详情"
+  }, {
+    "id": "1206149206170715330",
+    "name": "工单管理",
+    "parent": {"id": "1206149206170714872"},
+    "code": "gdgl",
+    "url": "/workorder",
+    "properties": "{\"isChildren\":false,\"path\":\"workorderManage/index\",\"keepAlive\":true,\"icon\":\"shigongdan\",\"color\": \"#f17335\"}",
+    "label": "工单管理"
+  }, {
+    "id": "1216267719626252926",
+    "name": "设备维保",
+    "parent": {"id": "1206149206170714872"},
+    "code": "facMaintainTask",
+    "url": "/facMaintainTask",
+    "properties": "{\"isChildren\":false,\"path\":\"fac/facMaintainTask/index\",\"keepAlive\":false,\"icon\":\"zhinenglouyu\",\"color\": \"#f7837c\"}",
+    "label": "设备维保"
+  }, {
+    "id": "1218181436794799959",
+    "name": "巡更巡检",
+    "parent": {"id": "1206149206170714872"},
+    "code": "propInspectTask",
+    "url": "/propInspectTask",
+    "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/index\",\"keepAlive\":false,\"icon\":\"zhinenglouyu\",\"color\": \"#f7837c\"}",
+    "label": "巡更巡检"
+  }, {
+    "id": "1274880227789250565",
+    "name": "监控合同",
+    "parent": {"id": "1206149206170714872"},
+    "code": "contractMonitor",
+    "url": "/contractMonitor",
+    "properties": "{\"isChildren\":false,\"path\":\"contract/contractMonitor/index\",\"keepAlive\":false,\"icon\":\"hetong\",\"color\": \"#f2c933\"}",
+    "label": "监控合同"
+  }, {
+    "id": "1295190801717641239",
+    "name": "抄表管理",
+    "parent": {"id": "1206149206170714872"},
+    "code": "kgce",
+    "url": "/kgce",
+    "properties": "{\"isChildren\":false,\"path\":\"kgce/index\",\"keepAlive\":false,\"icon\":\"shigongdan\",\"color\": \"#f28a35\"}",
+    "label": "抄表管理"
+  }, {
+    "id": "1253405597463527461",
+    "name": "合同监控",
+    "parent": {"id": "1274880227789250565"},
+    "code": "contract",
+    "url": "/contract",
+    "properties": "{\"isChildren\":false,\"path\":\"contract/contractTabs/index\",\"keepAlive\":false,\"icon\":\"hetong\",\"color\": \"#f2c933\"}",
+    "label": "合同监控"
+  }, {
+    "id": "1311498603562909696",
+    "name": "报事报修",
+    "parent": {"id": "1206149206170714872"},
+    "code": "maint",
+    "url": "/maint",
+    "properties": "{\"isChildren\":false,\"path\":\"maint/index\",\"keepAlive\":false,\"icon\":\"shigongdan\",\"color\": \"#f28a35\"}",
+    "label": "报事报修"
+  }, {
+    "id": "1205942566704041293",
+    "name": "首页",
+    "parent": {"id": "0"},
+    "code": "home",
+    "url": "/home",
+    "properties": "{\"isChildren\":true,\"path\":\"layout/home/newIndex\",\"icon\": \"wap-home-o\"}",
+    "label": "首页"
+  }, {
+    "id": "1206149206170715713",
+    "name": "待办",
+    "parent": {"id": "0"},
+    "code": "mytask",
+    "url": "/mytask",
+    "properties": "{\"isChildren\":true,\"path\":\"layout/mytask/index\",\"icon\": \"todo-list-o\"}",
+    "label": "待办"
+  }, {
+    "id": "1206149206170715731",
+    "name": "申请",
+    "parent": {"id": "0"},
+    "code": "myapproved",
+    "url": "/myapproved",
+    "properties": "{\"isChildren\":true,\"path\":\"layout/myapproved/index\",\"icon\": \"records\"}",
+    "label": "申请"
+  }, {
+    "id": "1206149206170715775",
+    "name": "已审批",
+    "parent": {"id": "0"},
+    "code": "myapplied",
+    "url": "/myapplied",
+    "properties": "{\"isChildren\":true,\"path\":\"layout/myapplied/index\",\"icon\": \"completed\"}",
+    "label": "已审批"
+  }, {
+    "id": "1206149206170715810",
+    "name": "我的",
+    "parent": {"id": "0"},
+    "code": "user",
+    "url": "/user",
+    "properties": "{\"isChildren\":true,\"path\":\"mine/myInfo/index\",\"icon\": \"manager-o\"}",
+    "label": "我的"
+  }]
+}
+// export default {
+//   "msg": "请求成功",
+//   "code": "100",
+//   "data3": [
+//     {
+//       "id": "1205942566704041293",
+//       "name": "首页",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 13:52:21",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-20 11:56:34",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1205942566704041293.",
+//       "sort": 190000,
+//       "code": "home",
+//       "url": "/home",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"layout/home/newIndex\",\"icon\": \"wap-home-o\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "首页"
+//     },
+//     {
+//       "id": "1206149206170715713",
+//       "name": "待办",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:12:06",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-13 15:12:06",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1206149206170715713.",
+//       "sort": 200000,
+//       "code": "mytask",
+//       "url": "/mytask",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"layout/mytask/index\",\"icon\": \"todo-list-o\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "待办"
+//     },
+//     {
+//       "id": "1206149206170715731",
+//       "name": "申请",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:12:47",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-27 15:58:34",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1206149206170715731.",
+//       "sort": 210000,
+//       "code": "myapproved",
+//       "url": "/myapproved",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"layout/myapproved/index\",\"icon\": \"records\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "申请"
+//     },
+//     {
+//       "id": "1206149206170715775",
+//       "name": "已审批",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:14:16",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-13 15:14:16",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1206149206170715775.",
+//       "sort": 220000,
+//       "code": "myapplied",
+//       "url": "/myapplied",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"layout/myapplied/index\",\"icon\": \"completed\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "已审批"
+//     },
+//     {
+//       "id": "1206149206170715810",
+//       "name": "我的",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:15:37",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-13 15:15:37",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1206149206170715810.",
+//       "sort": 230000,
+//       "code": "user",
+//       "url": "/user",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"mine/myInfo/index\",\"icon\": \"manager-o\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "我的"
+//     }
+//   ],
+//   "data2": [
+//     {
+//       "id": "1205942566704041293",
+//       "name": "首页",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 13:52:21",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-20 11:56:34",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1205942566704041293.",
+//       "sort": 190000,
+//       "code": "home",
+//       "url": "/home",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"layout/home/newIndex\",\"icon\": \"wap-home-o\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "首页"
+//     },
+//     {
+//       "id": "1206149206170715713",
+//       "name": "待办",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:12:06",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-13 15:12:06",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1206149206170715713.",
+//       "sort": 200000,
+//       "code": "mytask",
+//       "url": "/mytask",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"layout/mytask/index\",\"icon\": \"todo-list-o\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "待办"
+//     },
+//     {
+//       "id": "1206149206170715731",
+//       "name": "申请",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:12:47",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-27 15:58:34",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1206149206170715731.",
+//       "sort": 210000,
+//       "code": "myapproved",
+//       "url": "/myapproved",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"layout/myapproved/index\",\"icon\": \"records\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "申请"
+//     },
+//     {
+//       "id": "1206149206170715775",
+//       "name": "已审批",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:14:16",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-13 15:14:16",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1206149206170715775.",
+//       "sort": 220000,
+//       "code": "myapplied",
+//       "url": "/myapplied",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"layout/myapplied/index\",\"icon\": \"completed\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "已审批"
+//     },
+//     {
+//       "id": "1206149206170715810",
+//       "name": "我的",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:15:37",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-13 15:15:37",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1206149206170715810.",
+//       "sort": 230000,
+//       "code": "user",
+//       "url": "/user",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"mine/myInfo/index\",\"icon\": \"manager-o\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "我的"
+//     },
+//     {
+//       "id": "1206149206170714872",
+//       "name": "我的功能",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 14:36:49",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-20 11:56:47",
+//       "parent": {
+//         "id": "1205942566704041293",
+//         "name": "首页",
+//         "label": "首页"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714872.",
+//       "sort": 10000,
+//       "code": "",
+//       "url": "",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"layout/home/newIndex\",\"type\":\"van\", \"cssClass\": \"my_options\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714871",
+//       "label": "我的功能"
+//     },
+//     {
+//       "id": "1206149206170714910",
+//       "name": "移动办公",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 14:38:21",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-20 11:42:25",
+//       "parent": {
+//         "id": "1205942566704041293",
+//         "name": "首页",
+//         "label": "首页"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714910.",
+//       "sort": 20000,
+//       "code": "",
+//       "url": "",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":\"true\",\"path\":\"layout/home/newIndex\",\"type\":\"ul\", \"cssClass\": \"move_office\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714909",
+//       "label": "移动办公"
+//     },
+//     {
+//       "id": "1206149206170714983",
+//       "name": "区优码",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 14:41:57",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-20 11:56:59",
+//       "parent": {
+//         "id": "1206149206170714872",
+//         "name": "我的功能",
+//         "label": "我的功能"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714872.1206149206170714983.",
+//       "sort": 10000,
+//       "code": "erweima",
+//       "url": "/mytask",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":false,\"path\":\"layout/mytask/index\",\"icon\":\"erweima\",\"color\": \"#339bf3\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714982",
+//       "label": "区优码"
+//     },
+//     {
+//       "id": "1206149206170715079",
+//       "name": "资产管理",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 14:45:54",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-25 16:25:22",
+//       "parent": {
+//         "id": "1206149206170714872",
+//         "name": "我的功能",
+//         "label": "我的功能"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714872.1206149206170715079.",
+//       "sort": 20000,
+//       "code": "assetManagement",
+//       "url": "/assetManagement",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":false,\"path\":\"assetsManage/assetManagement/index\",\"keepAlive\":true,\"icon\":\"zhinenglouyu\",\"color\": \"#f7837c\", \"title\": \"资产管理\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714982",
+//       "label": "资产管理"
+//     },
+//     {
+//       "id": "1206149206170715131",
+//       "name": "招商跟进",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 14:48:01",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-27 10:04:07",
+//       "parent": {
+//         "id": "1206149206170714872",
+//         "name": "我的功能",
+//         "label": "我的功能"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714872.1206149206170715131.",
+//       "sort": 30000,
+//       "code": "merchantFollowUp",
+//       "url": "/merchantFollowUp",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":false,\"path\":\"merchant/merchantFollowUp/index\",\"keepAlive\":false,\"icon\":\"kehu\",\"color\": \"#33c9f3\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714982",
+//       "label": "招商跟进"
+//     },
+//     {
+//       "id": "1206149206170715211",
+//       "name": "经营规划",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 14:51:59",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-20 11:59:02",
+//       "parent": {
+//         "id": "1206149206170714872",
+//         "name": "我的功能",
+//         "label": "我的功能"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714872.1206149206170715211.",
+//       "sort": 40000,
+//       "code": "louyuguanli",
+//       "url": "/mytask",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":false,\"path\":\"layout/mytask/index\",\"keepAlive\":true,\"icon\":\"louyuguanli\",\"color\": \"#f28a35\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714982",
+//       "label": "经营规划"
+//     },
+//     {
+//       "id": "1206149206170715290",
+//       "name": "合同管理",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 14:55:37",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-20 11:59:19",
+//       "parent": {
+//         "id": "1206149206170714872",
+//         "name": "我的功能",
+//         "label": "我的功能"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714872.1206149206170715290.",
+//       "sort": 50000,
+//       "code": "hetong",
+//       "url": "/mytask",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":false,\"path\":\"layout/mytask/index\",\"keepAlive\":true,\"icon\":\"hetong\",\"color\": \"#f2c933\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714982",
+//       "label": "合同管理"
+//     },
+//     {
+//       "id": "1206149206170715314",
+//       "name": "报事",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 14:56:37",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-11-14 11:01:12",
+//       "parent": {
+//         "id": "1206149206170714872",
+//         "name": "我的功能",
+//         "label": "我的功能"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714872.1206149206170715314.",
+//       "sort": 60000,
+//       "code": "baoshibaoxiu_bs",
+//       "url": "/bs/create",
+//       "canPermission": "1",
+//       "isLocked": 1,
+//       "properties": "{\"isChildren\":false,\"path\":\"bsbx/bsbxForm\",\"keepAlive\":true,\"icon\":\"baoshibaoxiu\",\"color\": \"#33c9f3\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714982",
+//       "label": "报事"
+//     },
+//     {
+//       "id": "1206149206170715330",
+//       "name": "工单管理",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 14:57:19",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-20 11:59:43",
+//       "parent": {
+//         "id": "1206149206170714872",
+//         "name": "我的功能",
+//         "label": "我的功能"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714872.1206149206170715330.",
+//       "sort": 70000,
+//       "code": "gdgl",
+//       "url": "/workorder",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":false,\"path\":\"workorderManage/index\",\"keepAlive\":true,\"icon\":\"shigongdan\",\"color\": \"#f17335\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714982",
+//       "label": "工单管理"
+//     },
+//     {
+//       "id": "1216267719626252926",
+//       "name": "设备维保",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-20 14:15:54",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-25 16:23:48",
+//       "parent": {
+//         "id": "1206149206170714872",
+//         "name": "我的功能",
+//         "label": "我的功能"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714872.1216267719626252926.",
+//       "sort": 90000,
+//       "code": "facMaintainTask",
+//       "url": "/facMaintainTask",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":false,\"path\":\"fac/facMaintainTask/index\",\"keepAlive\":false,\"icon\":\"zhinenglouyu\",\"color\": \"#f7837c\"}",
+//       "systemCode": "1",
+//       "iconId": "1216267719626252925",
+//       "label": "设备维保"
+//     },
+//     {
+//       "id": "1274880227789250565",
+//       "name": "监控合同",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-11-28 21:23:07",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-12-01 11:31:25",
+//       "parent": {
+//         "id": "1206149206170714872",
+//         "name": "我的功能",
+//         "label": "我的功能"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714872.1274880227789250565.",
+//       "sort": 100000,
+//       "code": "contractMonitor",
+//       "url": "/contractMonitor",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":false,\"path\":\"contract/contractMonitor/index\",\"keepAlive\":false,\"icon\":\"hetong\",\"color\": \"#f2c933\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714982",
+//       "label": "监控合同"
+//     },
+//     {
+//       "id": "1218181436794799959",
+//       "name": "巡更巡检",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-24 14:24:04",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-25 16:22:45",
+//       "parent": {
+//         "id": "1206149206170714872",
+//         "name": "我的功能",
+//         "label": "我的功能"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714872.1218181436794799959.",
+//       "sort": 100000,
+//       "code": "propInspectTask",
+//       "url": "/propInspectTask",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/index\",\"keepAlive\":false,\"icon\":\"zhinenglouyu\",\"color\": \"#f7837c\"}",
+//       "systemCode": "1",
+//       "iconId": "1216267719626252925",
+//       "label": "巡更巡检"
+//     },
+//     {
+//       "id": "1206149206170715577",
+//       "name": "移动审批",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:06:44",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-20 11:41:52",
+//       "parent": {
+//         "id": "1206149206170714910",
+//         "name": "移动办公",
+//         "label": "移动办公"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714910.1206149206170715577.",
+//       "sort": 10000,
+//       "code": "",
+//       "url": "",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":\"false\",\"path\":\"layout/mytask/index\",\"icon\":\"\",\"color\": \"linear-gradient(180deg, rgba(133, 152, 255, 1) 0%, rgba(200, 206, 227, 1) 40%)\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714982",
+//       "label": "移动审批"
+//     },
+//     {
+//       "id": "1206149206170715587",
+//       "name": "公司公告",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:07:10",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-20 11:41:59",
+//       "parent": {
+//         "id": "1206149206170714910",
+//         "name": "移动办公",
+//         "label": "移动办公"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714910.1206149206170715587.",
+//       "sort": 20000,
+//       "code": "",
+//       "url": "",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":\"false\",\"path\":\"layout/mytask/index\",\"icon\":\"\",\"color\": \"linear-gradient(141.709836807757deg, rgba(137, 227, 162, 1) 0%, rgba(98, 207, 255, 1) 99%)\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714982",
+//       "label": "公司公告"
+//     },
+//     {
+//       "id": "1206149206170715605",
+//       "name": "知识库",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:07:44",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-20 11:42:11",
+//       "parent": {
+//         "id": "1206149206170714910",
+//         "name": "移动办公",
+//         "label": "移动办公"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714910.1206149206170715605.",
+//       "sort": 30000,
+//       "code": "",
+//       "url": "",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":\"false\",\"path\":\"layout/mytask/index\",\"icon\":\"\",\"color\": \"linear-gradient(141.709836807757deg, rgba(98, 207, 255, 1) 0%, rgba(137, 227, 162, 1) 99%\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714982",
+//       "label": "知识库"
+//     },
+//     {
+//       "id": "1206149206170715615",
+//       "name": "移动报表",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:08:17",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-20 11:42:17",
+//       "parent": {
+//         "id": "1206149206170714910",
+//         "name": "移动办公",
+//         "label": "移动办公"
+//       },
+//       "ids": "0.1205942566704041293.1206149206170714910.1206149206170715615.",
+//       "sort": 40000,
+//       "code": "",
+//       "url": "",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":\"false\",\"path\":\"layout/mytask/index\",\"icon\":\"\",\"color\": \"linear-gradient(141.709836807757deg, rgba(255, 148, 243, 1) 0%, rgba(227, 1, 116, 1) 100%)\"}",
+//       "systemCode": "1",
+//       "iconId": "1206149206170714982",
+//       "label": "移动报表"
+//     },
+//     {
+//       "id": "1206149206170715844",
+//       "name": "设置",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:16:40",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-13 15:16:40",
+//       "parent": {
+//         "id": "1206149206170715810",
+//         "name": "我的",
+//         "label": "我的"
+//       },
+//       "ids": "0.1206149206170715810.1206149206170715844.",
+//       "sort": 10000,
+//       "code": "settings",
+//       "url": "/settings",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":false,\"path\":\"mine/settings/index\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "设置"
+//     }
+//   ],
+//   "data": [
+//     {
+//       "id": "1205942566704041293",
+//       "name": "首页",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 13:52:21",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-20 11:56:34",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1205942566704041293.",
+//       "sort": 190000,
+//       "children": [
+//         {
+//           "id": "1206149206170714872",
+//           "name": "我的功能",
+//           "createBy": "超级管理员(super)",
+//           "createDate": "2022-10-13 14:36:49",
+//           "updateBy": "超级管理员(super)",
+//           "updateDate": "2022-10-20 11:56:47",
+//           "parent": {
+//             "id": "1205942566704041293",
+//             "name": "首页",
+//             "label": "首页"
+//           },
+//           "ids": "0.1205942566704041293.1206149206170714872.",
+//           "sort": 10000,
+//           "children": [
+//             {
+//               "id": "1206149206170714983",
+//               "name": "区优码",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-10-13 14:41:57",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-10-20 11:56:59",
+//               "parent": {
+//                 "id": "1206149206170714872",
+//                 "name": "我的功能",
+//                 "label": "我的功能"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714872.1206149206170714983.",
+//               "sort": 10000,
+//               "code": "erweima",
+//               "url": "/mytask",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":false,\"path\":\"layout/mytask/index\",\"icon\":\"erweima\",\"color\": \"#339bf3\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "区优码"
+//             },
+//             {
+//               "id": "1206149206170715079",
+//               "name": "资产管理",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-10-13 14:45:54",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-10-25 16:25:22",
+//               "parent": {
+//                 "id": "1206149206170714872",
+//                 "name": "我的功能",
+//                 "label": "我的功能"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714872.1206149206170715079.",
+//               "sort": 20000,
+//               "children": [
+//                 {
+//                   "id": "1206149206170715886",
+//                   "name": "园区档案",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-13 15:18:34",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-25 16:25:28",
+//                   "parent": {
+//                     "id": "1206149206170715079",
+//                     "name": "资产管理",
+//                     "label": "资产管理"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1206149206170715079.1206149206170715886.",
+//                   "sort": 10000,
+//                   "code": "parkArchives",
+//                   "url": "/parkArchives",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"assetsManage/assetManagement/parkArchives\",\"keepAlive\":true}",
+//                   "systemCode": "1",
+//                   "iconId": "1206149206170714982",
+//                   "label": "园区档案"
+//                 },
+//                 {
+//                   "id": "1206149206170715951",
+//                   "name": "房间详情",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-13 15:20:23",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-25 16:25:33",
+//                   "parent": {
+//                     "id": "1206149206170715079",
+//                     "name": "资产管理",
+//                     "label": "资产管理"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1206149206170715079.1206149206170715951.",
+//                   "sort": 20000,
+//                   "code": "roomDetails",
+//                   "url": "/roomDetails",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"assetsManage/assetManagement/roomDetails\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1206149206170714982",
+//                   "label": "房间详情"
+//                 },
+//                 {
+//                   "id": "1206149206170715962",
+//                   "name": "其他资产档案",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-13 15:20:55",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-25 16:25:39",
+//                   "parent": {
+//                     "id": "1206149206170715079",
+//                     "name": "资产管理",
+//                     "label": "资产管理"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1206149206170715079.1206149206170715962.",
+//                   "sort": 30000,
+//                   "code": "otherAssetFiles",
+//                   "url": "/otherAssetFiles",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"assetsManage/assetManagement/otherAssetFiles\",\"keepAlive\":true}",
+//                   "systemCode": "1",
+//                   "iconId": "1206149206170714982",
+//                   "label": "其他资产档案"
+//                 },
+//                 {
+//                   "id": "1206149206170715982",
+//                   "name": "通用资源详情",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-13 15:21:23",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-25 16:25:44",
+//                   "parent": {
+//                     "id": "1206149206170715079",
+//                     "name": "资产管理",
+//                     "label": "资产管理"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1206149206170715079.1206149206170715982.",
+//                   "sort": 40000,
+//                   "code": "genReDetails",
+//                   "url": "/genReDetails",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"assetsManage/assetManagement/genReDetails\",\"keepAlive\":true}",
+//                   "systemCode": "1",
+//                   "iconId": "1206149206170714982",
+//                   "label": "通用资源详情"
+//                 }
+//               ],
+//               "code": "assetManagement",
+//               "url": "/assetManagement",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":false,\"path\":\"assetsManage/assetManagement/index\",\"keepAlive\":true,\"icon\":\"zhinenglouyu\",\"color\": \"#f7837c\", \"title\": \"资产管理\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "资产管理"
+//             },
+//             {
+//               "id": "1206149206170715131",
+//               "name": "招商跟进",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-10-13 14:48:01",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-10-27 10:04:07",
+//               "parent": {
+//                 "id": "1206149206170714872",
+//                 "name": "我的功能",
+//                 "label": "我的功能"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714872.1206149206170715131.",
+//               "sort": 30000,
+//               "children": [
+//                 {
+//                   "id": "1214810849538924600",
+//                   "name": "客户详情",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-19 10:36:51",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-25 16:25:10",
+//                   "parent": {
+//                     "id": "1206149206170715131",
+//                     "name": "招商跟进",
+//                     "label": "招商跟进"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1206149206170715131.1214810849538924600.",
+//                   "sort": 10000,
+//                   "code": "customerDetails",
+//                   "url": "/customerDetails",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"merchant/merchantFollowUp/customerDetails\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1206149206170714982",
+//                   "label": "客户详情"
+//                 },
+//                 {
+//                   "id": "1214810849538924603",
+//                   "name": "新增跟进",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-19 10:37:26",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-20 11:58:49",
+//                   "parent": {
+//                     "id": "1206149206170715131",
+//                     "name": "招商跟进",
+//                     "label": "招商跟进"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1206149206170715131.1214810849538924603.",
+//                   "sort": 20000,
+//                   "code": "addFollowUpRecord",
+//                   "url": "/addFollowUpRecord",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"merchant/merchantFollowUp/addFollowUpRecord\"}",
+//                   "systemCode": "1",
+//                   "iconId": "1206149206170714982",
+//                   "label": "新增跟进"
+//                 }
+//               ],
+//               "code": "merchantFollowUp",
+//               "url": "/merchantFollowUp",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":false,\"path\":\"merchant/merchantFollowUp/index\",\"keepAlive\":false,\"icon\":\"kehu\",\"color\": \"#33c9f3\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "招商跟进"
+//             },
+//             {
+//               "id": "1206149206170715211",
+//               "name": "经营规划",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-10-13 14:51:59",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-10-20 11:59:02",
+//               "parent": {
+//                 "id": "1206149206170714872",
+//                 "name": "我的功能",
+//                 "label": "我的功能"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714872.1206149206170715211.",
+//               "sort": 40000,
+//               "code": "louyuguanli",
+//               "url": "/mytask",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":false,\"path\":\"layout/mytask/index\",\"keepAlive\":true,\"icon\":\"louyuguanli\",\"color\": \"#f28a35\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "经营规划"
+//             },
+//             {
+//               "id": "1206149206170715290",
+//               "name": "合同管理",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-10-13 14:55:37",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-10-20 11:59:19",
+//               "parent": {
+//                 "id": "1206149206170714872",
+//                 "name": "我的功能",
+//                 "label": "我的功能"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714872.1206149206170715290.",
+//               "sort": 50000,
+//               "code": "hetong",
+//               "url": "/mytask",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":false,\"path\":\"layout/mytask/index\",\"keepAlive\":true,\"icon\":\"hetong\",\"color\": \"#f2c933\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "合同管理"
+//             },
+//             {
+//               "id": "1206149206170715314",
+//               "name": "报事",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-10-13 14:56:37",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-11-14 11:01:12",
+//               "parent": {
+//                 "id": "1206149206170714872",
+//                 "name": "我的功能",
+//                 "label": "我的功能"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714872.1206149206170715314.",
+//               "sort": 60000,
+//               "children": [
+//                 {
+//                   "id": "1218058171233338980",
+//                   "name": "退回页面",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-24 09:58:33",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-25 16:24:18",
+//                   "parent": {
+//                     "id": "1206149206170715314",
+//                     "name": "报事",
+//                     "label": "报事"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1206149206170715314.1218058171233338980.",
+//                   "sort": 10000,
+//                   "code": "bsbx/sendBack",
+//                   "url": "/bsbx/sendBack",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"bsbx/sendBack\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1218058171233338979",
+//                   "label": "退回页面"
+//                 },
+//                 {
+//                   "id": "1218058171233341011",
+//                   "name": "评价页面",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-24 11:19:55",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-25 16:24:23",
+//                   "parent": {
+//                     "id": "1206149206170715314",
+//                     "name": "报事",
+//                     "label": "报事"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1206149206170715314.1218058171233341011.",
+//                   "sort": 20000,
+//                   "code": "bsbx/feedback",
+//                   "url": "/bsbx/feedback",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"bsbx/feedback\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1218058171233338979",
+//                   "label": "评价页面"
+//                 },
+//                 {
+//                   "id": "1218058171233341013",
+//                   "name": "确认签字页面",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-24 11:20:45",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-25 16:24:28",
+//                   "parent": {
+//                     "id": "1206149206170715314",
+//                     "name": "报事",
+//                     "label": "报事"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1206149206170715314.1218058171233341013.",
+//                   "sort": 30000,
+//                   "code": "bsbx/confirmSign",
+//                   "url": "/bsbx/confirmSign",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"bsbx/confirmSign\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1218058171233338979",
+//                   "label": "确认签字页面"
+//                 },
+//                 {
+//                   "id": "1222316579767960655",
+//                   "name": "进度详情",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-24 14:32:33",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-25 16:24:37",
+//                   "parent": {
+//                     "id": "1206149206170715314",
+//                     "name": "报事",
+//                     "label": "报事"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1206149206170715314.1222316579767960655.",
+//                   "sort": 40000,
+//                   "code": "bsbx/progressDetails",
+//                   "url": "/bsbx/progressDetails",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"bsbx/progressDetails\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1218058171233338979",
+//                   "label": "进度详情"
+//                 },
+//                 {
+//                   "id": "1223707358897988753",
+//                   "name": "确认缴费",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-25 14:50:45",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-25 16:24:43",
+//                   "parent": {
+//                     "id": "1206149206170715314",
+//                     "name": "报事",
+//                     "label": "报事"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1206149206170715314.1223707358897988753.",
+//                   "sort": 50000,
+//                   "code": "bsbx/payment/confirmPay",
+//                   "url": "/bsbx/payment/confirmPay",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"bsbx/payment/confirmPay\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1218058171233338979",
+//                   "label": "确认缴费"
+//                 },
+//                 {
+//                   "id": "1223707358897988765",
+//                   "name": "缴费清单明细",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-25 14:52:51",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-25 16:24:49",
+//                   "parent": {
+//                     "id": "1206149206170715314",
+//                     "name": "报事",
+//                     "label": "报事"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1206149206170715314.1223707358897988765.",
+//                   "sort": 60000,
+//                   "code": "bsbx/payment/paymentList",
+//                   "url": "/bsbx/payment/paymentList",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"bsbx/payment/paymentList\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1218058171233338979",
+//                   "label": "缴费清单明细"
+//                 }
+//               ],
+//               "code": "baoshibaoxiu_bs",
+//               "url": "/bs/create",
+//               "canPermission": "1",
+//               "isLocked": 1,
+//               "properties": "{\"isChildren\":false,\"path\":\"bsbx/bsbxForm\",\"keepAlive\":true,\"icon\":\"baoshibaoxiu\",\"color\": \"#33c9f3\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "报事"
+//             },
+//             {
+//               "id": "1206149206170715330",
+//               "name": "工单管理",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-10-13 14:57:19",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-10-20 11:59:43",
+//               "parent": {
+//                 "id": "1206149206170714872",
+//                 "name": "我的功能",
+//                 "label": "我的功能"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714872.1206149206170715330.",
+//               "sort": 70000,
+//               "code": "gdgl",
+//               "url": "/workorder",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":false,\"path\":\"workorderManage/index\",\"keepAlive\":true,\"icon\":\"shigongdan\",\"color\": \"#f17335\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "工单管理"
+//             },
+//             {
+//               "id": "1216267719626252926",
+//               "name": "设备维保",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-10-20 14:15:54",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-10-25 16:23:48",
+//               "parent": {
+//                 "id": "1206149206170714872",
+//                 "name": "我的功能",
+//                 "label": "我的功能"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714872.1216267719626252926.",
+//               "sort": 90000,
+//               "children": [
+//                 {
+//                   "id": "1216639990211837846",
+//                   "name": "任务详情",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-21 15:26:36",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-25 16:23:55",
+//                   "parent": {
+//                     "id": "1216267719626252926",
+//                     "name": "设备维保",
+//                     "label": "设备维保"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1216267719626252926.1216639990211837846.",
+//                   "sort": 10000,
+//                   "code": "facTaskPop",
+//                   "url": "/facTaskPop",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"fac/facMaintainTask/facTaskPop\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1216639990211837845",
+//                   "label": "任务详情"
+//                 },
+//                 {
+//                   "id": "1216640007391699838",
+//                   "name": "设备维保单",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-21 15:30:40",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-10-25 16:24:00",
+//                   "parent": {
+//                     "id": "1216267719626252926",
+//                     "name": "设备维保",
+//                     "label": "设备维保"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1216267719626252926.1216640007391699838.",
+//                   "sort": 20000,
+//                   "code": "repairOrderPop",
+//                   "url": "/repairOrderPop",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"fac/facMaintainTask/repairOrderPop\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1216639990211837845",
+//                   "label": "设备维保单"
+//                 }
+//               ],
+//               "code": "facMaintainTask",
+//               "url": "/facMaintainTask",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":false,\"path\":\"fac/facMaintainTask/index\",\"keepAlive\":false,\"icon\":\"zhinenglouyu\",\"color\": \"#f7837c\"}",
+//               "systemCode": "1",
+//               "iconId": "1216267719626252925",
+//               "label": "设备维保"
+//             },
+//             {
+//               "id": "1274880227789250565",
+//               "name": "监控合同",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-11-28 21:23:07",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-12-01 11:31:25",
+//               "parent": {
+//                 "id": "1206149206170714872",
+//                 "name": "我的功能",
+//                 "label": "我的功能"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714872.1274880227789250565.",
+//               "sort": 100000,
+//               "children": [
+//                 {
+//                   "id": "1253405597463527461",
+//                   "name": "合同监控",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-11-14 11:00:22",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-12-27 11:40:48",
+//                   "parent": {
+//                     "id": "1274880227789250565",
+//                     "name": "监控合同",
+//                     "label": "监控合同"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1274880227789250565.1253405597463527461.",
+//                   "sort": 110001,
+//                   "code": "contract",
+//                   "url": "/contract",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"contract/contractTabs/index\",\"keepAlive\":false,\"icon\":\"hetong\",\"color\": \"#f2c933\"}",
+//                   "systemCode": "1",
+//                   "iconId": "1206149206170714982",
+//                   "label": "合同监控"
+//                 }
+//               ],
+//               "code": "contractMonitor",
+//               "url": "/contractMonitor",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":false,\"path\":\"contract/contractMonitor/index\",\"keepAlive\":false,\"icon\":\"hetong\",\"color\": \"#f2c933\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "监控合同"
+//             },
+//             {
+//               "id": "1218181436794799959",
+//               "name": "巡更巡检",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-10-24 14:24:04",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-10-25 16:22:45",
+//               "parent": {
+//                 "id": "1206149206170714872",
+//                 "name": "我的功能",
+//                 "label": "我的功能"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714872.1218181436794799959.",
+//               "sort": 100000,
+//               "children": [
+//                 {
+//                   "id": "1218181436794799961",
+//                   "name": "任务详情",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-24 14:26:06",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-11-01 10:25:09",
+//                   "parent": {
+//                     "id": "1218181436794799959",
+//                     "name": "巡更巡检",
+//                     "label": "巡更巡检"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1218181436794799959.1218181436794799961.",
+//                   "sort": 10000,
+//                   "code": "taskPop",
+//                   "url": "/taskPop",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/taskPop\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1216639990211837845",
+//                   "label": "任务详情"
+//                 },
+//                 {
+//                   "id": "1218181436794799963",
+//                   "name": "巡检路线",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-24 14:26:38",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-11-01 10:25:28",
+//                   "parent": {
+//                     "id": "1218181436794799959",
+//                     "name": "巡更巡检",
+//                     "label": "巡更巡检"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1218181436794799959.1218181436794799963.",
+//                   "sort": 20000,
+//                   "code": "linePop",
+//                   "url": "/linePop",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/linePop\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1216639990211837845",
+//                   "label": "巡检路线"
+//                 },
+//                 {
+//                   "id": "1218181436794799965",
+//                   "name": "巡检点详情",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-24 14:27:02",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-11-01 10:25:42",
+//                   "parent": {
+//                     "id": "1218181436794799959",
+//                     "name": "巡更巡检",
+//                     "label": "巡更巡检"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1218181436794799959.1218181436794799965.",
+//                   "sort": 30000,
+//                   "code": "pointPop",
+//                   "url": "/pointPop",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/pointPop\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1216639990211837845",
+//                   "label": "巡检点详情"
+//                 },
+//                 {
+//                   "id": "1218181436794799967",
+//                   "name": "巡检拍照",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-24 14:27:27",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-11-01 10:26:02",
+//                   "parent": {
+//                     "id": "1218181436794799959",
+//                     "name": "巡更巡检",
+//                     "label": "巡更巡检"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1218181436794799959.1218181436794799967.",
+//                   "sort": 40000,
+//                   "code": "photoUploadPop",
+//                   "url": "/photoUploadPop",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/photoUploadPop\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1216639990211837845",
+//                   "label": "巡检拍照"
+//                 },
+//                 {
+//                   "id": "1218181436794799969",
+//                   "name": "巡检设备",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-24 14:28:14",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-11-01 10:26:17",
+//                   "parent": {
+//                     "id": "1218181436794799959",
+//                     "name": "巡更巡检",
+//                     "label": "巡更巡检"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1218181436794799959.1218181436794799969.",
+//                   "sort": 50000,
+//                   "code": "facPop",
+//                   "url": "/facPop",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/linePop\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1216639990211837845",
+//                   "label": "巡检设备"
+//                 },
+//                 {
+//                   "id": "1218181436794799971",
+//                   "name": "设备详情",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-10-24 14:28:44",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-11-01 10:26:30",
+//                   "parent": {
+//                     "id": "1218181436794799959",
+//                     "name": "巡更巡检",
+//                     "label": "巡更巡检"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1218181436794799959.1218181436794799971.",
+//                   "sort": 60000,
+//                   "code": "facDetailPop",
+//                   "url": "/facDetailPop",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/pointPop\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1216639990211837845",
+//                   "label": "设备详情"
+//                 }
+//               ],
+//               "code": "propInspectTask",
+//               "url": "/propInspectTask",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":false,\"path\":\"property/propInspectTask/index\",\"keepAlive\":false,\"icon\":\"zhinenglouyu\",\"color\": \"#f7837c\"}",
+//               "systemCode": "1",
+//               "iconId": "1216267719626252925",
+//               "label": "巡更巡检"
+//             },
+//             {
+//               "id": "1295190801717641239",
+//               "name": "抄表管理",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-12-12 14:23:44",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-12-14 10:41:49",
+//               "parent": {
+//                 "id": "1206149206170714872",
+//                 "name": "我的功能",
+//                 "label": "我的功能"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714872.1295190801717641239.",
+//               "sort": 100001,
+//               "children": [
+//                 {
+//                   "id": "1296808080243073064",
+//                   "name": "抄表",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-12-13 16:50:41",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-12-14 10:42:13",
+//                   "parent": {
+//                     "id": "1295190801717641239",
+//                     "name": "抄表管理",
+//                     "label": "抄表管理"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1295190801717641239.1296808080243073064.",
+//                   "sort": 10000,
+//                   "code": "meterReadingInput",
+//                   "url": "/kgce/meterReadingInput",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"kgce/meterReadingInput\",\"keepAlive\":false,\"icon\":\"shigongdan\",\"color\": \"#f28a35\"}",
+//                   "systemCode": "1",
+//                   "iconId": "1206149206170714982",
+//                   "label": "抄表"
+//                 },
+//                 {
+//                   "id": "1296917997046128641",
+//                   "name": "进度及详情",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-12-13 17:41:08",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-12-21 14:56:15",
+//                   "parent": {
+//                     "id": "1295190801717641239",
+//                     "name": "抄表管理",
+//                     "label": "抄表管理"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1295190801717641239.1296917997046128641.",
+//                   "sort": 20000,
+//                   "code": "meterReadingDetails",
+//                   "url": "/kgce/meterReadingDetails",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"kgce/meterReadingDetails\",\"keepAlive\":false,\"icon\":\"hetong\",\"color\":\"#339bf3\"}",
+//                   "systemCode": "1",
+//                   "iconId": "1206149206170714982",
+//                   "label": "进度及详情"
+//                 },
+//                 {
+//                   "id": "1315791200037052519",
+//                   "name": "查看页面",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-12-26 13:24:53",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2023-01-11 11:47:58",
+//                   "parent": {
+//                     "id": "1295190801717641239",
+//                     "name": "抄表管理",
+//                     "label": "抄表管理"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1295190801717641239.1315791200037052519.",
+//                   "sort": 30000,
+//                   "code": "meterViewPage",
+//                   "url": "/meterViewPage",
+//                   "canPermission": "1",
+//                   "isLocked": 1,
+//                   "properties": "{\"isChildren\":false,\"path\":\"kgce/meterViewPage\",\"keepAlive\":false}",
+//                   "systemCode": "1",
+//                   "iconId": "1206149206170714982",
+//                   "label": "查看页面"
+//                 }
+//               ],
+//               "code": "kgce",
+//               "url": "/kgce",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":false,\"path\":\"kgce/index\",\"keepAlive\":false,\"icon\":\"shigongdan\",\"color\": \"#f28a35\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "抄表管理"
+//             },
+//             {
+//               "id": "1311498603562909696",
+//               "name": "报事报修",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-12-23 13:23:41",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-12-23 13:24:07",
+//               "parent": {
+//                 "id": "1206149206170714872",
+//                 "name": "我的功能",
+//                 "label": "我的功能"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714872.1311498603562909696.",
+//               "sort": 110001,
+//               "children": [
+//                 {
+//                   "id": "1315950251265966240",
+//                   "name": "受理",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-12-26 17:22:15",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-12-26 17:59:37",
+//                   "parent": {
+//                     "id": "1311498603562909696",
+//                     "name": "报事报修",
+//                     "label": "报事报修"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1311498603562909696.1315950251265966240.",
+//                   "sort": 10000,
+//                   "code": "acceptance",
+//                   "url": "/maint/acceptance",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"maint/acceptance\",\"keepAlive\":false,\"icon\":\"shigongdan\",\"color\": \"#f28a35\"}",
+//                   "systemCode": "1",
+//                   "iconId": "1206149206170714982",
+//                   "label": "受理"
+//                 },
+//                 {
+//                   "id": "1321974939332313109",
+//                   "name": "工单详情",
+//                   "createBy": "超级管理员(super)",
+//                   "createDate": "2022-12-30 15:16:51",
+//                   "updateBy": "超级管理员(super)",
+//                   "updateDate": "2022-12-30 15:17:12",
+//                   "parent": {
+//                     "id": "1311498603562909696",
+//                     "name": "报事报修",
+//                     "label": "报事报修"
+//                   },
+//                   "ids": "0.1205942566704041293.1206149206170714872.1311498603562909696.1321974939332313109.",
+//                   "sort": 20000,
+//                   "code": "maintOrderDetail",
+//                   "url": "/maintOrderDetail",
+//                   "canPermission": "1",
+//                   "isLocked": 0,
+//                   "properties": "{\"isChildren\":false,\"path\":\"maint/maintOrderDetail\",\"keepAlive\":false,\"icon\":\"shigongdan\",\"color\": \"#f28a35\"}",
+//                   "systemCode": "1",
+//                   "iconId": "1206149206170714982",
+//                   "label": "工单详情"
+//                 }
+//               ],
+//               "code": "maint",
+//               "url": "/maint",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":false,\"path\":\"maint/index\",\"keepAlive\":false,\"icon\":\"shigongdan\",\"color\": \"#f28a35\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "报事报修"
+//             }
+//           ],
+//           "code": "",
+//           "url": "",
+//           "canPermission": "1",
+//           "isLocked": 0,
+//           "properties": "{\"isChildren\":true,\"path\":\"layout/home/newIndex\",\"type\":\"van\", \"cssClass\": \"my_options\"}",
+//           "systemCode": "1",
+//           "iconId": "1206149206170714871",
+//           "label": "我的功能"
+//         },
+//         {
+//           "id": "1206149206170714910",
+//           "name": "移动办公",
+//           "createBy": "超级管理员(super)",
+//           "createDate": "2022-10-13 14:38:21",
+//           "updateBy": "超级管理员(super)",
+//           "updateDate": "2022-10-20 11:42:25",
+//           "parent": {
+//             "id": "1205942566704041293",
+//             "name": "首页",
+//             "label": "首页"
+//           },
+//           "ids": "0.1205942566704041293.1206149206170714910.",
+//           "sort": 20000,
+//           "children": [
+//             {
+//               "id": "1206149206170715577",
+//               "name": "移动审批",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-10-13 15:06:44",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-10-20 11:41:52",
+//               "parent": {
+//                 "id": "1206149206170714910",
+//                 "name": "移动办公",
+//                 "label": "移动办公"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714910.1206149206170715577.",
+//               "sort": 10000,
+//               "code": "",
+//               "url": "",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":\"false\",\"path\":\"layout/mytask/index\",\"icon\":\"\",\"color\": \"linear-gradient(180deg, rgba(133, 152, 255, 1) 0%, rgba(200, 206, 227, 1) 40%)\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "移动审批"
+//             },
+//             {
+//               "id": "1206149206170715587",
+//               "name": "公司公告",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-10-13 15:07:10",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-10-20 11:41:59",
+//               "parent": {
+//                 "id": "1206149206170714910",
+//                 "name": "移动办公",
+//                 "label": "移动办公"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714910.1206149206170715587.",
+//               "sort": 20000,
+//               "code": "",
+//               "url": "",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":\"false\",\"path\":\"layout/mytask/index\",\"icon\":\"\",\"color\": \"linear-gradient(141.709836807757deg, rgba(137, 227, 162, 1) 0%, rgba(98, 207, 255, 1) 99%)\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "公司公告"
+//             },
+//             {
+//               "id": "1206149206170715605",
+//               "name": "知识库",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-10-13 15:07:44",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-10-20 11:42:11",
+//               "parent": {
+//                 "id": "1206149206170714910",
+//                 "name": "移动办公",
+//                 "label": "移动办公"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714910.1206149206170715605.",
+//               "sort": 30000,
+//               "code": "",
+//               "url": "",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":\"false\",\"path\":\"layout/mytask/index\",\"icon\":\"\",\"color\": \"linear-gradient(141.709836807757deg, rgba(98, 207, 255, 1) 0%, rgba(137, 227, 162, 1) 99%\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "知识库"
+//             },
+//             {
+//               "id": "1206149206170715615",
+//               "name": "移动报表",
+//               "createBy": "超级管理员(super)",
+//               "createDate": "2022-10-13 15:08:17",
+//               "updateBy": "超级管理员(super)",
+//               "updateDate": "2022-10-20 11:42:17",
+//               "parent": {
+//                 "id": "1206149206170714910",
+//                 "name": "移动办公",
+//                 "label": "移动办公"
+//               },
+//               "ids": "0.1205942566704041293.1206149206170714910.1206149206170715615.",
+//               "sort": 40000,
+//               "code": "",
+//               "url": "",
+//               "canPermission": "1",
+//               "isLocked": 0,
+//               "properties": "{\"isChildren\":\"false\",\"path\":\"layout/mytask/index\",\"icon\":\"\",\"color\": \"linear-gradient(141.709836807757deg, rgba(255, 148, 243, 1) 0%, rgba(227, 1, 116, 1) 100%)\"}",
+//               "systemCode": "1",
+//               "iconId": "1206149206170714982",
+//               "label": "移动报表"
+//             }
+//           ],
+//           "code": "",
+//           "url": "",
+//           "canPermission": "1",
+//           "isLocked": 0,
+//           "properties": "{\"isChildren\":\"true\",\"path\":\"layout/home/newIndex\",\"type\":\"ul\", \"cssClass\": \"move_office\"}",
+//           "systemCode": "1",
+//           "iconId": "1206149206170714909",
+//           "label": "移动办公"
+//         }
+//       ],
+//       "code": "home",
+//       "url": "/home",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"layout/home/newIndex\",\"icon\": \"wap-home-o\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "首页"
+//     },
+//     {
+//       "id": "1206149206170715713",
+//       "name": "待办",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:12:06",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-13 15:12:06",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1206149206170715713.",
+//       "sort": 200000,
+//       "code": "mytask",
+//       "url": "/mytask",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"layout/mytask/index\",\"icon\": \"todo-list-o\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "待办"
+//     },
+//     {
+//       "id": "1206149206170715731",
+//       "name": "申请",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:12:47",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-27 15:58:34",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1206149206170715731.",
+//       "sort": 210000,
+//       "code": "myapproved",
+//       "url": "/myapproved",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"layout/myapproved/index\",\"icon\": \"records\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "申请"
+//     },
+//     {
+//       "id": "1206149206170715775",
+//       "name": "已审批",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:14:16",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-13 15:14:16",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1206149206170715775.",
+//       "sort": 220000,
+//       "code": "myapplied",
+//       "url": "/myapplied",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"layout/myapplied/index\",\"icon\": \"completed\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "已审批"
+//     },
+//     {
+//       "id": "1206149206170715810",
+//       "name": "我的",
+//       "createBy": "超级管理员(super)",
+//       "createDate": "2022-10-13 15:15:37",
+//       "updateBy": "超级管理员(super)",
+//       "updateDate": "2022-10-13 15:15:37",
+//       "parent": {
+//         "id": "0",
+//         "name": "",
+//         "label": ""
+//       },
+//       "ids": "0.1206149206170715810.",
+//       "sort": 230000,
+//       "children": [
+//         {
+//           "id": "1206149206170715844",
+//           "name": "设置",
+//           "createBy": "超级管理员(super)",
+//           "createDate": "2022-10-13 15:16:40",
+//           "updateBy": "超级管理员(super)",
+//           "updateDate": "2022-10-13 15:16:40",
+//           "parent": {
+//             "id": "1206149206170715810",
+//             "name": "我的",
+//             "label": "我的"
+//           },
+//           "ids": "0.1206149206170715810.1206149206170715844.",
+//           "sort": 10000,
+//           "code": "settings",
+//           "url": "/settings",
+//           "canPermission": "1",
+//           "isLocked": 0,
+//           "properties": "{\"isChildren\":false,\"path\":\"mine/settings/index\"}",
+//           "systemCode": "1",
+//           "iconId": "1205942566704041292",
+//           "label": "设置"
+//         }
+//       ],
+//       "code": "user",
+//       "url": "/user",
+//       "canPermission": "1",
+//       "isLocked": 0,
+//       "properties": "{\"isChildren\":true,\"path\":\"mine/myInfo/index\",\"icon\": \"manager-o\"}",
+//       "systemCode": "1",
+//       "iconId": "1205942566704041292",
+//       "label": "我的"
+//     }
+//   ],
+//   "type": "success"
+// }

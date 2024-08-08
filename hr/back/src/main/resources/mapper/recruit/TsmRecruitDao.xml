@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.recruit.dao.TsmRecruitDao">
+  <sql id="tsmRecruitColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.recruit_code AS "recruitCode",
+      a.post_name AS "postName",
+      a.post_describe AS "postDescribe",
+      a.post_demand AS "postDemand",
+      a.salary_low AS "salaryLow",
+      a.salary_high AS "salaryHigh",
+      a.salary_special AS "salarySpecial",
+      a.staff_num AS "staffNum",
+      a.dept_id AS "deptId",
+      a.dept_code AS "deptCode",
+      a.dept_name AS "deptName",
+      a.company AS "company",
+      a.work_city AS "workCity",
+      a.recruit_type AS "recruitType",
+      a.first_interviewer AS "firstInterviewer",
+      a.second_interviewer AS "secondInterviewer",
+      a.final_interviewer AS "finalInterviewer",
+      a.form_num AS "formNum",
+      a.recruit_status AS "recruitStatus",
+      a.candidate AS "candidate",
+      a.act_status AS "actStatus",
+      a.apply_date AS "applyDate",
+      a.tenant_id AS "tenantId",
+      a.recruit_study AS "recruitStudy",
+      a.recruit_experience AS "recruitExperience",
+      a.remarks AS "remarks",
+      a.create_by AS "createBy",
+      a.create_date AS "createDate",
+      a.update_by AS "updateBy",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+      a.procdef_id AS "procdefId",
+      a.proc_inst AS "procInst",
+      a.proc_status AS "procStatus.id",
+      IFNULL(procStatus.name,'') AS "procStatus.name",
+    </trim>
+  </sql>
+  <sql id="tsmRecruitJoins">
+    LEFT JOIN sys_dict_item procStatus ON procStatus.id = a.proc_status
+  </sql>
+  <select id="get" resultType="com.geeke.recruit.entity.TsmRecruit">
+    SELECT
+    <include refid="tsmRecruitColumns" />
+    FROM tsm_recruit a
+    <include refid="tsmRecruitJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM tsm_recruit a
+    <include refid="tsmRecruitJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultType="com.geeke.recruit.entity.TsmRecruit">
+    SELECT
+    <include refid="tsmRecruitColumns" />
+    FROM tsm_recruit a
+    <include refid="tsmRecruitJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultType="com.geeke.recruit.entity.TsmRecruit">
+    SELECT
+    <include refid="tsmRecruitColumns" />
+    FROM tsm_recruit a
+    <include refid="tsmRecruitJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO tsm_recruit(
+    <trim suffixOverrides=",">
+      id,
+      recruit_code,
+      post_name,
+      post_describe,
+      post_demand,
+      salary_low,
+      salary_high,
+      salary_special,
+      staff_num,
+      dept_id,
+      dept_code,
+      dept_name,
+      company,
+      work_city,
+      recruit_type,
+      first_interviewer,
+      second_interviewer,
+      final_interviewer,
+      form_num,
+      recruit_status,
+      candidate,
+      act_status,
+      apply_date,
+      tenant_id,
+      recruit_study,
+      recruit_experience,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      proc_inst,
+      proc_status,
+      procdef_id,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ recruitCode },
+      #{ postName },
+      #{ postDescribe },
+      #{ postDemand },
+      #{ salaryLow },
+      #{ salaryHigh },
+      #{ salarySpecial },
+      #{ staffNum },
+      #{ deptId },
+      #{ deptCode },
+      #{ deptName },
+      #{ company },
+      #{ workCity },
+      #{ recruitType },
+      #{ firstInterviewer },
+      #{ secondInterviewer },
+      #{ finalInterviewer },
+      #{ formNum },
+      #{ recruitStatus },
+      #{ candidate },
+      #{ actStatus },
+      #{ applyDate },
+      #{ tenantId },
+      #{ recruitStudy },
+      #{ recruitExperience },
+      #{ remarks },
+      #{ createBy },
+      #{ createDate },
+      #{ updateBy },
+      #{ updateDate },
+      #{ delFlag },
+      #{ procInst },
+      #{ procStatus.id },
+      #{ procdefId },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE tsm_recruit SET
+    <trim suffixOverrides=",">
+      recruit_code = #{ recruitCode },
+      post_name = #{ postName },
+      post_describe = #{ postDescribe },
+      post_demand = #{ postDemand },
+      salary_low = #{ salaryLow },
+      salary_high = #{ salaryHigh },
+      salary_special = #{ salarySpecial },
+      staff_num = #{ staffNum },
+      dept_id = #{ deptId },
+      dept_code = #{ deptCode },
+      dept_name = #{ deptName },
+      company = #{ company },
+      work_city = #{ workCity },
+      recruit_type = #{ recruitType },
+      first_interviewer = #{ firstInterviewer },
+      second_interviewer = #{ secondInterviewer },
+      final_interviewer = #{ finalInterviewer },
+      form_num = #{ formNum },
+      recruit_status = #{ recruitStatus },
+      candidate = #{ candidate },
+      act_status = #{ actStatus },
+      apply_date = #{ applyDate },
+      tenant_id = #{ tenantId },
+      recruit_study = #{ recruitStudy },
+      recruit_experience = #{ recruitExperience },
+      remarks = #{ remarks },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+      proc_inst = #{ procInst },
+      proc_status = #{ procStatus.id },
+      procdef_id = #{ procdefId },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE tsm_recruit SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO tsm_recruit(
+    <trim suffixOverrides=",">
+      id,
+      recruit_code,
+      post_name,
+      post_describe,
+      post_demand,
+      salary_low,
+      salary_high,
+      salary_special,
+      staff_num,
+      dept_id,
+      dept_code,
+      dept_name,
+      company,
+      work_city,
+      recruit_type,
+      first_interviewer,
+      second_interviewer,
+      final_interviewer,
+      form_num,
+      recruit_status,
+      candidate,
+      act_status,
+      apply_date,
+      tenant_id,
+      recruit_study,
+      recruit_experience,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      proc_inst,
+      proc_status,
+      procdef_id,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.recruitCode},
+        #{entity.postName},
+        #{entity.postDescribe},
+        #{entity.postDemand},
+        #{entity.salaryLow},
+        #{entity.salaryHigh},
+        #{entity.salarySpecial},
+        #{entity.staffNum},
+        #{entity.deptId},
+        #{entity.deptCode},
+        #{entity.deptName},
+        #{entity.company},
+        #{entity.workCity},
+        #{entity.recruitType},
+        #{entity.firstInterviewer},
+        #{entity.secondInterviewer},
+        #{entity.finalInterviewer},
+        #{entity.formNum},
+        #{entity.recruitStatus},
+        #{entity.candidate},
+        #{entity.actStatus},
+        #{entity.applyDate},
+        #{entity.tenantId},
+        #{entity.recruitStudy},
+        #{entity.recruitExperience},
+        #{entity.remarks},
+        #{entity.createBy},
+        #{entity.createDate},
+        #{entity.updateBy},
+        #{entity.updateDate},
+        #{entity.delFlag},
+        #{entity.procInst},
+        #{entity.procStatus.id},
+        #{entity.procdefId},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE tsm_recruit
+    <set>
+      <trim prefix="recruit_code=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.recruitCode}
+        </foreach>
+      </trim>
+      <trim prefix="post_name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.postName}
+        </foreach>
+      </trim>
+      <trim prefix="post_describe=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.postDescribe}
+        </foreach>
+      </trim>
+      <trim prefix="post_demand=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.postDemand}
+        </foreach>
+      </trim>
+      <trim prefix="salary_low=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.salaryLow}
+        </foreach>
+      </trim>
+      <trim prefix="salary_high=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.salaryHigh}
+        </foreach>
+      </trim>
+      <trim prefix="salary_special=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.salarySpecial}
+        </foreach>
+      </trim>
+      <trim prefix="staff_num=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.staffNum}
+        </foreach>
+      </trim>
+      <trim prefix="dept_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.deptId}
+        </foreach>
+      </trim>
+      <trim prefix="dept_code=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.deptCode}
+        </foreach>
+      </trim>
+      <trim prefix="dept_name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.deptName}
+        </foreach>
+      </trim>
+      <trim prefix="company=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.company}
+        </foreach>
+      </trim>
+      <trim prefix="work_city=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.workCity}
+        </foreach>
+      </trim>
+      <trim prefix="recruit_type=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.recruitType}
+        </foreach>
+      </trim>
+      <trim prefix="first_interviewer=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.firstInterviewer}
+        </foreach>
+      </trim>
+      <trim prefix="second_interviewer=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.secondInterviewer}
+        </foreach>
+      </trim>
+      <trim prefix="final_interviewer=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.finalInterviewer}
+        </foreach>
+      </trim>
+      <trim prefix="form_num=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.formNum}
+        </foreach>
+      </trim>
+      <trim prefix="recruit_status=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.recruitStatus}
+        </foreach>
+      </trim>
+      <trim prefix="candidate=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.candidate}
+        </foreach>
+      </trim>
+      <trim prefix="act_status=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.actStatus}
+        </foreach>
+      </trim>
+      <trim prefix="apply_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.applyDate}
+        </foreach>
+      </trim>
+      <trim prefix="tenant_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.tenantId}
+        </foreach>
+      </trim>
+      <trim prefix="recruit_study=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.recruitStudy}
+        </foreach>
+      </trim>
+      <trim prefix="recruit_experience=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.recruitExperience}
+        </foreach>
+      </trim>
+      <trim prefix="remarks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+      <trim prefix="proc_inst=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.procInst}
+        </foreach>
+      </trim>
+      <trim prefix="proc_status=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.procStatus.id}
+        </foreach>
+      </trim>
+    <trim prefix="procdef_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.procdefId}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE tsm_recruit
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+</mapper>

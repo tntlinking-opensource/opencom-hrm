@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.induction.dao.TsmPostDao">
+  <sql id="tsmPostColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.induction_id AS "inductionId",
+      a.job_position AS "jobPosition.id",
+      IFNULL(jobPosition.name,'') AS "jobPosition.name",
+      a.work_city AS "workCity",
+      a.company_name AS "companyName",
+      a.personnel_area AS "personnelArea",
+      a.department AS "department.id",
+      IFNULL(department.name,'') AS "department.name",
+      a.employee_number AS "employeeNumber",
+      a.employee_type AS "employeeType.id",
+      IFNULL(employeeType.name,'') AS "employeeType.name",
+      a.employee_nature AS "employeeNature.id",
+      IFNULL(employeeNature.name,'') AS "employeeNature.name",
+      a.working_hours_category AS "workingHoursCategory.id",
+      IFNULL(workingHoursCategory.name,'') AS "workingHoursCategory.name",
+      a.employee_status AS "employeeStatus.id",
+      IFNULL(employeeStatus.name,'') AS "employeeStatus.name",
+      a.employee_rank AS "employeeRank",
+      a.technical_position AS "technicalPosition.id",
+      IFNULL(technicalPosition.name,'') AS "technicalPosition.name",
+      a.entry_time AS "entryTime",
+      a.regular_time AS "regularTime",
+      a.report_to_object AS "reportToObject",
+      a.probation_period AS "probationPeriod.id",
+      IFNULL(probationPeriod.name,'') AS "probationPeriod.name",
+      a.office_address AS "officeAddress",
+      a.expected_salary AS "expectedSalary",
+      a.interview_time AS "interviewTime",
+      a.remarks AS "remarks",
+      a.create_by AS "createBy",
+      a.create_date AS "createDate",
+      a.update_by AS "updateBy",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+      a.interview_result AS "interviewResult",
+      a.abandon_reporting AS "abandonReporting",
+    </trim>
+  </sql>
+  <sql id="tsmPostJoins">
+    LEFT JOIN sys_dict_item jobPosition ON jobPosition.id = a.job_position
+    LEFT JOIN org_department department ON department.id = a.department
+    LEFT JOIN sys_dict_item employeeType ON employeeType.id = a.employee_type
+    LEFT JOIN sys_dict_item employeeNature ON employeeNature.id = a.employee_nature
+    LEFT JOIN sys_dict_item workingHoursCategory ON workingHoursCategory.id = a.working_hours_category
+    LEFT JOIN sys_dict_item employeeStatus ON employeeStatus.id = a.employee_status
+    LEFT JOIN sys_dict_item technicalPosition ON technicalPosition.id = a.technical_position
+    LEFT JOIN sys_dict_item probationPeriod ON probationPeriod.id = a.probation_period
+  </sql>
+  <resultMap id="resultTsmPostMap" type="com.geeke.induction.entity.TsmPost">
+    <result property="id" column="id" />
+    <result property="inductionId" column="inductionId" />
+    <result property="workCity" column="workCity" />
+    <result property="companyName" column="companyName" />
+    <result property="personnelArea" column="personnelArea" />
+    <result property="employeeNumber" column="employeeNumber" />
+    <result property="employeeRank" column="employeeRank" />
+    <result property="entryTime" column="entryTime" />
+    <result property="regularTime" column="regularTime" />
+    <result property="reportToObject" column="reportToObject" />
+    <result property="officeAddress" column="officeAddress" />
+    <result property="expectedSalary" column="expectedSalary" />
+    <result property="interviewTime" column="interviewTime" />
+    <result property="remarks" column="remarks" />
+    <result property="createBy" column="createBy" />
+    <result property="createDate" column="createDate" />
+    <result property="updateBy" column="updateBy" />
+    <result property="updateDate" column="updateDate" />
+    <result property="delFlag" column="delFlag" />
+    <result property="interviewResult" column="interviewResult" />
+    <result property="abandonReporting" column="abandonReporting" />
+    <association property="jobPosition" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="jobPosition.id" />
+      <result property="name" column="jobPosition.name" />
+    </association>
+    <association property="department" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="department.id" />
+      <result property="name" column="department.name" />
+    </association>
+    <association property="employeeType" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="employeeType.id" />
+      <result property="name" column="employeeType.name" />
+    </association>
+    <association property="employeeNature" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="employeeNature.id" />
+      <result property="name" column="employeeNature.name" />
+    </association>
+    <association property="workingHoursCategory" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="workingHoursCategory.id" />
+      <result property="name" column="workingHoursCategory.name" />
+    </association>
+    <association property="employeeStatus" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="employeeStatus.id" />
+      <result property="name" column="employeeStatus.name" />
+    </association>
+    <association property="technicalPosition" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="technicalPosition.id" />
+      <result property="name" column="technicalPosition.name" />
+    </association>
+    <association property="probationPeriod" javaType="com.geeke.sys.entity.DictItem">
+      <result property="id" column="probationPeriod.id" />
+      <result property="name" column="probationPeriod.name" />
+    </association>
+  </resultMap>
+  <select id="get" resultMap="resultTsmPostMap">
+    SELECT
+    <include refid="tsmPostColumns" />
+    FROM tsm_post a
+    <include refid="tsmPostJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM tsm_post a
+    <include refid="tsmPostJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultMap="resultTsmPostMap">
+    SELECT
+    <include refid="tsmPostColumns" />
+    FROM tsm_post a
+    <include refid="tsmPostJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultMap="resultTsmPostMap">
+    SELECT
+    <include refid="tsmPostColumns" />
+    FROM tsm_post a
+    <include refid="tsmPostJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO tsm_post(
+    <trim suffixOverrides=",">
+      id,
+      induction_id,
+      job_position,
+      work_city,
+      company_name,
+      personnel_area,
+      department,
+      employee_number,
+      employee_type,
+      employee_nature,
+      working_hours_category,
+      employee_status,
+      employee_rank,
+      technical_position,
+      entry_time,
+      regular_time,
+      report_to_object,
+      probation_period,
+      office_address,
+      expected_salary,
+      interview_time,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      interview_result,
+      abandon_reporting,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ inductionId },
+      #{ jobPosition.id },
+      #{ workCity },
+      #{ companyName },
+      #{ personnelArea },
+      #{ department.id },
+      #{ employeeNumber },
+      #{ employeeType.id },
+      #{ employeeNature.id },
+      #{ workingHoursCategory.id },
+      #{ employeeStatus.id },
+      #{ employeeRank },
+      #{ technicalPosition.id },
+      #{ entryTime },
+      #{ regularTime },
+      #{ reportToObject },
+      #{ probationPeriod.id },
+      #{ officeAddress },
+      #{ expectedSalary },
+      #{ interviewTime },
+      #{ remarks },
+      #{ createBy },
+      #{ createDate },
+      #{ updateBy },
+      #{ updateDate },
+      #{ delFlag },
+      #{ interviewResult },
+      #{ abandonReporting },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE tsm_post SET
+    <trim suffixOverrides=",">
+      induction_id = #{ inductionId },
+      job_position = #{ jobPosition.id },
+      work_city = #{ workCity },
+      company_name = #{ companyName },
+      personnel_area = #{ personnelArea },
+      department = #{ department.id },
+      employee_number = #{ employeeNumber },
+      employee_type = #{ employeeType.id },
+      employee_nature = #{ employeeNature.id },
+      working_hours_category = #{ workingHoursCategory.id },
+      employee_status = #{ employeeStatus.id },
+      employee_rank = #{ employeeRank },
+      technical_position = #{ technicalPosition.id },
+      entry_time = #{ entryTime },
+      regular_time = #{ regularTime },
+      report_to_object = #{ reportToObject },
+      probation_period = #{ probationPeriod.id },
+      office_address = #{ officeAddress },
+      expected_salary = #{ expectedSalary },
+      interview_time = #{ interviewTime },
+      remarks = #{ remarks },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+      interview_result = #{ interviewResult },
+      abandon_reporting = #{ abandonReporting },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE tsm_post SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO tsm_post(
+    <trim suffixOverrides=",">
+      id,
+      induction_id,
+      job_position,
+      work_city,
+      company_name,
+      personnel_area,
+      department,
+      employee_number,
+      employee_type,
+      employee_nature,
+      working_hours_category,
+      employee_status,
+      employee_rank,
+      technical_position,
+      entry_time,
+      regular_time,
+      report_to_object,
+      probation_period,
+      office_address,
+      expected_salary,
+      interview_time,
+      remarks,
+      create_by,
+      create_date,
+      update_by,
+      update_date,
+      del_flag,
+      interview_result,
+      abandon_reporting,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.inductionId},
+        #{entity.jobPosition.id},
+        #{entity.workCity},
+        #{entity.companyName},
+        #{entity.personnelArea},
+        #{entity.department.id},
+        #{entity.employeeNumber},
+        #{entity.employeeType.id},
+        #{entity.employeeNature.id},
+        #{entity.workingHoursCategory.id},
+        #{entity.employeeStatus.id},
+        #{entity.employeeRank},
+        #{entity.technicalPosition.id},
+        #{entity.entryTime},
+        #{entity.regularTime},
+        #{entity.reportToObject},
+        #{entity.probationPeriod.id},
+        #{entity.officeAddress},
+        #{entity.expectedSalary},
+        #{entity.interviewTime},
+        #{entity.remarks},
+        #{entity.createBy},
+        #{entity.createDate},
+        #{entity.updateBy},
+        #{entity.updateDate},
+        #{entity.delFlag},
+        #{entity.interviewResult},
+        #{entity.abandonReporting},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE tsm_post
+    <set>
+      <trim prefix="induction_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.inductionId}
+        </foreach>
+      </trim>
+      <trim prefix="job_position=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.jobPosition.id}
+        </foreach>
+      </trim>
+      <trim prefix="work_city=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.workCity}
+        </foreach>
+      </trim>
+      <trim prefix="company_name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyName}
+        </foreach>
+      </trim>
+      <trim prefix="personnel_area=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personnelArea}
+        </foreach>
+      </trim>
+      <trim prefix="department=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.department.id}
+        </foreach>
+      </trim>
+      <trim prefix="employee_number=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeNumber}
+        </foreach>
+      </trim>
+      <trim prefix="employee_type=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeType.id}
+        </foreach>
+      </trim>
+      <trim prefix="employee_nature=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeNature.id}
+        </foreach>
+      </trim>
+      <trim prefix="working_hours_category=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.workingHoursCategory.id}
+        </foreach>
+      </trim>
+      <trim prefix="employee_status=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeStatus.id}
+        </foreach>
+      </trim>
+      <trim prefix="employee_rank=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeRank}
+        </foreach>
+      </trim>
+      <trim prefix="technical_position=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.technicalPosition.id}
+        </foreach>
+      </trim>
+      <trim prefix="entry_time=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.entryTime}
+        </foreach>
+      </trim>
+      <trim prefix="regular_time=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.regularTime}
+        </foreach>
+      </trim>
+      <trim prefix="report_to_object=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.reportToObject}
+        </foreach>
+      </trim>
+      <trim prefix="probation_period=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.probationPeriod.id}
+        </foreach>
+      </trim>
+      <trim prefix="office_address=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.officeAddress}
+        </foreach>
+      </trim>
+      <trim prefix="expected_salary=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.expectedSalary}
+        </foreach>
+      </trim>
+      <trim prefix="interview_time=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.interviewTime}
+        </foreach>
+      </trim>
+      <trim prefix="remarks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+      <trim prefix="interview_result=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.interviewResult}
+        </foreach>
+      </trim>
+      <trim prefix="abandon_reporting=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.abandonReporting}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE tsm_post
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+</mapper>

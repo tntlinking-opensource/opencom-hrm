@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.notice.dao.NoticeSendDao">
+
+  <sql id="noticeSendColumns">
+      a.id AS "id",
+      a.sender_id AS "senderId",
+      a.title AS "title",
+      a.is_site AS "isSite",
+      a.is_wechat AS "isWechat",
+      a.is_email AS "isEmail",
+      a.is_sms AS "isSms",
+      a.site_content AS "siteContent",
+      a.email_content AS "emailContent",
+      a.wechat_content AS "wechatContent",
+      a.sms_content AS "smsContent",
+      a.received_by AS "receivedBy",
+      a.remarks AS "remarks",
+      a.create_by AS "createBy",
+      a.create_date AS "createDate",
+      a.update_by AS "updateBy",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag"
+  </sql>
+
+  <sql id="noticeSendJoins"> </sql>
+
+  <select id="get" resultType="com.geeke.notice.entity.NoticeSend">
+    SELECT
+    <include refid="noticeSendColumns" />
+    FROM notice_send a
+    <include refid="noticeSendJoins" />
+    WHERE a.id = #{id}
+  </select>
+
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM notice_send a
+    <include refid="noticeSendJoins" />
+    <where>
+      1=1 AND a.id > 0 AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+
+  <select id="listPage" resultType="com.geeke.notice.entity.NoticeSend">
+    SELECT
+    <include refid="noticeSendColumns" />
+    FROM notice_send a
+    <include refid="noticeSendJoins" />
+    <where>
+      1=1 AND a.id > 0 AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''"> ORDER BY ${order} </when>
+      <otherwise> ORDER BY a.update_date DESC </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+
+  <select id="listAll" resultType="com.geeke.notice.entity.NoticeSend">
+    SELECT
+    <include refid="noticeSendColumns" />
+    FROM notice_send a
+    <include refid="noticeSendJoins" />
+    <where>
+      1=1 AND a.id > 0 AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''"> ORDER BY ${order} </when>
+      <otherwise> ORDER BY a.update_date DESC </otherwise>
+    </choose>
+  </select>
+
+  <insert id="insert">
+    INSERT INTO notice_send(
+      id, sender_id, title, is_site, is_wechat, is_email, is_sms, site_content,
+      email_content, wechat_content, sms_content, received_by, remarks,
+      create_by, create_date, update_by, update_date, del_flag
+    ) VALUES (
+      #{ id }, #{ senderId }, #{ title }, #{ isSite }, #{ isWechat }, #{ isEmail
+      }, #{ isSms }, #{ siteContent }, #{ emailContent }, #{ wechatContent }, #{
+      smsContent }, #{ receivedBy }, #{ remarks }, #{ createBy }, #{ createDate
+      }, #{ updateBy }, #{ updateDate }, #{ delFlag }
+    )
+  </insert>
+
+  <update id="update">
+    UPDATE notice_send SET
+      title = #{ title }, is_site = #{ isSite },
+      is_wechat = #{ isWechat }, is_email = #{ isEmail }, is_sms = #{ isSms },
+      site_content = #{ siteContent }, email_content = #{ emailContent },
+      wechat_content = #{ wechatContent }, sms_content = #{ smsContent },
+      received_by = #{ receivedBy }, remarks = #{ remarks }, update_by = #{
+      updateBy }, update_date = #{ updateDate }
+    WHERE id = #{id}
+  </update>
+
+  <update id="delete">
+    UPDATE notice_send SET update_by = #{updateBy}, update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE} WHERE id = #{id}
+  </update>
+
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO notice_send(
+      id, sender_id, title, is_site, is_wechat, is_email, is_sms, site_content,
+      email_content, wechat_content, sms_content, received_by, remarks,
+      create_by, create_date, update_by, update_date, del_flag
+    ) VALUES
+    <foreach
+      collection="entitys"
+      index="index"
+      item="entity"
+      open=""
+      separator=","
+      close=""
+    >
+      (
+        #{entity.id}, #{entity.senderId}, #{entity.title}, #{entity.isSite},
+        #{entity.isWechat}, #{entity.isEmail}, #{entity.isSms},
+        #{entity.siteContent}, #{entity.emailContent}, #{entity.wechatContent},
+        #{entity.smsContent}, #{entity.receivedBy}, #{entity.remarks},
+        #{entity.createBy}, #{entity.createDate}, #{entity.updateBy},
+        #{entity.updateDate}, #{entity.delFlag}
+      )
+    </foreach>
+  </insert>
+
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE notice_send
+    <set>
+
+      <trim prefix="title=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.title}
+        </foreach>
+      </trim>
+
+      <trim prefix="is_site=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isSite}
+        </foreach>
+      </trim>
+
+      <trim prefix="is_wechat=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isWechat}
+        </foreach>
+      </trim>
+
+      <trim prefix="is_email=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isEmail}
+        </foreach>
+      </trim>
+
+      <trim prefix="is_sms=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isSms}
+        </foreach>
+      </trim>
+
+      <trim prefix="site_content=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.siteContent}
+        </foreach>
+      </trim>
+
+      <trim prefix="email_content=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.emailContent}
+        </foreach>
+      </trim>
+
+      <trim prefix="wechat_content=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.wechatContent}
+        </foreach>
+      </trim>
+
+      <trim prefix="sms_content=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.smsContent}
+        </foreach>
+      </trim>
+
+      <trim prefix="received_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.receivedBy}
+        </foreach>
+      </trim>
+
+      <trim prefix="remarks=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remarks}
+        </foreach>
+      </trim>
+
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE id IN
+    <foreach
+      collection="entitys"
+      item="entity"
+      index="index"
+      separator=","
+      open="("
+      close=")"
+    >
+      #{entity.id}
+    </foreach>
+  </update>
+
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE notice_send
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+
+    WHERE id IN
+    <foreach
+      collection="entitys"
+      item="entity"
+      index="index"
+      separator=","
+      open="("
+      close=")"
+    >
+      #{entity.id}
+    </foreach>
+  </update>
+
+
+    <!-- 查询公司-部门-人员信息转换成树 -->
+    <select id="getCompanyTree" resultType="com.geeke.notice.entity.CompanyTree">
+        select c.id,c.name,c.parent_id from org_company c  where  c.del_flag  = 0
+        <if test='code == "1" or  code == "2"'>
+            union all
+            select d.id,d.name,d.company_id  from org_department d join org_company c
+            on c.id = d.company_id and c.del_flag  = 0
+            where  d.del_flag  = 0
+        </if>
+        <if test='code == "2"'>
+            union all
+            select u.id,u.name,u.department_id as parent_id   from sys_user u
+            join  org_department d on u.department_id = d.id and d.del_flag  = 0
+            where u.del_flag  = 0
+        </if>
+    </select>
+
+    <!-- 根据公司id 查询人员 -->
+    <select id="getCompanyIdUserList" resultType="java.lang.String">
+        select user.id from sys_user user
+        where user.del_flag  = 0  and company_id in
+        <foreach collection="arr" item="companyId" index="index" separator="," open="(" close=")">
+            #{companyId}
+        </foreach>
+        and id not in (select user from  notice_unsubscribe where notice_template = #{noticeTemplateId})
+    </select>
+
+    <!-- 根据部门id 查询人员 -->
+    <select id="getDepartmentIdUserList" resultType="java.lang.String">
+        select user.id from sys_user user
+        where user.del_flag  = 0  and department_id in
+        <foreach collection="arr" item="companyId" index="index" separator="," open="(" close=")">
+            #{companyId}
+        </foreach>
+        and id not in (select user from  notice_unsubscribe where notice_template = #{noticeTemplateId})
+    </select>
+
+</mapper>

@@ -1,0 +1,74 @@
+server:
+  port: 5001
+
+spring:
+  datasource:
+    dynamic:
+      primary: master
+      strict: false
+      datasource:
+        master:
+          driver-class-name: com.mysql.jdbc.Driver
+          url: jdbc:mysql://61.172.179.56:3306/application_hr?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+          username: root
+          password: aTze0ubeJisUbDKB
+          type: com.zaxxer.hikari.HikariDataSource
+  cache:
+    type: redis
+  redis:
+    host: 61.172.179.56
+    password: aTze0ubeJisUbDKB
+    port: 6379
+    database: 0
+  cloud:
+    stream:
+      enabled: true
+      rocketmq:
+        binder:
+          name-server: 61.172.179.56:9876
+          group: DCODE_GROUP
+
+
+jwtUtils:
+  id: jwt
+  secret: 6686df7fc3a34e26a61c034d5ec82488
+  ttlMillis: 3600000
+
+qixin:
+  appkey: 266b9724-e6df-4897-ab08-a00d9554c2fd
+  secretKey: a1177eb8-126b-403c-acbd-026ff9eceb5d
+  host: https://api.qixin.com/
+  profile: APIService
+
+weChat:
+  corpid: ww21ecf19d6c519f83
+  corpsecret: G3rf94sZqkZJ90duduA-TCIaou-QUeA9qNe7ANtjR9Y
+  agentid: 1000006
+
+
+baidu:
+  sms:
+    accessKey: 9aa348551a8d40dc8077d619c6120772
+    secretAccess: 61ce9306d76a41868d1193536fda7653
+    endpoint: http://smsv3.bj.baidubce.com
+    signature:
+      id: sms-sign-WmvZrj56673
+    template:
+      code: sms-tmpl-SDDBTY24370
+      msg: sms-tmpl-snvDbF24911
+nacos:
+  namespace: 7f6a420d-1056-48de-9f85-8e9f9549fe8b
+  config-group: DEV_GROUP
+  discovery-group: SEATA_GROUP
+  server-addr: 61.172.179.56:8848
+  username: nacos
+  password: nacos
+
+qiyuesuo:
+  serverUrl: https://openapi.qiyuesuo.cn
+  accessKey: q4xKsNcFI8
+  accessSecret: qKPK101VGyLsnSqFoLzSCu3JGiMAVO
+  categoryId: 2778827393123488527
+  templateId: 3102092638929559644
+  renewalTemplateId: 3104328241452753173
+  callbackSecretKey: TXjU3dKi0Bbe0a8G

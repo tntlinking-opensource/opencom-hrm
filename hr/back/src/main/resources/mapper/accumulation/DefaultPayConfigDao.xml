@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.accumulation.dao.DefaultPayConfigDao">
+  <sql id="defaultPayConfigColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.company_id AS "companyId",
+      a.pay_city_id AS "payCityId",
+      a.product_name AS "productName",
+      a.product_type AS "productType",
+      a.unit_scale AS "unitScale",
+      a.person_scale AS "personScale",
+      a.company_high_base AS "companyHighBase",
+      a.company_low_base AS "companyLowBase",
+      a.person_high_base AS "personHighBase",
+      a.person_low_base AS "personLowBase",
+      a.company_pay_type AS "companyPayType",
+      a.company_pay_amount AS "companyPayAmount",
+      a.company_pay_month AS "companyPayMonth",
+      a.person_pay_type AS "personPayType",
+      a.person_pay_amount AS "personPayAmount",
+      a.person_pay_month AS "personPayMonth",
+      a.enable AS "enable",
+      a.is_default AS "isDefault",
+      a.status AS "status",
+      a.create_by AS "createBy",
+      a.update_by AS "updateBy",
+      a.create_date AS "createDate",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+    </trim>
+  </sql>
+  <sql id="defaultPayConfigJoins">
+  </sql>
+
+    <select id="get" resultType="com.geeke.accumulation.entity.DefaultPayConfig">
+    SELECT
+    <include refid="defaultPayConfigColumns" />
+    FROM default_pay_config a
+    <include refid="defaultPayConfigJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM default_pay_config a
+    <include refid="defaultPayConfigJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultType="com.geeke.accumulation.entity.DefaultPayConfig">
+    SELECT
+    <include refid="defaultPayConfigColumns" />
+    FROM default_pay_config a
+    <include refid="defaultPayConfigJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC,a.create_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultType="com.geeke.accumulation.entity.DefaultPayConfig">
+    SELECT
+    <include refid="defaultPayConfigColumns" />
+    FROM default_pay_config a
+    <include refid="defaultPayConfigJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC,a.create_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO default_pay_config(
+    <trim suffixOverrides=",">
+      id,
+      company_id,
+      pay_city_id,
+      product_name,
+      product_type,
+      unit_scale,
+      person_scale,
+      company_high_base,
+      company_low_base,
+      person_high_base,
+      person_low_base,
+      company_pay_type,
+      company_pay_amount,
+      company_pay_month,
+      person_pay_type,
+      person_pay_amount,
+      person_pay_month,
+      enable,
+      is_default,
+      status,
+      create_by,
+      update_by,
+      create_date,
+      update_date,
+      del_flag,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ companyId },
+      #{ payCityId },
+      #{ productName },
+      #{ productType },
+      #{ unitScale },
+      #{ personScale },
+      #{ companyHighBase },
+      #{ companyLowBase },
+      #{ personHighBase },
+      #{ personLowBase },
+      #{ companyPayType },
+      #{ companyPayAmount },
+      #{ companyPayMonth },
+      #{ personPayType },
+      #{ personPayAmount },
+      #{ personPayMonth },
+      #{ enable },
+      #{ isDefault},
+      #{ status },
+      #{ createBy },
+      #{ updateBy },
+      #{ createDate },
+      #{ updateDate },
+      #{ delFlag },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE default_pay_config SET
+    <trim suffixOverrides=",">
+      company_id = #{ companyId },
+      pay_city_id = #{ payCityId },
+      product_name = #{ productName },
+      product_type = #{ productType },
+      unit_scale = #{ unitScale },
+      person_scale = #{ personScale },
+      company_high_base = #{ companyHighBase },
+      company_low_base = #{ companyLowBase },
+      person_high_base = #{ personHighBase },
+      person_low_base = #{ personLowBase },
+      company_pay_type = #{ companyPayType },
+      company_pay_amount = #{ companyPayAmount },
+      company_pay_month = #{ companyPayMonth },
+      person_pay_type = #{ personPayType },
+      person_pay_amount = #{ personPayAmount },
+      person_pay_month = #{ personPayMonth },
+      enable = #{ enable },
+      is_default = #{ isDefault},
+      status = #{ status },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE default_pay_config SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO default_pay_config(
+    <trim suffixOverrides=",">
+      id,
+      company_id,
+      pay_city_id,
+      product_name,
+      product_type,
+      unit_scale,
+      person_scale,
+      company_high_base,
+      company_low_base,
+      person_high_base,
+      person_low_base,
+      company_pay_type,
+      company_pay_amount,
+      company_pay_month,
+      person_pay_type,
+      person_pay_amount,
+      person_pay_month,
+      enable,
+      is_default,
+      status,
+      create_by,
+      update_by,
+      create_date,
+      update_date,
+      del_flag,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.companyId},
+        #{entity.payCityId},
+        #{entity.productName},
+        #{entity.productType},
+        #{entity.unitScale},
+        #{entity.personScale},
+        #{entity.companyHighBase},
+        #{entity.companyLowBase},
+        #{entity.personHighBase},
+        #{entity.personLowBase},
+        #{entity.companyPayType},
+        #{entity.companyPayAmount},
+        #{entity.companyPayMonth},
+        #{entity.personPayType},
+        #{entity.personPayAmount},
+        #{entity.personPayMonth},
+        #{entity.enable },
+        #{entity.isDefault},
+        #{entity.status },
+        #{entity.createBy},
+        #{entity.updateBy},
+        #{entity.createDate},
+        #{entity.updateDate},
+        #{entity.delFlag},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE default_pay_config
+    <set>
+      <trim prefix="company_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyId}
+        </foreach>
+      </trim>
+      <trim prefix="pay_city_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.payCityId}
+        </foreach>
+      </trim>
+      <trim prefix="product_name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.productName}
+        </foreach>
+      </trim>
+      <trim prefix="product_type=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.productType}
+        </foreach>
+      </trim>
+      <trim prefix="unit_scale=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.unitScale}
+        </foreach>
+      </trim>
+      <trim prefix="person_scale=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personScale}
+        </foreach>
+      </trim>
+      <trim prefix="company_high_base=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyHighBase}
+        </foreach>
+      </trim>
+      <trim prefix="company_low_base=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyLowBase}
+        </foreach>
+      </trim>
+      <trim prefix="person_high_base=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personHighBase}
+        </foreach>
+      </trim>
+      <trim prefix="person_low_base=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personLowBase}
+        </foreach>
+      </trim>
+      <trim prefix="company_pay_type=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyPayType}
+        </foreach>
+      </trim>
+      <trim prefix="company_pay_amount=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyPayAmount}
+        </foreach>
+      </trim>
+      <trim prefix="company_pay_month=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyPayMonth}
+        </foreach>
+      </trim>
+      <trim prefix="person_pay_type=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personPayType}
+        </foreach>
+      </trim>
+      <trim prefix="person_pay_amount=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personPayAmount}
+        </foreach>
+      </trim>
+      <trim prefix="person_pay_month=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.personPayMonth}
+        </foreach>
+      </trim>
+      <trim prefix="enable=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.enable}
+        </foreach>
+      </trim>
+      <trim prefix="is_default=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.isDefault}
+        </foreach>
+      </trim>
+      <trim prefix="status=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.status=case}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE default_pay_config
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+
+  <update id="deleteByPayCityId">
+    update default_pay_config
+    set
+    update_by = #{param.updateBy},
+    update_date = #{param.updateDate},
+    del_flag = #{param.DEL_FLAG_DELETE}
+    where pay_city_id = #{param.payCityId}
+    and del_flag = #{param.DEL_FLAG_NORMAL}
+  </update>
+</mapper>

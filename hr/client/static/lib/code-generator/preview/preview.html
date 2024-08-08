@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>form-generator-preview</title>
+    
+    <script src="../../vue-i18n@7.3.2.js"></script>
+    <script src="../../vue@2.6.14.js"></script>
+    <script src="../../vuex@3.6.2.js"></script>
+    <script src="../../vue-router@3.5.3.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="../../element/element-ui@2.15.6.css">
+    <!-- 引入组件库 -->
+    <script src="../../element/element-ui@2.15.6.js"></script>
+    <link rel="stylesheet" href="../../umy-ui/umy-ui@1.1.6.css">
+    <script src="../../umy-ui/umy-ui@1.1.6.js"></script>
+
+    <style>
+      body{
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        height: calc(100vh - 33px);
+        padding: 12px;
+        box-sizing: border-box;
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+      }
+      input, textarea{
+        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>抱歉，javascript被禁用，请开启后重试。</strong>
+    </noscript>
+    <div id="previewApp"></div>
+    <script src="../vue-codegenerator.umd.js"></script>
+  </body>
+</html>

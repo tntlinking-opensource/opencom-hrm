@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.geeke.specialAddDeduct.dao.SpecialAddDeductDao">
+  <sql id="specialAddDeductColumns">
+    <trim suffixOverrides=",">
+      a.id AS "id",
+      a.company_id AS "companyId",
+      a.employee_no AS "employeeNo",
+      a.employee_name AS "employeeName",
+      a.id_card_type AS "idCardType",
+      a.id_card_no AS "idCardNo",
+      a.employee_status AS "employeeStatus",
+      a.period_start AS "periodStart",
+      a.period_end AS "periodEnd",
+      a.current_income AS "currentIncome",
+      a.current_income_no_tax AS "currentIncomeNoTax",
+      a.base_annuity AS "baseAnnuity",
+      a.base_ill_medical AS "baseIllMedical",
+      a.unemploy AS "unemploy",
+      a.accumula_fund AS "accumulaFund",
+      a.acc_sub_education AS "accSubEducation",
+      a.acc_keep_education AS "accKeepEducation",
+      a.acc_house_loan_tax AS "accHouseLoanTax",
+      a.acc_house_rent AS "accHouseRent",
+      a.acc_care_old AS "accCareOld",
+      a.acc_baby_passport AS "accBabyPassport",
+      a.acc_person_annuity AS "accPersonAnnuity",
+      a.unit_annuity AS "unitAnnuity",
+      a.profession_annuity AS "professionAnnuity",
+      a.bus_health_insurance AS "busHealthInsurance",
+      a.tax_delay_old_insurance AS "taxDelayOldInsurance",
+      a.other_insurance AS "otherInsurance",
+      a.deduct_donate_amount AS "deductDonateAmount",
+      a.pre_tax_deduct_total AS "preTaxDeductTotal",
+      a.deduct_tax_amount AS "deductTaxAmount",
+      a.deduct_expense_standard AS "deductExpenseStandard",
+      a.tax_paid_amount AS "taxPaidAmount",
+      a.tax_year_month AS "taxYearMonth",
+      a.remark AS "remark",
+      a.create_by AS "createBy",
+      a.update_by AS "updateBy",
+      a.create_date AS "createDate",
+      a.update_date AS "updateDate",
+      a.del_flag AS "delFlag",
+    </trim>
+  </sql>
+  <sql id="specialAddDeductJoins">
+    left join salary_archives_info salary on salary.employee_no = a.employee_no and salary.del_flag = #{DEL_FLAG_NORMAL}
+  </sql>
+  <select id="get" resultType="com.geeke.specialAddDeduct.entity.SpecialAddDeduct">
+    SELECT
+    <include refid="specialAddDeductColumns" />
+    FROM special_add_deduct a
+    <include refid="specialAddDeductJoins" />
+    WHERE a.id = #{id}
+  </select>
+  <select id="count" resultType="int">
+    SELECT COUNT(*) FROM special_add_deduct a
+    <include refid="specialAddDeductJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+  </select>
+  <select id="listPage" resultType="com.geeke.specialAddDeduct.entity.SpecialAddDeduct">
+    SELECT
+    <include refid="specialAddDeductColumns" />
+    FROM special_add_deduct a
+    <include refid="specialAddDeductJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC,a.create_date DESC
+      </otherwise>
+    </choose>
+    LIMIT #{limit} OFFSET #{offset}
+  </select>
+  <select id="listAll" resultType="com.geeke.specialAddDeduct.entity.SpecialAddDeduct">
+    SELECT
+    <include refid="specialAddDeductColumns" />
+    FROM special_add_deduct a
+    <include refid="specialAddDeductJoins" />
+    <where>
+      1=1
+      AND a.id > 0
+      AND a.del_flag = #{DEL_FLAG_NORMAL}
+      <include refid="Common.whereParams" />
+    </where>
+    <choose>
+      <when test="order != null and order != ''">
+        ORDER BY ${order}
+      </when>
+      <otherwise>
+        ORDER BY a.update_date DESC,a.create_date DESC
+      </otherwise>
+    </choose>
+  </select>
+  <insert id="insert">
+    INSERT INTO special_add_deduct(
+    <trim suffixOverrides=",">
+      id,
+      company_id,
+      employee_no,
+      employee_name,
+      id_card_type,
+      id_card_no,
+      employee_status,
+      period_start,
+      period_end,
+      current_income,
+      current_income_no_tax,
+      base_annuity,
+      base_ill_medical,
+      unemploy,
+      accumula_fund,
+      acc_sub_education,
+      acc_keep_education,
+      acc_house_loan_tax,
+      acc_house_rent,
+      acc_care_old,
+      acc_baby_passport,
+      acc_person_annuity,
+      unit_annuity,
+      profession_annuity,
+      bus_health_insurance,
+      tax_delay_old_insurance,
+      other_insurance,
+      deduct_donate_amount,
+      pre_tax_deduct_total,
+      deduct_tax_amount,
+      deduct_expense_standard,
+      tax_paid_amount,
+      tax_year_month,
+      remark,
+      create_by,
+      update_by,
+      create_date,
+      update_date,
+      del_flag,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ id },
+      #{ companyId },
+      #{ employeeNo },
+      #{ employeeName },
+      #{ idCardType },
+      #{ idCardNo },
+      #{ employeeStatus },
+      #{ periodStart },
+      #{ periodEnd },
+      #{ currentIncome },
+      #{ currentIncomeNoTax },
+      #{ baseAnnuity },
+      #{ baseIllMedical },
+      #{ unemploy },
+      #{ accumulaFund },
+      #{ accSubEducation },
+      #{ accKeepEducation },
+      #{ accHouseLoanTax },
+      #{ accHouseRent },
+      #{ accCareOld },
+      #{ accBabyPassport },
+      #{ accPersonAnnuity },
+      #{ unitAnnuity },
+      #{ professionAnnuity },
+      #{ busHealthInsurance },
+      #{ taxDelayOldInsurance },
+      #{ otherInsurance },
+      #{ deductDonateAmount },
+      #{ preTaxDeductTotal },
+      #{ deductTaxAmount },
+      #{ deductExpenseStandard },
+      #{ taxPaidAmount },
+      #{ taxYearMonth },
+      #{ remark },
+      #{ createBy },
+      #{ updateBy },
+      #{ createDate },
+      #{ updateDate },
+      #{ delFlag },
+    </trim>
+    )
+  </insert>
+  <update id="update">
+    UPDATE special_add_deduct SET
+    <trim suffixOverrides=",">
+      company_id = #{ companyId },
+      employee_no = #{ employeeNo },
+      employee_name = #{ employeeName },
+      id_card_type = #{ idCardType },
+      id_card_no = #{ idCardNo },
+      employee_status = #{ employeeStatus },
+      period_start = #{ periodStart },
+      period_end = #{ periodEnd },
+      current_income = #{ currentIncome },
+      current_income_no_tax = #{ currentIncomeNoTax },
+      base_annuity = #{ baseAnnuity },
+      base_ill_medical = #{ baseIllMedical },
+      unemploy = #{ unemploy },
+      accumula_fund = #{ accumulaFund },
+      acc_sub_education = #{ accSubEducation },
+      acc_keep_education = #{ accKeepEducation },
+      acc_house_loan_tax = #{ accHouseLoanTax },
+      acc_house_rent = #{ accHouseRent },
+      acc_care_old = #{ accCareOld },
+      acc_baby_passport = #{ accBabyPassport },
+      acc_person_annuity = #{ accPersonAnnuity },
+      unit_annuity = #{ unitAnnuity },
+      profession_annuity = #{ professionAnnuity },
+      bus_health_insurance = #{ busHealthInsurance },
+      tax_delay_old_insurance = #{ taxDelayOldInsurance },
+      other_insurance = #{ otherInsurance },
+      deduct_donate_amount = #{ deductDonateAmount },
+      pre_tax_deduct_total = #{ preTaxDeductTotal },
+      deduct_tax_amount = #{ deductTaxAmount },
+      deduct_expense_standard = #{ deductExpenseStandard },
+      tax_paid_amount = #{ taxPaidAmount },
+      tax_year_month = #{ taxYearMonth },
+      remark = #{ remark },
+      update_by = #{ updateBy },
+      update_date = #{ updateDate },
+    </trim>
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <update id="delete">
+    UPDATE special_add_deduct SET
+    update_by = #{updateBy},
+    update_date = #{updateDate},
+    del_flag = #{DEL_FLAG_DELETE}
+    WHERE id = #{id}
+    and update_date = #{oldUpdateDate}
+  </update>
+  <insert id="bulkInsert" parameterType="java.util.List">
+    INSERT INTO special_add_deduct(
+    <trim suffixOverrides=",">
+      id,
+      company_id,
+      employee_no,
+      employee_name,
+      id_card_type,
+      id_card_no,
+      employee_status,
+      period_start,
+      period_end,
+      current_income,
+      current_income_no_tax,
+      base_annuity,
+      base_ill_medical,
+      unemploy,
+      accumula_fund,
+      acc_sub_education,
+      acc_keep_education,
+      acc_house_loan_tax,
+      acc_house_rent,
+      acc_care_old,
+      acc_baby_passport,
+      acc_person_annuity,
+      unit_annuity,
+      profession_annuity,
+      bus_health_insurance,
+      tax_delay_old_insurance,
+      other_insurance,
+      deduct_donate_amount,
+      pre_tax_deduct_total,
+      deduct_tax_amount,
+      deduct_expense_standard,
+      tax_paid_amount,
+      tax_year_month,
+      remark,
+      create_by,
+      update_by,
+      create_date,
+      update_date,
+      del_flag,
+    </trim>
+    ) VALUES
+    <foreach collection="entitys" index="index" item="entity" open="" separator="," close="">
+      (
+      <trim suffixOverrides=",">
+        #{entity.id},
+        #{entity.companyId},
+        #{entity.employeeNo},
+        #{entity.employeeName},
+        #{entity.idCardType},
+        #{entity.idCardNo},
+        #{entity.employeeStatus},
+        #{entity.periodStart},
+        #{entity.periodEnd},
+        #{entity.currentIncome},
+        #{entity.currentIncomeNoTax},
+        #{entity.baseAnnuity},
+        #{entity.baseIllMedical},
+        #{entity.unemploy},
+        #{entity.accumulaFund},
+        #{entity.accSubEducation},
+        #{entity.accKeepEducation},
+        #{entity.accHouseLoanTax},
+        #{entity.accHouseRent},
+        #{entity.accCareOld},
+        #{entity.accBabyPassport},
+        #{entity.accPersonAnnuity},
+        #{entity.unitAnnuity},
+        #{entity.professionAnnuity},
+        #{entity.busHealthInsurance},
+        #{entity.taxDelayOldInsurance},
+        #{entity.otherInsurance},
+        #{entity.deductDonateAmount},
+        #{entity.preTaxDeductTotal},
+        #{entity.deductTaxAmount},
+        #{entity.deductExpenseStandard},
+        #{entity.taxPaidAmount},
+        #{entity.taxYearMonth},
+        #{entity.remark},
+        #{entity.createBy},
+        #{entity.updateBy},
+        #{entity.createDate},
+        #{entity.updateDate},
+        #{entity.delFlag},
+      </trim>
+      )
+    </foreach>
+  </insert>
+  <update id="bulkUpdate" parameterType="java.util.List">
+    UPDATE special_add_deduct
+    <set>
+      <trim prefix="company_id=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.companyId}
+        </foreach>
+      </trim>
+      <trim prefix="employee_no=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeNo}
+        </foreach>
+      </trim>
+      <trim prefix="employee_name=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeName}
+        </foreach>
+      </trim>
+      <trim prefix="id_card_type=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.idCardType}
+        </foreach>
+      </trim>
+      <trim prefix="id_card_no=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.idCardNo}
+        </foreach>
+      </trim>
+      <trim prefix="employee_status=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.employeeStatus}
+        </foreach>
+      </trim>
+      <trim prefix="period_start=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.periodStart}
+        </foreach>
+      </trim>
+      <trim prefix="period_end=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.periodEnd}
+        </foreach>
+      </trim>
+      <trim prefix="current_income=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.currentIncome}
+        </foreach>
+      </trim>
+      <trim prefix="current_income_no_tax=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.currentIncomeNoTax}
+        </foreach>
+      </trim>
+      <trim prefix="base_annuity=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.baseAnnuity}
+        </foreach>
+      </trim>
+      <trim prefix="base_ill_medical=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.baseIllMedical}
+        </foreach>
+      </trim>
+      <trim prefix="unemploy=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.unemploy}
+        </foreach>
+      </trim>
+      <trim prefix="accumula_fund=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.accumulaFund}
+        </foreach>
+      </trim>
+      <trim prefix="acc_sub_education=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.accSubEducation}
+        </foreach>
+      </trim>
+      <trim prefix="acc_keep_education=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.accKeepEducation}
+        </foreach>
+      </trim>
+      <trim prefix="acc_house_loan_tax=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.accHouseLoanTax}
+        </foreach>
+      </trim>
+      <trim prefix="acc_house_rent=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.accHouseRent}
+        </foreach>
+      </trim>
+      <trim prefix="acc_care_old=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.accCareOld}
+        </foreach>
+      </trim>
+      <trim prefix="acc_baby_passport=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.accBabyPassport}
+        </foreach>
+      </trim>
+      <trim prefix="acc_person_annuity=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.accPersonAnnuity}
+        </foreach>
+      </trim>
+      <trim prefix="unit_annuity=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.unitAnnuity}
+        </foreach>
+      </trim>
+      <trim prefix="profession_annuity=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.professionAnnuity}
+        </foreach>
+      </trim>
+      <trim prefix="bus_health_insurance=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.busHealthInsurance}
+        </foreach>
+      </trim>
+      <trim prefix="tax_delay_old_insurance=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.taxDelayOldInsurance}
+        </foreach>
+      </trim>
+      <trim prefix="other_insurance=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.otherInsurance}
+        </foreach>
+      </trim>
+      <trim prefix="deduct_donate_amount=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.deductDonateAmount}
+        </foreach>
+      </trim>
+      <trim prefix="pre_tax_deduct_total=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.preTaxDeductTotal}
+        </foreach>
+      </trim>
+      <trim prefix="deduct_tax_amount=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.deductTaxAmount}
+        </foreach>
+      </trim>
+      <trim prefix="deduct_expense_standard=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.deductExpenseStandard}
+        </foreach>
+      </trim>
+      <trim prefix="tax_paid_amount=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.taxPaidAmount}
+        </foreach>
+      </trim>
+      <trim prefix="tax_year_month=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.taxYearMonth}
+        </foreach>
+      </trim>
+      <trim prefix="remark=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.remark}
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+  <update id="bulkDelete" parameterType="java.util.List">
+    UPDATE special_add_deduct
+    <set>
+      <trim prefix="del_flag=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then 1
+        </foreach>
+      </trim>
+      <trim prefix="update_by=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateBy}
+        </foreach>
+      </trim>
+      <trim prefix="update_date=case" suffix="end,">
+        <foreach collection="entitys" item="entity" index="index">
+          when id=#{entity.id} then #{entity.updateDate}
+        </foreach>
+      </trim>
+    </set>
+    WHERE
+    <foreach collection="entitys" item="entity" index="index" separator="OR" open="(" close=")">
+      id = #{entity.id} and update_date = #{entity.oldUpdateDate}
+    </foreach>
+  </update>
+
+  <select id="getTaxDeclareConfig" resultType="com.geeke.specialAddDeduct.entity.TaxDeclareConfig">
+    select id, name, code, limit_amount as limitAmount, is_merge_tax as isMergeTax
+    from tax_declare_config
+  </select>
+
+  <insert id="insertTaxDeclareConfig">
+    INSERT INTO tax_declare_config(
+    <trim suffixOverrides=",">
+      id,
+      name,
+      code,
+      limit_amount,
+      is_merge_tax,
+    </trim>
+    ) VALUES (
+    <trim suffixOverrides=",">
+      #{ object.id },
+      #{ object.name },
+      #{ object.code },
+      #{ object.limitAmount },
+      #{ object.isMergeTax },
+    </trim>
+    )
+  </insert>
+  <update id="updateTaxDeclareConfig">
+    UPDATE tax_declare_config SET
+    <trim suffixOverrides=",">
+      limit_amount = #{ object.limitAmount },
+      is_merge_tax = #{ object.isMergeTax },
+    </trim>
+    WHERE code = #{ object.code }
+  </update>
+  <select id="getSpecialAddDeductByTaxMonth" resultType="com.geeke.specialAddDeduct.entity.SpecialAddDeduct">
+    select * from special_add_deduct where id_card_no = #{idCard} and tax_year_month = #{taxMonth}
+  </select>
+</mapper>

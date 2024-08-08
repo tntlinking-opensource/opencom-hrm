@@ -1,0 +1,49 @@
+/* 色调 */
+$default-color: #fff;
+
+$theme-color: #049ce0;
+$theme-lightBg-color: #ecf5ff;
+$theme-lightBd-color: #b3d8ff;
+
+$success-color: #67c23a;
+$success-lightBg-color: #f0f9eb;
+$success-lightBd-color: #c2e7b0;
+
+$warning-color: #e6a23c;
+$warning-lightBg-color: #fdf6ec;
+$warning-lightBd-color: #f5dab1;
+
+$danger-color: #f56c6c;
+$danger-lightBg-color: #fef0f0;
+$danger-lightBd-color: #fbc4c4;
+
+$info-color: #909399;
+$info-lightBg-color: #f4f4f5;
+$info-lightBd-color: #d3d4d6;
+
+$text-color: rgba(0,0,0,.65);
+
+/* 字体设置 */
+@mixin app-font {
+	font-family: "PingFangSC-Regular","Hiragino Sans GB","Microsoft YaHei",Helvetica,sans-serif;
+}
+
+/* 圆角设置 */
+@mixin border-radius($radius) {
+	border-radius: $radius;
+	-moz-border-radius: $radius;
+	-webkit-border-radius: $radius;
+}
+
+/* 自定义背景图标 */
+@mixin app-icon($url) {
+	display: inline-block;
+	background: url("../../assets/images/" + $url + ".png") no-repeat center / cover;
+}
+
+/* 文字单行省略号 */
+@mixin text-ellipsis {
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
