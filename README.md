@@ -45,19 +45,4 @@ OpenCOM人事管理系统主要包括人事管理与薪酬管理两个核心模�
 
 如需要其他产品源码，可访问天天开源官网。
 
-# 技术介绍
 
-## 源码结构
-![img_3.png](readmeImg/img_3.png)
-
-## 技术架构
-
-* 前端技术选型
-![img.png](readmeImg/img.png)
-
-* 后端技术选型
-![img_1.png](readmeImg/img_1.png)
-![img_2.png](readmeImg/img_2.png)
-
-# 启动部署
-请参考代码目录中名为【产品源代码运行部署指南v1.0】文档
