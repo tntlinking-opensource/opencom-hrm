@@ -1,37 +1,63 @@
-# 开源企业代码仓库
+# 平台介绍
 
-#### 介绍
-包含组织架构、开发者平台、应用代码。
+## 🏠【关于我们】
 
-#### 软件架构
-软件架构说明
+![天天开源](https://open.tntlinking.com/assets/logo-b-BzFUYaRU.png) 
+
+天天开源致⼒于打造中国应⽤管理软件开源⽣态，⾯向医疗、企业、教育三⼤⾏业信息化需求，提供优质的开源软件产品与解决⽅案。平台现已发布OpenHIS、OpenCOM、OpenEDU系列开源产品，并持续招募⽣态合作伙伴，期待共同构建开源创新的⾏业协作模式，加速⾏业的数字化进程。
+
+天天开源的前⾝是新致开源，最早于2022年6⽉发布开源医疗软件平台OpenHIS.org.cn，于2023年6⽉发布开源企业软件平台OpenCOM.com.cn。2025年7⽉，新致开源品牌更新为天天开源，我们始终秉持开源、专业、协作的理念，致⼒于为医疗、教育、中⼩企业等⾏业提供优质的开源解决⽅案。
+
+了解我们：https://open.tntlinking.com/about?site=gitee
+
+## 💾【部署包下载】
+
+请访问官网产品中心下载部署包：https://open.tntlinking.com/resource/productCenter?site=gitee
+
+## 📚【支持文档】
+
+技术支持资源：https://open.tntlinking.com/resource/technicalSupport?site=gitee
+（含演示环境、操作手册、部署手册、开发手册、常见问题等）
+
+产品介绍：https://open.tntlinking.com/resource/industryKnowledge?site=gitee
+
+操作教程：https://open.tntlinking.com/resource/operationTutorial?site=gitee
+
+沙龙回顾：https://open.tntlinking.com/resource/openSourceSalon#23?site=gitee
+
+## 🤝【合作方式】
+
+产品服务价格：https://open.tntlinking.com/cost?site=gitee
+
+加入生态伙伴：https://open.tntlinking.com/ecology/becomePartner?site=gitee
+
+## 🤗【技术社区】
+
+请访问官网扫码加入技术社区交流：https://open.tntlinking.com/ecology/joinCommunity?site=gitee
+
+请关注公众号【天天开源软件】以便获得最新产品更新信息。
 
 
-#### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+# 项目介绍
 
-#### 使用说明
+OpenCOM人事管理系统主要包括人事管理与薪酬管理两个核心模块，其中人事管理模块支持招聘、入职、离职全流程管理，薪酬管理模块支持社保公积金与薪酬计算，旨在助力企业优化人事流程，提升效率与管理水平。
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+如需要其他产品源码，可访问天天开源企业官网。
 
-#### 参与贡献
+# 技术介绍
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+## 源码结构
+![img_3.png](readmeImg/img_3.png)
 
+## 技术架构
 
-#### 特技
+* 前端技术选型
+![img.png](readmeImg/img.png)
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+* 后端技术选型
+![img_1.png](readmeImg/img_1.png)
+![img_2.png](readmeImg/img_2.png)
+
+# 启动部署
+请参考代码目录中名为【产品源代码运行部署指南v1.0】文档
